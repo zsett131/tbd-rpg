@@ -86,7 +86,9 @@ class PlayerBase:
         return self.playerhealth
 
     def setplayermaxHealth(self):
-        HealthCalculation = self.getplayermaxHealth + self.getplayerStrength
+        playermaxHealth = self.getplayermaxHealth()
+        playerStrength = self.getplayerStrength()
+        HealthCalculation = playermaxHealth + playerStrength
 
     def getplayermaxHealth(self):
         return self.playermaxHealth
@@ -120,39 +122,42 @@ class PlayerBase:
 
     def setplayerStrength(self, allocation):
         if self.Skillpoints >= allocation:
-            self.playerStrength += allocation
-            self.allocateSkillPoints(self, allocation)
-            print("Your strength is now " + self.getplayerStrength)
+            self.Strength += allocation
+            self.allocateSkillPoints(allocation)
+            playerstrength = self.getplayerStrength()
+            print("Your strength is now {}".format(playerstrength))
         else:
             print("You only have {} to allocate, not {}".format(self.Skillpoints, allocation))
 
     def getplayerStrength(self):
-        return self.playerStrength
+        return self.Strength
 
     # Player Wisdom Setter and Getter
 
     def setplayerWisdom(self, allocation):
         if self.Skillpoints >= allocation:
-            self.playerWisdom += allocation
+            self.Wisdom += allocation
             self.allocateSkillPoints(self, allocation)
-            print("Your wisdom is now " + self.getplayerWisdom)
+            playerwisdom = self.getplayerWisdom()
+            print("Your strength is now {}".format(playerwisdom))
         else:
-            print("You only have " + self.Skillpoints + " to allocate, not " + allocation + ".")
+            print("You only have {} to allocate, not {}".format(self.Skillpoints, allocation))
 
     def getplayerWisdom(self):
-        return self.playerWisdom()
+        return self.Wisdom()
 
     # Player Agility Setter and Getter
 
     def setplayerAgility(self, allocation):
         if self.Skillpoints >= allocation:
-            self.playerWisdom += allocation
+            self.Agility += allocation
             self.allocateSkillPoints(self, allocation)
-            print("Your agility is now " + self.getplayerAgility)
+            playeragility = self.getplayerAgility()
+            print("Your strength is now {}".format(playeragility))
         else:
-            print("You only have " + self.Skillpoints + " to allocate, not " + allocation + ".")
+            print("You only have {} to allocate, not {}".format(self.Skillpoints, allocation))
 
     def getplayerAgility(self):
-        return self.playerAgility()
+        return self.Agility()
 
 PlayerBase()
