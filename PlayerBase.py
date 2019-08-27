@@ -45,6 +45,11 @@ class PlayerBase:
     def getplayerLevel(self):
         return self.playerLevel
 
+    def playerLevelUp(self):
+        if self.playerExp >= self.playerExpCap:
+            self.playerLevel += 1
+            self.incrementSkillPoints()
+
 
     # Player Exp Setter and Getter.
 
