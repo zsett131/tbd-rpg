@@ -6,7 +6,6 @@ class ConsumableHealingItem(Item):
     Affect = 1
 
     def __init__(self, arg1, arg2, arg3, arg4, heal):
-        super(arg1, arg2, arg3, arg4)
         self.sethealAmount(heal)
 
     # Getter and setter for the amount healed

@@ -12,7 +12,7 @@ class ConsumableItem:
 
     # The constructor that sets the name, description, StackCap, Stack, and affect.
     def __init__(self, arg1, arg2, arg3, arg4):
-        pass
+        self.itemAffect(arg1, arg2, arg3, arg4)
 
     def itemAffect(self, arg1, arg2, arg3, arg4):
         self.setItemName(arg1)
@@ -46,36 +46,3 @@ class ConsumableItem:
 
     def getItemStack(self):
         return self.itemStack
-
-class EquippableItem:
-    itemName: str = "XYZ"
-    itemDescription: str = "XYZ"
-    levelReq = 0
-    damage = 0
-
-    def __init__(self, name, description, levelReq, damage):
-        pass
-
-    def setItemName(self, name):
-        self.itemName = name
-
-    def getItemName(self):
-        return self.itemName
-
-    def setItemDescription(self, desc):
-        self.itemDescription = desc
-
-    def getItemDescription(self):
-        return self.itemDescription
-
-    def setLevelReq(self, level):
-        self.levelReq = level
-
-    def getLevelReq(self):
-        return self.levelReq
-
-    def setDamage(self, damage):
-        self.damage = damage
-
-    def getDamage(self):
-        return self.damage
