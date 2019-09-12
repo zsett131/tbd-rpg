@@ -62,9 +62,9 @@ class EnemyBase:
     # Lever generator based on monster level and player level
     def levelGenerator(self, level, playerlevel):
         if playerlevel < level:
-            self.setLevel((level % playerlevel)//2)
+            self.setLevel(level + (level % playerlevel)//3)
         if playerlevel > level:
-            self.setlevel((playerlevel % level)//2)
+            self.setlevel(level - (playerlevel % level)//3)
 
     # Exp, hp, and damage generator based on monster's level in comparison to input level.
     def expGenerator(self, originalExp, originalHp, originalDamage, originalLevel, currentLevel):
