@@ -1,5 +1,6 @@
 import pygame
 import math
+import Item
 
 class PlayerBase:
     # All the player variables are kept within this area.
@@ -12,7 +13,7 @@ class PlayerBase:
     expLogistic = 0
     playerCurrentHealth = 20
     playerMaxHealth = 20
-    playerWeapon = 0
+    playerWeapon = Item
     playerDamage = 0
 
     # The stats, Strength, Wisdom, and Agility.
@@ -103,6 +104,15 @@ class PlayerBase:
     def getPlayerMaxHealth(self):
         return self.playerMaxHealth
 
+    # Sets and Gets the players equipped item
+    def setPlayerEquiped(self, weapon):
+        if self.getPlayerEquiped():
+            self.setPlayerDamage(weapon.getDamage()*(1+(self.getPlayerStrength()//50)))
+        else:
+            self.setPlayerDamage(1+(self.getPlayerStrength()//50))
+
+    def getPlayerEquiped(self):
+        return self.playerWeapon
 
     # Player damage Setter and Getter.
 
@@ -113,7 +123,7 @@ class PlayerBase:
         return self.playerDamage
 
     def playerAttack(self):
-        pass
+        return self.getPlayerDamage()
 
     # Attributes: Strength, Wisdom, Agility
 
