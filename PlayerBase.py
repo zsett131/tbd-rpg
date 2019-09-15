@@ -94,7 +94,7 @@ class PlayerBase:
             self.setPlayerCurrentHealth(self.getPlayerMaxHealth())
 
     def playerTakeDamage(self, damage):
-        self.playerCurrentHealth = self.getPlayerVurrentHealth() - damage
+        self.playerCurrentHealth = self.getPlayerCurrentHealth() - damage
 
     def setPlayerMaxHealth(self):
         self.playermaxHealth = self.getPlayerMaxHealth()
