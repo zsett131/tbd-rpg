@@ -9,16 +9,18 @@ class ConsumableItem:
     itemDescription: str = "XYZ"
     itemStackCap: int = 0
     itemStack: int = 0
+    itemDropRate = 0
 
     # The constructor that sets the name, description, StackCap, Stack, and affect.
-    def __init__(self, name, desc, stackCap, stack):
-        self.itemAffect(name, desc, stackCap, stack)
+    def __init__(self, name, desc, stackCap, stack, dropRate):
+        self.itemAffect(name, desc, stackCap, stack, dropRate)
 
-    def itemAffect(self, name, desc, stackCap, stack):
+    def itemAffect(self, name, desc, stackCap, stack, dropRate):
         self.setItemName(name)
         self.setItemDescription(desc)
         self.setItemStackCap(stackCap)
         self.setItemStack(stack)
+        self.setItemDropRate(dropRate)
 
     # The setter and Getter for itemName
     def setItemName(self, name):
@@ -46,6 +48,13 @@ class ConsumableItem:
 
     def getItemStack(self):
         return self.itemStack
+
+    # Most important function, setter and getter for drop rate.
+    def setItemDropRate(self, rate):
+        self.itemDropRate = float(rate)
+
+    def getItemDropRate(self):
+        return self.itemDropRate
 
 class EquippableItem:
     itemName: str = "XYZ"

@@ -15,6 +15,7 @@ class PlayerBase:
     playerMaxHealth = 20
     playerWeapon = Item
     playerDamage = 0
+    playerInventory = []
 
     # The stats, Strength, Wisdom, and Agility.
 
@@ -182,6 +183,16 @@ class PlayerBase:
 
     def getPlayerAgility(self):
         return self.Agility
+
+    # The mythical land of player inventory. Appends to list and also removes based on function.
+    def addtoPlayerInventory(self, item):
+        self.playerInventory.append(item)
+
+    def getfromPlayerInventory(self, position):
+        return self.playerInventory(position)
+
+    def removefromPlayerInventory(self, removalpoint):
+        self.playerInventory.remove(removalpoint)
 
     # Item affects and what to do with them
     def itemAffects(self, item):
