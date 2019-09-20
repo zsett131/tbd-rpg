@@ -40,13 +40,13 @@ class EnemyBase:
 
     # Hp getter and setters
     def setHp(self, hp):
-        self.hp = self.getHp() - 1
+        self.hp = hp
 
     def getHp(self):
         return self.hp
 
     def enemyTakeDamage(self, taken):
-        self.setHp(taken)
+        self.hp = self.getHp() - taken
         if self.getHp() < 0:
             self.setHp(0)
             self.isAlive()

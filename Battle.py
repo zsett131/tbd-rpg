@@ -21,8 +21,8 @@ class Battle:
             Player.playerTakeDamage(Enemy.enemyAttack())
             print(Player.getPlayerName(), "took", Enemy.enemyAttack(), "damage.")
             time.sleep(1)
-
-    print("Player Exp: ", Player.getPlayerExp())
+        print(Enemy.getName(), "has been Euthanized")
+        print("Player Exp: ", Player.getPlayerExp())
 
 A = PlayerBase("Jairo")
 B = EnemyBasic("Chad", "Boring", 5, A.getPlayerLevel(), 20, 50, 2, [])
