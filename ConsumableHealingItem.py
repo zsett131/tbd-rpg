@@ -6,7 +6,7 @@ class ConsumableHealingItem(Item):
     Affect = 1
 
     def __init__(self, name, desc, stackCap, stack, heal, dropRate):
-        Item.__init__(name, desc, stackCap, stack, dropRate)
+        Item.__init__(self, name, desc, stackCap, stack, dropRate)
 
     # Getter and setter for the amount healed
     def sethealAmount(self, heal):

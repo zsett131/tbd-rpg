@@ -40,9 +40,9 @@ class EnemyBase:
 
     # Hp getter and setters
     def setHp(self, hp):
-        self.hp = hp
+        self.hp = self.getHp() - 1
 
-    def getHp(self, hp):
+    def getHp(self):
         return self.hp
 
     def enemyTakeDamage(self, taken):
@@ -57,6 +57,9 @@ class EnemyBase:
 
     def getDamage(self):
         return self.damage
+
+    def enemyAttack(self):
+        return self.getDamage()
 
     # Enemy level getter and setter
     def setLevel(self, level):

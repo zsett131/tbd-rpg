@@ -14,7 +14,7 @@ class PlayerBase:
     playerCurrentHealth = 20
     playerMaxHealth = 20
     playerWeapon = Item
-    playerDamage = 0
+    playerDamage = 1
     playerInventory = []
 
     # The stats, Strength, Wisdom, and Agility.
@@ -25,9 +25,8 @@ class PlayerBase:
     SkillPoints = 0
 
     # The constructor (place holder for now)
-    def __init__(self):
-        print("I exist")
-        self.expalgorithm()
+    def __init__(self, name):
+        self.setPlayerName(name)
 
     def expAlgorithm(self):
         expLogistic = 1/(3+math.exp(-(3/4)*(self.playerLevel/16)-4))
@@ -127,6 +126,7 @@ class PlayerBase:
         self.playerDamage = damage
 
     def getPlayerDamage(self):
+        self.getPlayerEquiped()
         return self.playerDamage
 
     def playerAttack(self):
