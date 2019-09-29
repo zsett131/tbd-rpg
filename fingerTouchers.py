@@ -17,13 +17,13 @@ class fingerTouchers:
 
         self.img_width = width
         self.img_height = height
-        self.x_position = self.resolution_width-(desired_x//2)
-        self.y_position = self.resolution_height-(desired_y//2)
+        self.x_position = desired_x-width//2
+        self.y_position = desired_y-height//2
         self.standard_img = pygame.image.load(img_one)
         self.hover_img = pygame.image.load(img_two)
 
-    def setStandardImg(self):
-        pygame.display.set_mode.blit(self.standard_img, (self.x_position, self.y_position))
+    def getXPosition(self):
+        return self.x_position
 
-    def setHoverImg(self):
-        pygame.display.set_mode.blit(self.hover_img, (self.x_position, self.y_position))
+    def getYPosition(self):
+        return self.y_position
