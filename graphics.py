@@ -43,6 +43,7 @@ while not quit:
         # ---------------------------------Sets Display height and the display button
         gameDisplay = pygame.display.set_mode((display_width, display_height))
         gameDisplay.fill(blue)
+        buttonHover = False
         sans(sansrick_displayx, sansrick_displayy)
 
         # ---------------------------------Grabs the position of the mouse to update the button to sans or peter
@@ -51,9 +52,10 @@ while not quit:
         mouse = pygame.mouse.get_pos()
         if 250 < mouse[0] < 550 and 300 < mouse[1] < 400:
             hover(sansrick_displayx, sansrick_displayy)
+            buttonHover = True
         else:
             sans(sansrick_displayx, sansrick_displayy)
-        if pygame.mouse.get_pressed()[0] == 1:
+        if pygame.mouse.get_pressed()[0] == 1 and buttonHover:
             Peter = True
             brokenBeter(0, 0)
 
