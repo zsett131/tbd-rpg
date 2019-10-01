@@ -23,7 +23,7 @@ class GameBase:
         self.display = None
         self.clock = pygame.time.Clock()
         self.startButton = MakeButton.MakeButton(self, 300, 100, 400, 400, 'sansrick.jpg', 'hovergriff.jpg',
-                                                 allback=self.peterTime)
+                                                 callback=self.peterTime)
 
     def peterTime(self):
         brokenBeter(self.display, 0, 0)
