@@ -1,7 +1,7 @@
 import pygame
 import sys
 
-class fingerTouchers:
+class makeButton:
 
     x_position = 0
     y_position = 0
@@ -27,3 +27,12 @@ class fingerTouchers:
 
     def getYPosition(self):
         return self.y_position
+
+    def getXY(self):
+        return self.getXPosition(), self.getYPosition()
+
+    def imgStandard(self):
+        return self.standard_img
+
+    def imgHover(self):
+        return self.hover_img
