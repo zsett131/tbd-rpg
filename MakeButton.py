@@ -22,6 +22,7 @@ class MakeButton:
         self.standard_img = pygame.image.load(img_one)
         self.hover_img = pygame.image.load(img_two)
         self.callback = callback
+        self.pressed = False
 
     def getXPosition(self):
         return self.x_position
@@ -48,12 +49,20 @@ class MakeButton:
     def process(self):
         mouse = pygame.mouse.get_pos()
         x, y = self.standard_img.get_size()
+        hovered = False
         if self.getXPosition() < mouse[0] < self.getXPosition() + x and \
                 self.getYPosition() < mouse[1] < self.getYPosition() + y:
-            self.base.display.blit(self.imgHover(), self.getXY())
+            if not self.base.CLICK_STATE or self.pressed:
+                self.base.display.blit(self.imgHover(), self.getXY())
+                hovered = True
         else:
             self.base.display.blit(self.imgStandard(), self.getXY())
 
-        if pygame.mouse.get_pressed()[0] == 1:
+        if pygame.mouse.get_pressed()[0] and hovered:
+            self.pressed = 1
+        elif self.pressed and not hovered and not pygame.mouse.get_pressed()[0]:
+            self.pressed = 0
+        elif not pygame.mouse.get_pressed()[0] and hovered and self.pressed:
+            self.pressed = 0
             if self.callback:
                 self.callback()

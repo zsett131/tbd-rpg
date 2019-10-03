@@ -1,6 +1,5 @@
 import pygame
 import MakeButton
-from Frame import Frame
 
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 600
@@ -30,11 +29,6 @@ class GameBase:
         brokenBeter(self.display, 0, 0)
         self.startButton.hide()
 
-        # --------------------------------------Initiates the battle phase, will be placed into another class later.
-        Frame.efill(self, black)
-        battle_frame = Frame(300, 0, self)
-        battle_frame.makeRect(blue, 800, 300)
-
     def construct(self):
         self.display = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
@@ -50,7 +44,6 @@ class GameBase:
 
             for button in MakeButton.BUTTONS:
                 button.process()
-
 
             self.clock.tick(30)
 
