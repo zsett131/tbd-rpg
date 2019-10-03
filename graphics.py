@@ -9,6 +9,7 @@ from Battle import Battle
 
 Player = PlayerBase("Jairo")
 import GameBase
+from Frame import Frame
 
 clock = pygame.time.Clock()
 red = (255, 0, 0)
