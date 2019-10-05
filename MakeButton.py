@@ -48,11 +48,10 @@ class MakeButton:
         BUTTONS.remove(self)
 
     def process(self):
-        mouse = pygame.mouse.get_pos()
-        x, y = self.standard_img.get_size()
         hovered = False
-        if self.getXPosition() < mouse[0] < self.getXPosition() + x and \
-                self.getYPosition() < mouse[1] < self.getYPosition() + y:
+        rect = self.imgStandard().get_rect()
+        rect.x, rect.y = self.getXY()
+        if rect.collidepoint(pygame.mouse.get_pos()):
             if not self.base.CLICK_STATE or self.pressed:
                 self.base.display.blit(self.imgHover(), self.getXY())
                 hovered = True
