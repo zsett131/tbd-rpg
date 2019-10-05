@@ -24,6 +24,8 @@ class Battle:
     def topBattleFrame(self, mainGame):
         self.topFrame = Frame(0, 0, mainGame)
         self.topFrame.makeRect(GameBase.lightblue, 800, 300)
+        self.topFrame.uniqueRect(GameBase.red, 50, 25, 275, 75)
+        self.topFrame.uniqueRect(GameBase.red, GameBase.DISPLAY_WIDTH-50-275, GameBase.DISPLAY_HEIGHT-25-75-300, 275, 75)
 
 
     def damagePlayer(self):

@@ -21,6 +21,10 @@ class Frame:
     def makeRect(self, color, width, depth):
         pygame.draw.rect(self.display, color, (self.right, self.down, width, depth))
 
+    def uniqueRect(self, color, right, down, width, depth):
+        pygame.draw.rect(self.display, color, (right, down, width, depth))
+
+
     def addButtons(self, args): #TODO
         for buttons in args:
             pass
