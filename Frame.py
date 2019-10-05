@@ -13,7 +13,7 @@ class Frame:
         self.down = down
         self.right = right
         self.mainGame = gamebase
-        self.display = self.mainGame.display
+        self.display = gamebase
 
     def efill(self, color):
         self.display.fill(color)

@@ -25,7 +25,6 @@ class EnemyBasic(EnemyBase):
 
         levelDifference = abs(originalLevel - currentLevel)
 
-
         if originalLevel > currentLevel:
             percentMultiplier = 1-(levelDifference*5)/100
         elif currentLevel > originalLevel:

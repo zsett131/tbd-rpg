@@ -1,20 +1,30 @@
 from PlayerBase import PlayerBase
 from EnemyBasic import EnemyBasic
-from GameBase import GameBase
 from Frame import Frame
-import ConsumableItemsList
+import GameBase
 import time
 
 class Battle:
 
     thePlayer = PlayerBase
     theEnemy = EnemyBasic
-    battleFrame = 0
+    bottomFrame = 0
+    topFrame = 0
 
     def __init__(self, Player, Enemy, mainGame):
         thePlayer = Player
         theEnemy = Enemy
-        self.battleFrame = Frame(100,100, mainGame)
+        self.bottomBattleFrame(mainGame)
+        self.topBattleFrame(mainGame)
+
+    def bottomBattleFrame(self,mainGame):
+        self.bottomFrame = Frame(300, 0, mainGame)
+        self.bottomFrame.makeRect(GameBase.blue, 800, 300)
+
+    def topBattleFrame(self, mainGame):
+        self.topFrame = Frame(0, 0, mainGame)
+        self.topFrame.makeRect(GameBase.lightblue, 800, 300)
+
 
     def damagePlayer(self):
         return self.thePlayer.playerTakeDamage(self.Enemy.enemyAttack)
@@ -28,3 +38,4 @@ class Battle:
             return self.thePlayer
         else:
             return self.thePlayer
+

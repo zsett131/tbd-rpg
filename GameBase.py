@@ -1,12 +1,17 @@
 import pygame
 import MakeButton
+from Battle import Battle
 from Frame import Frame
+from PlayerBase import PlayerBase
+from EnemyBasic import EnemyBasic
+from EnemyList import ListofEnemies
 
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 600
 red = (255, 0, 0)
 green = (0, 255, 0)
 blue = (0, 0, 255)
+lightblue = (135, 206, 250)
 white = (255, 255, 255)
 black = (0, 0, 0)
 sansrick_displayx = 250
@@ -14,6 +19,9 @@ sansrick_displayy = 300
 sansRick = pygame.image.load('sansrick.jpg')
 hoverGriff = pygame.image.load('hovergriff.jpg')
 familyguy = pygame.image.load('familyguypeter.jpg')
+
+The_Player = PlayerBase("Jairo")
+The_Enemy = ListofEnemies[0]
 
 def brokenBeter(display, x,y):
     display.blit(familyguy, (x,y))
@@ -33,8 +41,7 @@ class GameBase:
 
         # --------------------------------------Initiates the battle phase, will be placed into another class later.
         Frame.efill(self, black)
-        battle_frame = Frame(300, 0, self)
-        battle_frame.makeRect(blue, 800, 300)
+        battle_frame    = Battle(The_Player, The_Enemy, self.display)
 
     def construct(self):
         self.display = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))

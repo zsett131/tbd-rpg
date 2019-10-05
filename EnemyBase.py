@@ -58,9 +58,6 @@ class EnemyBase:
     def getDamage(self):
         return self.damage
 
-    def enemyAttack(self):
-        return self.getDamage()
-
     # Enemy level getter and setter
     def setLevel(self, level):
         self.level = level

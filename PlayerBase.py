@@ -40,7 +40,6 @@ class PlayerBase:
     def getPlayerName(self):
         return self.playerName
 
-
     # Player Level getter.
 
     def getPlayerLevel(self):
@@ -103,9 +102,7 @@ class PlayerBase:
             return True
 
     def setPlayerMaxHealth(self):
-        self.playermaxHealth = self.getPlayerMaxHealth()
-        self.playerStrength = self.getPlayerStrength()
-        self.healthCalculation = self.playerMaxHealth + self.playerStrength
+        self.setPlayerMaxHealth(self.getplayerMaxHealth() + self.getPlayerStrength())
 
     def getPlayerMaxHealth(self):
         return self.playerMaxHealth
@@ -113,9 +110,9 @@ class PlayerBase:
     # Sets and Gets the players equipped item
     def setPlayerEquiped(self, weapon):
         if self.getPlayerEquiped():
-            self.setPlayerDamage(weapon.getDamage()*(1+(self.getPlayerStrength()//50)))
+            self.setPlayerDamage(weapon.getDamage()*(1+(self.getPlayerStrength()//10)))
         else:
-            self.setPlayerDamage(1+(self.getPlayerStrength()//50))
+            self.setPlayerDamage(1+(self.getPlayerStrength()//10))
 
     def getPlayerEquiped(self):
         return self.playerWeapon
