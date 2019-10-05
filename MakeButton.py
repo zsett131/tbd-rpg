@@ -13,14 +13,15 @@ class MakeButton:
     resolution_width = 800
     resolution_height = 600
 
-    def __init__(self, base, width, height, desired_x, desired_y, img_one, img_two, callback=None):
+    def __init__(self, base, width, height, desired_x, desired_y, standard_img, hover_img, press_img=None, callback=None):
         self.base = base
         self.img_width = width
         self.img_height = height
         self.x_position = desired_x-width//2
         self.y_position = desired_y-height//2
-        self.standard_img = pygame.image.load(img_one)
-        self.hover_img = pygame.image.load(img_two)
+        self.standard_img = pygame.image.load(standard_img)
+        self.hover_img = pygame.image.load(hover_img)
+        self.press_img = pygame.image.load(press_img) if press_img else None
         self.callback = callback
         self.pressed = False
 
