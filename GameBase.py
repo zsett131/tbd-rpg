@@ -41,7 +41,7 @@ class GameBase:
 
         # --------------------------------------Initiates the battle phase, will be placed into another class later.
         Frame.efill(self, black)
-        battle_frame    = Battle(The_Player, The_Enemy, self.display)
+        battle_frame = Battle(The_Player, The_Enemy, self.display)
 
     def construct(self):
         self.display = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
