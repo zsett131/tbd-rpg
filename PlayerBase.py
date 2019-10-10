@@ -10,6 +10,7 @@ class PlayerBase:
     playerLevel = 1
     playerExp = 0
     playerExpCap = 100
+    playerHealthPercentage = 0.0
     expLogistic = 0
     playerCurrentHealth = 20
     playerMaxHealth = 20
@@ -106,6 +107,13 @@ class PlayerBase:
 
     def getPlayerMaxHealth(self):
         return self.playerMaxHealth
+
+    def setPlayerHealthPercentage(self):
+        self.playerHealthPercentage = self.getPlayerCurrentHealth()//self.getPlayerMaxHealth()
+
+    def getPlayerHealthPercentage(self):
+        self.setPlayerHealthPercentage()
+        return self.playerHealthPercentage
 
     # Sets and Gets the players equipped item
     def setPlayerEquiped(self, weapon):

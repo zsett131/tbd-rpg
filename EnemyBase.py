@@ -5,6 +5,8 @@ class EnemyBase:
     name = ""
     desc = ""
     hp = 0
+    maxhp = 0
+    healthpercentage = 0.0
     exp = 0
     damage = 0
     level = 0
@@ -13,6 +15,7 @@ class EnemyBase:
         self.name = name
         self.desc = desc
         self.hp = hp
+        self.maxhp = hp
         self.exp = exp
         self.damage = damage
         self.level = level
@@ -44,6 +47,13 @@ class EnemyBase:
 
     def getHp(self):
         return self.hp
+
+    def getMaxHp(self):
+        return self.maxhp
+
+    def getEnemyHealthPercentage(self):
+        self.healthpercentage = self.hp/self.getMaxHp()
+        return self.healthpercentage
 
     def enemyTakeDamage(self, taken):
         self.hp = self.getHp() - taken
