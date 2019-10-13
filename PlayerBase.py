@@ -15,7 +15,7 @@ class PlayerBase:
     playerCurrentHealth = 20
     playerMaxHealth = 20
     playerWeapon = Item
-    playerDamage = 1
+    playerDamage = 2
     playerInventory = []
 
     # The stats, Strength, Wisdom, and Agility.
@@ -103,13 +103,13 @@ class PlayerBase:
             return True
 
     def setPlayerMaxHealth(self):
-        self.setPlayerMaxHealth(self.getplayerMaxHealth() + self.getPlayerStrength())
+        self.playerMaxHealth = (self.getPlayerMaxHealth() + self.getPlayerStrength())
 
     def getPlayerMaxHealth(self):
         return self.playerMaxHealth
 
     def setPlayerHealthPercentage(self):
-        self.playerHealthPercentage = self.getPlayerCurrentHealth()//self.getPlayerMaxHealth()
+        self.playerHealthPercentage = self.getPlayerCurrentHealth()/self.getPlayerMaxHealth()
 
     def getPlayerHealthPercentage(self):
         self.setPlayerHealthPercentage()

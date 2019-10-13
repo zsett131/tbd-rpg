@@ -35,6 +35,7 @@ class EnemyBasic(EnemyBase):
         self.setExp(int(originalExp * percentMultiplier))
         self.setHp(int(originalHp * percentMultiplier))
         self.setDamage(int(originalDamage * percentMultiplier))
+        self.maxhp = self.hp
 
     # First a list called drops is created. Next, the exp amount of the enemy is put in followed by each item that is successfully dropped from the enemy.
 

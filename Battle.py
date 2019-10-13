@@ -60,8 +60,7 @@ class Battle:
         pygame.draw.rect(self.topFrame.display, GameBase.green, self.playerHealthBar)
 
     def damagePlayer(self):
-        return self.thePlayer.playerTakeDamage(10)
-
+        return self.thePlayer.playerTakeDamage(self.theEnemy.getDamage())
 
     def damageEnemy(self):
         return self.theEnemy.enemyTakeDamage(self.thePlayer.playerAttack())
