@@ -43,6 +43,7 @@ class GameBase:
         Frame.efill(self, black)
         battle_frame = Battle(The_Player, The_Enemy, self.display)
         battle_frame.damagePlayer()
+        battle_frame.damageEnemy()
         battle_frame.drawHealthBars()
 
     def construct(self):
