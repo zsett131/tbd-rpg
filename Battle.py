@@ -13,6 +13,8 @@ class Battle:
     pygame.init()
     thePlayer = PlayerBase
     theEnemy = PlayerBase
+    isPlayerDead = False
+    isEnemyDead = False
     bottomFrame = 0
     topFrame = 0
     myfont = pygame.font.SysFont('Comic Sans TM', 25)
@@ -41,6 +43,8 @@ class Battle:
         self.topFrame.makeRect(GameBase.lightblue, 800, 300)
         self.topFrame.display.blit(self.character_bar, (25, 25))
         self.topFrame.display.blit(self.character_bar, (500, 200))
+        self.topFrame.display.blit(self.theEnemy.icon, (550, 20))
+        self.topFrame.display.blit(self.thePlayer.playerIcon, (25, 140))
 
         # Creates the Font and renders them.
         text = self.myfont.render(self.theEnemy.getName(), True, GameBase.black)
@@ -94,10 +98,16 @@ class Battle:
             self.battleComplete()
 
     def damagePlayer(self):
+        if self.thePlayer.getPlayerCurrentHealth() <= 0:
+            self.isPlayerDead = True
         return self.thePlayer.playerTakeDamage(self.theEnemy.getDamage())
 
+
     def damageEnemy(self):
+        if self.theEnemy.getHp() <= 0:
+            self.isEnemyDead = True
         return self.theEnemy.enemyTakeDamage(self.thePlayer.playerAttack())
+
 
     def battleComplete(self):
         if self.thePlayer.isPlayerAlive() and not self.theEnemy.isAlive():

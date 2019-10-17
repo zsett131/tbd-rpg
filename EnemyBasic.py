@@ -6,8 +6,8 @@ class EnemyBasic(EnemyBase):
 
     lootDrop = []
 
-    def __init__(self, name, desc, level, playerlevel, hp, exp, damage, lootTable):
-        EnemyBase.__init__(self, name, desc, level, hp, exp, damage)
+    def __init__(self, name, desc, level, playerlevel, hp, exp, damage, lootTable, icon):
+        EnemyBase.__init__(self, name, desc, level, hp, exp, damage, icon)
         self.levelGenerator(self.level, playerlevel)
         self.statsGenerator(self.exp, self.hp, self.damage, level, self.level)
         self.lootDrop = lootTable

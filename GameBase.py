@@ -22,6 +22,7 @@ familyguy = pygame.image.load('familyguypeter.jpg')
 
 The_Player = PlayerBase("Jairo")
 The_Enemy = ListofEnemies[0]
+battle_frame = None
 
 def brokenBeter(display, x,y):
     display.blit(familyguy, (x,y))
@@ -70,6 +71,7 @@ class GameBase:
                 self.CLICK_STATE = False
 
             self.clock.tick(30)
+
 
             # ---------------------------------While statement dies when X button pressed
             pygame.display.update()

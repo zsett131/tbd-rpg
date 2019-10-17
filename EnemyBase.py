@@ -1,9 +1,10 @@
-
+import pygame
 
 class EnemyBase:
 
     name = ""
     desc = ""
+    icon = None
     hp = 0
     maxhp = 0
     healthpercentage = 0.0
@@ -11,9 +12,10 @@ class EnemyBase:
     damage = 0
     level = 0
 
-    def __init__(self, name, desc, level, hp, exp, damage):
+    def __init__(self, name, desc, level, hp, exp, damage, icon):
         self.name = name
         self.desc = desc
+        self.icon = pygame.image.load(icon)
         self.hp = hp
         self.maxhp = hp
         self.exp = exp

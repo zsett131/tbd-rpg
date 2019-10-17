@@ -7,6 +7,7 @@ class PlayerBase:
     # Exp, health, weapons, damage, and stats will all be here.
 
     playerName = ""
+    playerIcon = pygame.image.load('Jotaro.jpg')
     playerLevel = 1
     playerExp = 0
     playerExpCap = 100
