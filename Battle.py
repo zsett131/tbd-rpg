@@ -32,12 +32,12 @@ class Battle:
         self.topBattleFrame(mainGame)
 
     def bottomBattleFrame(self, mainGame):
-        self.bottomFrame = Frame(300, 0, mainGame)
+        self.bottomFrame = Frame(300, 0, mainGame, self)
         self.bottomFrame.makeRect(GameBase.blue, 800, 300)
         self.bottomFrame.addButtons()
 
     def topBattleFrame(self, mainGame):
-        self.topFrame = Frame(0, 0, mainGame)
+        self.topFrame = Frame(0, 0, mainGame, self)
         self.topFrame.makeRect(GameBase.lightblue, 800, 300)
         self.topFrame.display.blit(self.character_bar, (25, 25))
         self.topFrame.display.blit(self.character_bar, (500, 200))

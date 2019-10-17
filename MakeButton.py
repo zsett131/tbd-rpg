@@ -51,7 +51,8 @@ class MakeButton:
         BUTTONS.append(self)
 
     def hide(self):
-        BUTTONS.remove(self)
+        if self in BUTTONS:
+            BUTTONS.remove(self)
 
     def process(self):
         hovered = False

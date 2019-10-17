@@ -36,6 +36,15 @@ base = GameBase.GameBase()
 try:
     base.run()
 except:
-    base.peterTime()
+    base.exception()
+    pygame.display.update()
+    quit = False
+    while not quit:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                quit = True
+
+        if pygame.mouse.get_pressed()[0]:
+            quit = True
 
 pygame.quit()

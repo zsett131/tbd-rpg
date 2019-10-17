@@ -35,6 +35,11 @@ class GameBase:
         self.startButton = MakeButton.MakeButton(self, 300, 100, 400, 400, 'sansrick.jpg', 'hovergriff.jpg',
                                                  callback=self.peterTime)
 
+    def exception(self):
+        brokenBeter(self.display, 0, 0)
+        for button in MakeButton.BUTTONS:
+            button.hide()
+
     def peterTime(self):
         brokenBeter(self.display, 0, 0)
         self.startButton.hide()
