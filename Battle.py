@@ -22,8 +22,8 @@ class Battle:
     enemy_health_bar_color = (0,0,0)
     player_health_bar_length = 150
     player_health_bar_color = (0,0,0)
-    enemyHealthBar = pygame.Rect(125, 50, enemy_health_bar_length, 25)
-    playerHealthBar = pygame.Rect(600, 225, player_health_bar_length, 25)
+    enemyHealthBar = pygame.Rect(125, 60, enemy_health_bar_length, 25)
+    playerHealthBar = pygame.Rect(600, 235, player_health_bar_length, 25)
 
     character_bar = pygame.image.load('Character_Bar.png')
 
@@ -48,9 +48,9 @@ class Battle:
 
         # Creates the Font and renders them.
         text = self.myfont.render(self.theEnemy.getName(), True, GameBase.black)
-        self.topFrame.display.blit(text, (54, 43))
+        self.topFrame.display.blit(text, (54, 40))
         text = self.myfont.render(self.thePlayer.getPlayerName(), True, GameBase.black)
-        self.topFrame.display.blit(text, (530, 218))
+        self.topFrame.display.blit(text, (530, 215))
 
         # Draws the Player and Enemy Health Bars
         self.drawHealthBars()
@@ -61,8 +61,8 @@ class Battle:
         self.enemy_health_bar_length = int(self.enemy_health_bar_length * self.theEnemy.getEnemyHealthPercentage())
 
         # Draws a white rectangle over the hp, allowing for a green rectangle to be put on top
-        pygame.draw.rect(self.topFrame.display, GameBase.white, (125, 50, 150, 25))
-        pygame.draw.rect(self.topFrame.display, GameBase.white, (600, 225, 150, 25))
+        pygame.draw.rect(self.topFrame.display, GameBase.white, (125, 60, 150, 25))
+        pygame.draw.rect(self.topFrame.display, GameBase.white, (600, 235, 150, 25))
 
         # Sets the color of the Player and Enemies health bar
         if self.thePlayer.getPlayerCurrentHealth() <= 0.0:
@@ -84,8 +84,8 @@ class Battle:
             self.enemy_health_bar_color = GameBase.green
 
         # Creates the new player and enemy hp bar
-        self.playerHealthBar = pygame.Rect(600, 225, self.player_health_bar_length, 25)
-        self.enemyHealthBar = pygame.Rect(125, 50, self.enemy_health_bar_length, 25)
+        self.playerHealthBar = pygame.Rect(600, 235, self.player_health_bar_length, 25)
+        self.enemyHealthBar = pygame.Rect(125, 60, self.enemy_health_bar_length, 25)
         print("Player hp: ", self.thePlayer.getPlayerCurrentHealth())
         print("Enemy hp: ", self.theEnemy.getHp())
 
