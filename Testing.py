@@ -1,17 +1,7 @@
 from PlayerBase import PlayerBase
-
+from EnemyBasic import EnemyBasic
 
 class Testing:
     
-    A = PlayerBase()
-    A.setplayercurrenthealth(10)
-    print(A.getplayerExpCap())
-    A.addplayerExp(100)
-    print(A.getplayerLevel())
-    print(A.getplayerExpCap())
-    A.addplayerExp(200)
-    print(A.getplayerExpCap())
-    print(A.getplayerExp())
-    A.addplayerExp(300)
-    print(A.getplayerExpCap())
+    A = EnemyBasic("Harold", "A Ugandan Warlord from the 8th dimension.", 20, 15, 100, 25, 5)
 
