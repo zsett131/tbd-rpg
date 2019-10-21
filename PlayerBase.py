@@ -200,7 +200,24 @@ class PlayerBase:
     def removefromPlayerInventory(self, removalpoint):
         self.playerInventory.remove(removalpoint)
 
+    def getPlayerInventory(self):
+        return self.playerInventory
+
+    # Get battle drops
+    def getBattleDrops(self, drops):
+        self.addPlayerExp(drops[0])
+        for x in drops[1:]:
+            self.addtoPlayerInventory(x)
+
     # Item affects and what to do with them
     def itemAffects(self, item):
         if item.getAffect() == 1:
             self.setPlayerCurrentHealth(item.gethealAmount())
+
+    # Item getters
+    def getItem(self, position):
+        if self.getPlayerInventory():
+            return self.playerInventory[position].getItemName()
+        else:
+            print("Bruh the inventory is empty.")
+

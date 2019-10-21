@@ -23,7 +23,7 @@ class EnemyBasic(EnemyBase):
     # Exp, hp, and damage generator based on monster's level in comparison to input level.
     def statsGenerator(self, originalExp, originalHp, originalDamage, originalLevel, currentLevel):
 
-        levelDifference = originalLevel % currentLevel
+        levelDifference = abs(originalLevel - currentLevel)
 
 
         if originalLevel > currentLevel:
@@ -33,7 +33,6 @@ class EnemyBasic(EnemyBase):
 
         self.setExp(int(originalExp * percentMultiplier))
         self.setHp(int(originalHp * percentMultiplier))
-        print(originalHp)
         self.setDamage(int(originalDamage * percentMultiplier))
 
     # First a list called drops is created. Next, the exp amount of the enemy is put in followed by each item that is successfully dropped from the enemy.
@@ -41,6 +40,6 @@ class EnemyBasic(EnemyBase):
     def died(self): # TODO: xp calculation, loot generation, etc.
         drops = [self.getExp()]
         for x in self.lootDrop:
-            if self.lootDrop[x] <= random():
-                drops.append(self.lootDrop[x])
+            if x.getItemDropRate() >= random():
+                drops.append(x)
         return drops

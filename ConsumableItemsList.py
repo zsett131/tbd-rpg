@@ -1,6 +1,6 @@
 from ConsumableHealingItem import ConsumableHealingItem
 
-consumables = [ConsumableHealingItem("Health Potion", "A potion that heals for 10 health.", 10, 1, 10, .10),
+consumables = [ConsumableHealingItem("Health Potion", "A potion that heals for 10 health.", 10, 1, 10, .1),
                ConsumableHealingItem("Greater Health Potion",
                                      "A mystical potion that heals for 30 health.", 10, 1, 30, .05),
                ConsumableHealingItem("Superior Health Potion",
