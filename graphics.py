@@ -1,14 +1,8 @@
 import pygame
-import sys
-import time
-from EnemyList import ListofEnemies
 from PlayerBase import PlayerBase
-from makeButton import makeButton
-from Battle import Battle
 
 Player = PlayerBase("Jairo")
 import GameBase
-from Frame import Frame
 
 clock = pygame.time.Clock()
 red = (255, 0, 0)
