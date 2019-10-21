@@ -18,4 +18,3 @@ class EnemyBase:
 
     def died(self, *args): # TODO: xp calculation, loot generation, etc.
         pass
-
