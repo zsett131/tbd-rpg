@@ -1,9 +1,9 @@
-import PlayerBase
+from PlayerBase import PlayerBase
 
 
 class Testing:
     
-    A = PlayerBase
+    A = PlayerBase()
     allocation = 10
     A.setplayerStrength(allocation)
     A.setplayermaxHealth()
