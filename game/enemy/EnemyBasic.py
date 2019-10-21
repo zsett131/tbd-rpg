@@ -1,6 +1,6 @@
-from EnemyBase import EnemyBase
+from game.enemy.EnemyBase import EnemyBase
 from random import random
-from lootTableMaker import lootTableMaker
+
 
 class EnemyBasic(EnemyBase):
 

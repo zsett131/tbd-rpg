@@ -1,6 +1,3 @@
-import math
-import PlayerBase
-
 class Item:
 
     # All the important variables for a consumable item

@@ -1,5 +1,4 @@
-from MakeButton import MakeButton
-import GameBase
+from game.base.MakeButton import MakeButton
 import pygame
 
 class Frame:

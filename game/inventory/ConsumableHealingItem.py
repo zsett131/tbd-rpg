@@ -1,4 +1,4 @@
-from Item import Item
+from game.inventory.Item import Item
 
 class ConsumableHealingItem(Item):
 

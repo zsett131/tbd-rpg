@@ -1,6 +1,6 @@
 import pygame
-import sys
-import GameBase
+from game.base import GameBase
+
 BUTTONS = []
 class MakeButton:
 

@@ -1,6 +1,5 @@
-from EnemyBasic import EnemyBasic
-from ConsumableHealingItem import ConsumableHealingItem
-import ConsumableItemsList
+from game.enemy.EnemyBasic import EnemyBasic
+from game.inventory import ConsumableItemsList
 
 ListofEnemies = []
 

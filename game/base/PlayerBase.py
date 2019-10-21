@@ -1,6 +1,7 @@
 import pygame
 import math
-import Item
+from game.inventory import Item
+
 
 class PlayerBase:
     # All the player variables are kept within this area.

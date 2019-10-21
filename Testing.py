@@ -1,5 +1,4 @@
-from PlayerBase import PlayerBase
-from EnemyBasic import EnemyBasic
+from game.enemy.EnemyBasic import EnemyBasic
 
 class Testing:
     

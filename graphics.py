@@ -1,8 +1,8 @@
 import pygame
-from PlayerBase import PlayerBase
+from game.base.PlayerBase import PlayerBase
 
 Player = PlayerBase("Jairo")
-import GameBase
+from game.base import GameBase
 
 clock = pygame.time.Clock()
 red = (255, 0, 0)

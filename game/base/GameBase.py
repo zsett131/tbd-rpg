@@ -1,10 +1,9 @@
 import pygame
-import MakeButton
-from Battle import Battle
-from Frame import Frame
-from PlayerBase import PlayerBase
-from EnemyBasic import EnemyBasic
-from EnemyList import ListofEnemies
+from game.base import MakeButton
+from game.battle.Battle import Battle
+from game.battle.Frame import Frame
+from game.base.PlayerBase import PlayerBase
+from game.enemy.EnemyList import ListofEnemies
 
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 600

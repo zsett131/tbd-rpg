@@ -1,6 +1,5 @@
 from pip._vendor.msgpack.fallback import xrange
-import Item
-import ConsumableItemsList
+
 
 class lootTableMaker():
 

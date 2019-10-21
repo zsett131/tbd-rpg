@@ -1,11 +1,7 @@
-from PlayerBase import PlayerBase
-from EnemyBasic import EnemyBasic
-from Frame import Frame
-import GameBase
+from game.base.PlayerBase import PlayerBase
+from game.battle.Frame import Frame
+from game.base import GameBase
 import pygame
-from pygame import font
-import time
-
 
 
 class Battle:

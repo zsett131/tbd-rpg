@@ -1,4 +1,4 @@
-from ConsumableHealingItem import ConsumableHealingItem
+from game.inventory.ConsumableHealingItem import ConsumableHealingItem
 
 consumables = [ConsumableHealingItem("Health Potion", "A potion that heals for 10 health.", 10, 1, 10, .1),
                ConsumableHealingItem("Greater Health Potion",
