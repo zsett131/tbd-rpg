@@ -1,6 +1,5 @@
 import pygame
 import sys
-<<<<<<< HEAD
 import time
 from EnemyList import ListofEnemies
 from PlayerBase import PlayerBase
@@ -34,5 +33,9 @@ sansrick_displayy = 300
 # -------------------------------------Game Loop
 pygame.init()
 base = GameBase.GameBase()
-base.run()
+try:
+    base.run()
+except:
+    base.peterTime()
+
 pygame.quit()

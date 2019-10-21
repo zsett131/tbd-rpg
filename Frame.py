@@ -13,7 +13,10 @@ class Frame:
         self.down = down
         self.right = right
         self.mainGame = gamebase
-        self.display = gamebase
+        self.display = self.mainGame.display
+        self.buttons = []
+        self.attackButton = None
+        self.runButton = None
 
     def efill(self, color):
         self.display.fill(color)
@@ -24,11 +27,11 @@ class Frame:
     def uniqueRect(self, color, right, down, width, depth):
         pygame.draw.rect(self.display, color, (right, down, width, depth))
 
-
-    def addButtons(self, args): #TODO
-        for buttons in args:
-            pass
-
+    def addButtons(self):
+        self.attackButton = MakeButton(self.mainGame, callback=lambda: print('1'), width=250, height=100, desired_x=200, desired_y=400, standard_img=None, hover_img=None)
+        self.attackButton.show()
+        self.runButton = MakeButton(self.mainGame, callback=lambda: print('2'), width=250, height=100, desired_x=600, desired_y=400, standard_img=None, hover_img=None)
+        self.runButton.show()
 
 
 

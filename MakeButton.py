@@ -1,5 +1,6 @@
 import pygame
 import sys
+import GameBase
 BUTTONS = []
 class MakeButton:
 
@@ -19,11 +20,12 @@ class MakeButton:
         self.img_height = height
         self.x_position = desired_x-width//2
         self.y_position = desired_y-height//2
-        self.standard_img = pygame.image.load(standard_img)
-        self.hover_img = pygame.image.load(hover_img)
+        self.standard_img = pygame.image.load(standard_img) if standard_img else None
+        self.hover_img = pygame.image.load(hover_img) if hover_img else None
         self.press_img = pygame.image.load(press_img) if press_img else None
         self.callback = callback
         self.pressed = False
+        self.rect = None
 
     def getXPosition(self):
         return self.x_position
@@ -41,7 +43,11 @@ class MakeButton:
         return self.hover_img
 
     def show(self):
-        self.base.display.blit(self.imgStandard(), self.getXY())
+        if self.imgStandard():
+            self.base.display.blit(self.imgStandard(), self.getXY())
+        else:
+            self.rect = pygame.Rect(self.x_position, self.y_position, self.img_width, self.img_height)
+            self.rectVis = pygame.draw.rect(self.base.display, GameBase.white, self.rect)
         BUTTONS.append(self)
 
     def hide(self):
@@ -49,14 +55,22 @@ class MakeButton:
 
     def process(self):
         hovered = False
-        rect = self.imgStandard().get_rect()
+        rect = self.rect
+        if not rect:
+            rect = self.imgStandard().get_rect()
         rect.x, rect.y = self.getXY()
         if rect.collidepoint(pygame.mouse.get_pos()):
             if not self.base.CLICK_STATE or self.pressed:
-                self.base.display.blit(self.imgHover(), self.getXY())
+                if self.imgHover():
+                    self.base.display.blit(self.imgHover(), self.getXY())
+                else:
+                    self.rectVis = pygame.draw.rect(self.base.display, GameBase.green, self.rect)
                 hovered = True
         else:
-            self.base.display.blit(self.imgStandard(), self.getXY())
+            if self.imgStandard():
+                self.base.display.blit(self.imgStandard(), self.getXY())
+            else:
+                self.rectVis = pygame.draw.rect(self.base.display, GameBase.white, self.rect)
 
         if pygame.mouse.get_pressed()[0] and hovered:
             self.pressed = 1
