@@ -45,6 +45,12 @@ class EnemyBase:
     def getHp(self, hp):
         return self.hp
 
+    def enemyTakeDamage(self, taken):
+        self.setHp(taken)
+        if self.getHp() < 0:
+            self.setHp(0)
+            self.isAlive()
+
     # Enemy damage getter and setter
     def setDamage(self, damage):
         self.damage = damage
@@ -84,3 +90,10 @@ class EnemyBase:
 
     def died(self, *args): # TODO: xp calculation, loot generation, etc.
         pass
+
+    # Function to determine if the enemy is dead or not
+    def isAlive(self):
+        if self.getHp() == 0:
+            return False
+        else:
+            return True

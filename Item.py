@@ -1,7 +1,7 @@
 import math
 import PlayerBase
 
-class ConsumableItem:
+class Item:
 
     # All the important variables for a consumable item
 

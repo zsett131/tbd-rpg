@@ -1,12 +1,12 @@
-import Item
+from Item import Item
 
 class ConsumableHealingItem(Item):
 
     healAmount = 0
     Affect = 1
 
-    def __init__(self, arg1, arg2, arg3, arg4, heal):
-        self.sethealAmount(heal)
+    def __init__(self, name, desc, stackCap, stack, heal, dropRate):
+        Item.__init__(name, desc, stackCap, stack, dropRate)
 
     # Getter and setter for the amount healed
     def sethealAmount(self, heal):

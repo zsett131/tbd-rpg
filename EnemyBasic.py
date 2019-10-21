@@ -1,12 +1,16 @@
 from EnemyBase import EnemyBase
+from random import random
+from lootTableMaker import lootTableMaker
 
 class EnemyBasic(EnemyBase):
 
-    def __init__(self, name, desc, level, playerlevel, hp, exp, damage):
+    lootDrop = []
+
+    def __init__(self, name, desc, level, playerlevel, hp, exp, damage, lootTable):
         EnemyBase.__init__(self, name, desc, level, hp, exp, damage)
         self.levelGenerator(self.level, playerlevel)
         self.statsGenerator(self.exp, self.hp, self.damage, level, self.level)
-        print(self.getExp())
+        self.lootDrop = lootTable
 
     # Level generator based on monster level and player level
     def levelGenerator(self, level, playerlevel):
@@ -33,6 +37,12 @@ class EnemyBasic(EnemyBase):
         self.setHp(int(originalHp * percentMultiplier))
         self.setDamage(int(originalDamage * percentMultiplier))
 
+    # First a list called drops is created. Next, the exp amount of the enemy is put in followed by each item that is successfully dropped from the enemy.
 
-    def died(self, *args): # TODO: xp calculation, loot generation, etc.
-        pass
+    def died(self): # TODO: xp calculation, loot generation, etc.
+        drops = []
+        drops.append(self.getExp())
+        for x in self.lootDrop:
+            if self.lootDrop[x] <= random():
+                drops.append(self.lootDrop[x])
+        return drops
