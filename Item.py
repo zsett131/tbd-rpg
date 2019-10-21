@@ -11,14 +11,14 @@ class ConsumableItem:
     itemStack: int = 0
 
     # The constructor that sets the name, description, StackCap, Stack, and affect.
-    def __init__(self, arg1, arg2, arg3, arg4):
-        self.itemAffect(arg1, arg2, arg3, arg4)
+    def __init__(self, name, desc, stackCap, stack):
+        self.itemAffect(name, desc, stackCap, stack)
 
-    def itemAffect(self, arg1, arg2, arg3, arg4):
-        self.setItemName(arg1)
-        self.setItemDescription(arg2)
-        self.setItemStackCap(arg3)
-        self.setItemStack(arg4)
+    def itemAffect(self, name, desc, stackCap, stack):
+        self.setItemName(name)
+        self.setItemDescription(desc)
+        self.setItemStackCap(stackCap)
+        self.setItemStack(stack)
 
     # The setter and Getter for itemName
     def setItemName(self, name):
