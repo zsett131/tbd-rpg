@@ -28,8 +28,10 @@ class EnemyBasic(EnemyBase):
 
         if originalLevel > currentLevel:
             percentMultiplier = 1-(levelDifference*5)/100
-        if currentLevel > originalLevel:
+        elif currentLevel > originalLevel:
             percentMultiplier = 1+(levelDifference*5)/100
+        else:
+            percentMultiplier = 1
 
         self.setExp(int(originalExp * percentMultiplier))
         self.setHp(int(originalHp * percentMultiplier))
