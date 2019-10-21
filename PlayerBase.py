@@ -124,7 +124,7 @@ class PlayerBase:
             self.allocateSkillPoints(self, allocation)
             print("Your strength is now " + self.getplayerStrength)
         else:
-            print("You only have " + self.Skillpoints + " to allocate, not " + allocation + ".")
+            print("You only have {} to allocate, not {}".format(self.Skillpoints, allocation))
 
     def getplayerStrength(self):
         return self.playerStrength
