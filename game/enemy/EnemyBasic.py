@@ -5,12 +5,17 @@ from random import random
 class EnemyBasic(EnemyBase):
 
     lootDrop = []
+    playerlevel = None
 
     def __init__(self, name, desc, level, playerlevel, hp, exp, damage, lootTable, icon):
         EnemyBase.__init__(self, name, desc, level, hp, exp, damage, icon)
-        self.levelGenerator(self.level, playerlevel)
-        self.statsGenerator(self.exp, self.hp, self.damage, level, self.level)
+        self.playerlevel = playerlevel
         self.lootDrop = lootTable
+
+    def setPlayerLevel(self, level):
+        self.playerlevel = level
+        self.levelGenerator(self.level, self.playerlevel)
+        self.statsGenerator(self.exp, self.hp, self.damage, level, self.level)
 
     # Level generator based on monster level and player level
     def levelGenerator(self, level, playerlevel):
