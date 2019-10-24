@@ -11,8 +11,8 @@ class Battle:
     theEnemy = PlayerBase
     isPlayerDead = False
     isEnemyDead = False
-    bottomFrame = 0
-    topFrame = 0
+    bottomFrame = None
+    topFrame = None
     myfont = pygame.font.SysFont('Comic Sans TM', 25)
     enemy_health_bar_length = 150
     enemy_health_bar_color = (0,0,0)
@@ -47,6 +47,7 @@ class Battle:
         self.topFrame.display.blit(text, (54, 40))
         text = self.myfont.render(self.thePlayer.getPlayerName(), True, GameBase.black)
         self.topFrame.display.blit(text, (530, 215))
+
 
         # Draws the Player and Enemy Health Bars
         self.drawHealthBars()
@@ -92,6 +93,13 @@ class Battle:
         if self.enemy_health_bar_length != 0:
             pygame.draw.rect(self.topFrame.display, self.enemy_health_bar_color, self.enemyHealthBar)
             self.battleComplete()
+
+        text = self.myfont.render(str(self.theEnemy.getHp()) + "/" + str(self.theEnemy.getMaxHp()), True,
+                                  GameBase.black)
+        self.topFrame.display.blit(text, (130, 65))
+        text = self.myfont.render(str(self.thePlayer.getPlayerCurrentHealth()) + "/" +
+                                  str(self.thePlayer.getPlayerMaxHealth()), True, GameBase.black)
+        self.topFrame.display.blit(text, (605, 240))
 
     def damagePlayer(self):
         if self.thePlayer.getPlayerCurrentHealth() <= 0:
