@@ -29,7 +29,8 @@ pygame.init()
 base = GameBase.GameBase()
 try:
     base.run()
-except:
+except Exception as e:
+    print(e)
     base.exception()
     pygame.display.update()
     quit = False
