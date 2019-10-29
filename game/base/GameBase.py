@@ -3,7 +3,7 @@ from game.base import MakeButton
 from game.battle.Battle import Battle
 from game.battle.Frame import Frame
 from game.base.PlayerBase import PlayerBase
-from game.enemy.EnemyList import ListofEnemies
+from game.enemy.EnemyList import EnemyList
 
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 600
@@ -20,7 +20,9 @@ hoverGriff = pygame.image.load('hovergriff.jpg')
 familyguy = pygame.image.load('familyguypeter.jpg')
 
 The_Player = PlayerBase("Jairo")
-The_Enemy = ListofEnemies[9]
+enemies = EnemyList(The_Player.getPlayerLevel())
+The_Enemy = enemies.ListofEnemies[0]
+
 battle_frame = None
 
 def brokenBeter(display, x,y):
@@ -28,6 +30,10 @@ def brokenBeter(display, x,y):
 
 class GameBase:
     CLICK_STATE = False
+
+    The_Player = PlayerBase("Jairo")
+    enemies = EnemyList(The_Player.getPlayerLevel())
+    The_Enemy = enemies.ListofEnemies[9]
 
     def __init__(self):
         self.display = None
