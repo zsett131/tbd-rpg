@@ -1,5 +1,6 @@
 from game.base.MakeButton import MakeButton
 from game.base import GameBase
+import time
 import pygame
 
 class Frame:
@@ -99,5 +100,7 @@ class Frame:
             str(self.battle.thePlayer.getPlayerDamage()) + " to " + self.battle.theEnemy.getName()
         text = self.myfont.render(firstAttack, True, GameBase.white)
         self.display.blit(text, (20, 310))
-        self.battle.
+        self.battle.theEnemy.enemyTakeDamage(self.battle.thePlayer.getPlayerDamage())
+        time.sleep(2)
+        self.battle.drawHealthBars()
 
