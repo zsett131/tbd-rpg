@@ -1,4 +1,5 @@
 from game.base.MakeButton import MakeButton
+from game.base import GameBase
 import pygame
 
 class Frame:
@@ -36,10 +37,14 @@ class Frame:
         pygame.draw.rect(self.display, color, (right, down, width, depth))
 
     def addButtons(self):
-        self.attackButton = MakeButton(self.mainGame, callback=self.enterAttack, width=250, height=100, desired_x=200, desired_y=375, standard_img=None, hover_img=None)
-        self.runButton = MakeButton(self.mainGame, callback=lambda: print(self.battle, '2'), width=250, height=100, desired_x=600, desired_y=375, standard_img=None, hover_img=None)
-        self.itemButton = MakeButton(self.mainGame, callback=lambda: print(self.battle, '3'), width=250, height=100, desired_x=200, desired_y=525, standard_img=None, hover_img=None)
-        self.cringeButton = MakeButton(self.mainGame, callback=lambda: print(self.battle, '4'), width=250, height=100, desired_x=600, desired_y=525, standard_img=None, hover_img=None)
+        self.attackButton = MakeButton(self.mainGame, callback=self.enterAttack, width=250, height=100, desired_x=200,
+                                       desired_y=375, standard_img=None, hover_img=None, text=self.battle.buttonfont.render('Attack', True, GameBase.black))
+        self.runButton = MakeButton(self.mainGame, callback=lambda: print(self.battle, '2'), width=250, height=100,
+                                    desired_x=600, desired_y=375, standard_img=None, hover_img=None, text=self.battle.buttonfont.render('Run', True, GameBase.black))
+        self.itemButton = MakeButton(self.mainGame, callback=lambda: print(self.battle, '3'), width=250, height=100,
+                                     desired_x=200, desired_y=525, standard_img=None, hover_img=None, text=self.battle.buttonfont.render('Item', True, GameBase.black))
+        self.cringeButton = MakeButton(self.mainGame, callback=lambda: print(self.battle, '4'), width=250, height=100,
+                                       desired_x=600, desired_y=525, standard_img=None, hover_img=None)
         self.backButton = MakeButton(self.mainGame, callback=self.exitAttack, width=25, height=25, desired_x=25,
                                      desired_y=325, standard_img='exit_normal.png', hover_img='exit_hover.png')
         self.attack1 = MakeButton(self.mainGame, callback=lambda: print(self.battle, 'attack-1'), width=250, height=100,

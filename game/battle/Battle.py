@@ -13,7 +13,8 @@ class Battle:
     isEnemyDead = False
     bottomFrame = None
     topFrame = None
-    myfont = pygame.font.SysFont('Comic Sans TM', 25)
+    myfont = pygame.font.SysFont('comicsansms', 16)
+    buttonfont = pygame.font.SysFont('comicsansms', 25)
     enemy_health_bar_length = 150
     enemy_health_bar_color = (0,0,0)
     player_health_bar_length = 150
@@ -44,7 +45,7 @@ class Battle:
 
         # Creates the Font and renders them.
         text = self.myfont.render(self.theEnemy.getName(), True, GameBase.black)
-        self.topFrame.display.blit(text, (54, 40))
+        self.topFrame.display.blit(text, (54, 35))
         text = self.myfont.render(self.thePlayer.getPlayerName(), True, GameBase.black)
         self.topFrame.display.blit(text, (530, 215))
 
@@ -96,10 +97,12 @@ class Battle:
 
         text = self.myfont.render(str(self.theEnemy.getHp()) + "/" + str(self.theEnemy.getMaxHp()), True,
                                   GameBase.black)
-        self.topFrame.display.blit(text, (130, 65))
+        textRect = text.get_rect()
+        self.topFrame.display.blit(text, (130, self.enemyHealthBar.y - textRect.height / 2 + self.enemyHealthBar.height / 2))
         text = self.myfont.render(str(self.thePlayer.getPlayerCurrentHealth()) + "/" +
                                   str(self.thePlayer.getPlayerMaxHealth()), True, GameBase.black)
-        self.topFrame.display.blit(text, (605, 240))
+        textRect = text.get_rect()
+        self.topFrame.display.blit(text, (605, self.playerHealthBar.y - textRect.height / 2 + self.playerHealthBar.height / 2))
 
     def damagePlayer(self):
         if self.thePlayer.getPlayerCurrentHealth() <= 0:

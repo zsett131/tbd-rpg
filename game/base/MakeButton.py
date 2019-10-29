@@ -14,7 +14,7 @@ class MakeButton:
     resolution_width = 800
     resolution_height = 600
 
-    def __init__(self, base, width, height, desired_x, desired_y, standard_img, hover_img, press_img=None, callback=None):
+    def __init__(self, base, width, height, desired_x, desired_y, standard_img, hover_img, press_img=None, text=None, callback=None):
         self.base = base
         self.img_width = width
         self.img_height = height
@@ -26,6 +26,7 @@ class MakeButton:
         self.callback = callback
         self.pressed = False
         self.rect = None
+        self.text = text
 
     def getXPosition(self):
         return self.x_position
@@ -43,12 +44,10 @@ class MakeButton:
         return self.hover_img
 
     def show(self):
-        if self.imgStandard():
-            self.base.display.blit(self.imgStandard(), self.getXY())
-        else:
+        if not self.imgStandard():
             self.rect = pygame.Rect(self.x_position, self.y_position, self.img_width, self.img_height)
-            self.rectVis = pygame.draw.rect(self.base.display, GameBase.white, self.rect)
         BUTTONS.append(self)
+        self.process()
 
     def hide(self):
         if self in BUTTONS:
@@ -72,6 +71,13 @@ class MakeButton:
                 self.base.display.blit(self.imgStandard(), self.getXY())
             else:
                 self.rectVis = pygame.draw.rect(self.base.display, GameBase.white, self.rect)
+
+        if self.text:
+            textRect = self.text.get_rect()
+            textWidth = textRect.width
+            textHeight = textRect.height
+            x, y = rect.center
+            self.base.display.blit(self.text, (x - textWidth / 2, y - textHeight / 2))
 
         if pygame.mouse.get_pressed()[0] and hovered:
             self.pressed = 1
