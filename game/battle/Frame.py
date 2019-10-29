@@ -4,10 +4,11 @@ import pygame
 
 class Frame:
 
+    pygame.init()
     down = 0
     right = 0
     mainGame = 0
-
+    myfont = pygame.font.SysFont('Comic Sans TM', 25)
 
     def __init__(self, down, right, gamebase, battle):
         self.down = down
@@ -47,7 +48,7 @@ class Frame:
                                        desired_x=600, desired_y=525, standard_img=None, hover_img=None)
         self.backButton = MakeButton(self.mainGame, callback=self.exitAttack, width=25, height=25, desired_x=25,
                                      desired_y=325, standard_img='exit_normal.png', hover_img='exit_hover.png')
-        self.attack1 = MakeButton(self.mainGame, callback=lambda: print(self.battle, 'attack-1'), width=250, height=100,
+        self.attack1 = MakeButton(self.mainGame, callback=self.doAttack, width=250, height=100,
                                   desired_x=200, desired_y=375, standard_img=None, hover_img=None)
         self.attack2 = MakeButton(self.mainGame, callback=lambda: print(self.battle, 'attack-2'), width=250, height=100,
                                   desired_x=600, desired_y=375, standard_img=None, hover_img=None)
@@ -84,4 +85,19 @@ class Frame:
         self.makeRect(self.color, self.width, self.depth)
         self.showMain()
 
+    def doAttack(self):
+        self.backButton.hide()
+        self.attack1.hide()
+        self.attack2.hide()
+        self.attack3.hide()
+        self.attack4.hide()
+        self.makeRect(self.color, self.width, self.depth)
+        self.dialogueTime()
+
+    def dialogueTime(self):
+        firstAttack=self.battle.thePlayer.getPlayerName() + " has dealt " + \
+            str(self.battle.thePlayer.getPlayerDamage()) + " to " + self.battle.theEnemy.getName()
+        text = self.myfont.render(firstAttack, True, GameBase.white)
+        self.display.blit(text, (20, 310))
+        self.battle.
 
