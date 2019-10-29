@@ -20,7 +20,7 @@ hoverGriff = pygame.image.load('hovergriff.jpg')
 familyguy = pygame.image.load('familyguypeter.jpg')
 
 The_Player = PlayerBase("Jairo")
-The_Enemy = ListofEnemies[8]
+The_Enemy = ListofEnemies[9]
 battle_frame = None
 
 def brokenBeter(display, x,y):
