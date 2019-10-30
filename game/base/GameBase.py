@@ -9,6 +9,7 @@ DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 600
 red = (255, 0, 0)
 green = (0, 255, 0)
+orange = (255, 140, 0)
 blue = (0, 0, 255)
 lightblue = (135, 206, 250)
 white = (255, 255, 255)
@@ -56,6 +57,9 @@ class GameBase:
 
     def construct(self):
         self.display = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
+
+    def updateDisplay(self):
+        pygame.display.update()
 
     def run(self):
         self.construct()

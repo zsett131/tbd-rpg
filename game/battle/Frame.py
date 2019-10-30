@@ -94,13 +94,28 @@ class Frame:
         self.attack4.hide()
         self.makeRect(self.color, self.width, self.depth)
         self.dialogueTime()
+        self.makeRect(self.color, self.width, self.depth)
+        self.showMain()
 
     def dialogueTime(self):
-        firstAttack=self.battle.thePlayer.getPlayerName() + " has dealt " + \
+        self.mainGame.updateDisplay()
+        time.sleep(1/2)
+        firstAttack = self.battle.thePlayer.getPlayerName() + " has dealt " + \
             str(self.battle.thePlayer.getPlayerDamage()) + " to " + self.battle.theEnemy.getName()
         text = self.myfont.render(firstAttack, True, GameBase.white)
         self.display.blit(text, (20, 310))
+
         self.battle.theEnemy.enemyTakeDamage(self.battle.thePlayer.getPlayerDamage())
-        time.sleep(2)
+        time.sleep(1/2)
+        self.mainGame.updateDisplay()
+        time.sleep(1)
+
+        secondAttack = self.battle.theEnemy.getName() + " has dealt " + \
+                      str(self.battle.theEnemy.getDamage()) + " to " + self.battle.thePlayer.getPlayerName()
+        text = self.myfont.render(secondAttack, True, GameBase.white)
+        self.display.blit(text, (20, 340))
+        self.battle.thePlayer.playerTakeDamage(self.battle.theEnemy.getDamage())
+        self.mainGame.updateDisplay()
+        time.sleep(1)
         self.battle.drawHealthBars()
 
