@@ -4,6 +4,7 @@ from game.battle.Battle import Battle
 from game.battle.Frame import Frame
 from game.base.PlayerBase import PlayerBase
 from game.enemy.EnemyList import EnemyList
+from game.base import Animation
 
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 600
@@ -74,6 +75,9 @@ class GameBase:
 
             for button in MakeButton.BUTTONS:
                 button.process()
+
+            for process in Animation.PROCESSING:
+                process.process()
 
             if pygame.mouse.get_pressed()[0]:
                 self.CLICK_STATE = True

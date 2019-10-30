@@ -1,5 +1,6 @@
 from game.base.MakeButton import MakeButton
 from game.base import GameBase
+from game.base.Animation import TextWriter
 import time
 import pygame
 
@@ -25,6 +26,9 @@ class Frame:
         self.color = None
         self.width = None
         self.depth = None
+        self.textWriter = None
+        self.playerDialogText = ''
+        self.enemyDialogText = ''
 
     def efill(self, color):
         self.display.fill(color)
@@ -60,6 +64,7 @@ class Frame:
         self.showMain()
 
     def showMain(self):
+        self.makeRect(self.color, self.width, self.depth)
         self.attackButton.show()
         self.runButton.show()
         self.itemButton.show()
@@ -93,29 +98,45 @@ class Frame:
         self.attack3.hide()
         self.attack4.hide()
         self.makeRect(self.color, self.width, self.depth)
-        self.dialogueTime()
+        self.doPlayerDialog()
+
+    def setPlayerDialog(self, text):
+        self.playerDialogText = text
         self.makeRect(self.color, self.width, self.depth)
-        self.showMain()
-
-    def dialogueTime(self):
-        self.mainGame.updateDisplay()
-        time.sleep(1/2)
-        firstAttack = self.battle.thePlayer.getPlayerName() + " has dealt " + \
-            str(self.battle.thePlayer.getPlayerDamage()) + " to " + self.battle.theEnemy.getName()
-        text = self.myfont.render(firstAttack, True, GameBase.white)
+        text = self.myfont.render(self.playerDialogText, True, GameBase.white)
         self.display.blit(text, (20, 310))
+        if self.playerDialogText == self.textWriter.text:
+            self.battle.theEnemy.enemyTakeDamage(self.battle.thePlayer.getPlayerDamage())
+            self.battle.drawHealthBars()
+            self.mainGame.updateDisplay()
+            self.doEnemyDialog()
 
-        self.battle.theEnemy.enemyTakeDamage(self.battle.thePlayer.getPlayerDamage())
-        time.sleep(1/2)
-        self.mainGame.updateDisplay()
-        time.sleep(1)
+    def setEnemyDialog(self, text):
+        self.enemyDialogText = text
+        self.makeRect(self.color, self.width, self.depth)
+        text1 = self.myfont.render(self.playerDialogText, True, GameBase.white)
+        text2 = self.myfont.render(self.enemyDialogText, True, GameBase.white)
+        self.display.blit(text1, (20, 310))
+        self.display.blit(text2, (20, 340))
+        if self.enemyDialogText == self.textWriter.text:
+            self.battle.thePlayer.playerTakeDamage(self.battle.theEnemy.getDamage())
+            self.battle.drawHealthBars()
+            self.mainGame.updateDisplay()
+            time.sleep(1)
+            self.textWriter = None
+            self.playerDialogText = None
+            self.enemyDialogText = None
+            self.showMain()
 
+    def doPlayerDialog(self):
+        firstAttack = self.battle.thePlayer.getPlayerName() + " has dealt " + \
+                      str(self.battle.thePlayer.getPlayerDamage()) + " to " + self.battle.theEnemy.getName()
+        self.textWriter = TextWriter(self.mainGame, 2, firstAttack, self.setPlayerDialog)
+        self.textWriter.start()
+
+    def doEnemyDialog(self):
         secondAttack = self.battle.theEnemy.getName() + " has dealt " + \
                       str(self.battle.theEnemy.getDamage()) + " to " + self.battle.thePlayer.getPlayerName()
-        text = self.myfont.render(secondAttack, True, GameBase.white)
-        self.display.blit(text, (20, 340))
-        self.battle.thePlayer.playerTakeDamage(self.battle.theEnemy.getDamage())
-        self.mainGame.updateDisplay()
-        time.sleep(1)
-        self.battle.drawHealthBars()
+        self.textWriter = TextWriter(self.mainGame, 2, secondAttack, self.setEnemyDialog)
+        self.textWriter.start()
 
