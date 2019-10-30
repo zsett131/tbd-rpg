@@ -55,8 +55,8 @@ class Battle:
 
     def drawHealthBars(self):
         # Sets the pixel amount of the bar
-        self.player_health_bar_length = int(self.player_health_bar_length * self.thePlayer.getPlayerHealthPercentage())
-        self.enemy_health_bar_length = int(self.enemy_health_bar_length * self.theEnemy.getEnemyHealthPercentage())
+        self.player_health_bar_length = int(150 * self.thePlayer.getPlayerHealthPercentage())
+        self.enemy_health_bar_length = int(150 * self.theEnemy.getEnemyHealthPercentage())
 
         # Draws a white rectangle over the hp, allowing for a green rectangle to be put on top
         pygame.draw.rect(self.topFrame.display, GameBase.white, (125, 60, 150, 25))
@@ -103,6 +103,7 @@ class Battle:
                                   str(self.thePlayer.getPlayerMaxHealth()), True, GameBase.black)
         textRect = text.get_rect()
         self.topFrame.display.blit(text, (605, self.playerHealthBar.y - textRect.height / 2 + self.playerHealthBar.height / 2))
+
 
     def damagePlayer(self):
         if self.thePlayer.getPlayerCurrentHealth() <= 0:
