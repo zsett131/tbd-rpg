@@ -8,6 +8,7 @@ class PlayerBase:
     # Exp, health, weapons, damage, and stats will all be here.
 
     playerName = ""
+    playerAlive = True
     playerIcon = pygame.image.load('Jotaro.jpg')
     playerLevel = 1
     playerExp = 0
@@ -87,6 +88,8 @@ class PlayerBase:
         self.playerCurrentHealth = incoming
 
     def getPlayerCurrentHealth(self):
+        if self.getPlayerCurrentHealth() <= 0:
+            self.playerAlive = False
         return self.playerCurrentHealth
 
     def playerHeal(self, amount):
