@@ -20,9 +20,9 @@ sansRick = pygame.image.load('sansrick.jpg')
 hoverGriff = pygame.image.load('hovergriff.jpg')
 familyguy = pygame.image.load('familyguypeter.jpg')
 
-The_Player = PlayerBase("Jairo")
-enemies = EnemyList(The_Player.getPlayerLevel())
-The_Enemy = enemies.ListofEnemies[0]
+The_Player = None
+enemies = None
+The_Enemy = None
 
 battle_frame = None
 
@@ -34,7 +34,7 @@ class GameBase:
 
     The_Player = PlayerBase("Jairo")
     enemies = EnemyList(The_Player.getPlayerLevel())
-    The_Enemy = enemies.ListofEnemies[9]
+    The_Enemy = enemies.ListofEnemies[0]
 
     def __init__(self):
         self.display = None
@@ -53,7 +53,7 @@ class GameBase:
 
         # --------------------------------------Initiates the battle phase, will be placed into another class later.
         Frame.efill(self, black)
-        battle_frame = Battle(self.The_Player, The_Enemy, self)
+        battle_frame = Battle(self.The_Player, self.The_Enemy, self)
         self.The_Player = battle_frame.battleComplete()
 
     def construct(self):

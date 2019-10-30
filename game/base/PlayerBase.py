@@ -87,8 +87,11 @@ class PlayerBase:
     def setPlayerCurrentHealth(self, incoming):
         self.playerCurrentHealth = incoming
 
+    def checkPlayerCurrentHealth(self):
+        return self.playerCurrentHealth
+
     def getPlayerCurrentHealth(self):
-        if self.getPlayerCurrentHealth() <= 0:
+        if self.checkPlayerCurrentHealth() <= 0:
             self.playerAlive = False
         return self.playerCurrentHealth
 

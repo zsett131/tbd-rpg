@@ -104,7 +104,6 @@ class Battle:
         textRect = text.get_rect()
         self.topFrame.display.blit(text, (605, self.playerHealthBar.y - textRect.height / 2 + self.playerHealthBar.height / 2))
 
-
     def damagePlayer(self):
         if self.thePlayer.getPlayerCurrentHealth() <= 0:
             self.isPlayerDead = True
