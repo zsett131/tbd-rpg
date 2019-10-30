@@ -1,5 +1,6 @@
 import pygame
 from game.base.PlayerBase import PlayerBase
+import traceback
 
 Player = PlayerBase("Jairo")
 from game.base import GameBase
@@ -32,6 +33,7 @@ try:
 except Exception as e:
     print(e)
     base.exception()
+    traceback.print_exc()
     pygame.display.update()
     quit = False
     while not quit:
