@@ -131,12 +131,12 @@ class Frame:
     def doPlayerDialog(self):
         firstAttack = self.battle.thePlayer.getPlayerName() + " has dealt " + \
                       str(self.battle.thePlayer.getPlayerDamage()) + " to " + self.battle.theEnemy.getName()
-        self.textWriter = TextWriter(self.mainGame, 2, firstAttack, self.setPlayerDialog)
+        self.textWriter = TextWriter(self.mainGame, 15, firstAttack, self.setPlayerDialog)
         self.textWriter.start()
 
     def doEnemyDialog(self):
         secondAttack = self.battle.theEnemy.getName() + " has dealt " + \
                       str(self.battle.theEnemy.getDamage()) + " to " + self.battle.thePlayer.getPlayerName()
-        self.textWriter = TextWriter(self.mainGame, 2, secondAttack, self.setEnemyDialog)
+        self.textWriter = TextWriter(self.mainGame, 15, secondAttack, self.setEnemyDialog)
         self.textWriter.start()
 
