@@ -61,6 +61,8 @@ class Frame:
                                   desired_x=200, desired_y=525, standard_img=None, hover_img=None)
         self.attack4 = MakeButton(self.mainGame, callback=lambda: print(self.battle, 'attack-4'), width=250, height=100,
                                   desired_x=600, desired_y=525, standard_img=None, hover_img=None)
+        self.postBattleDeath = MakeButton(self.mainGame, callback="oop", width=250, height=200,
+                                          desired_x=275, desired_y=350, standard_img=None, hover_img=None)
         self.showMain()
 
     def showMain(self):
@@ -99,6 +101,9 @@ class Frame:
         self.attack4.hide()
         self.makeRect(self.color, self.width, self.depth)
         self.doPlayerDialog()
+        if self.battle.thePlayer.playerCurrentHealth <= 0:
+            self.postBattleDeath.show()
+
 
     def setPlayerDialog(self, text):
         self.playerDialogText = text
