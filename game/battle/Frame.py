@@ -62,7 +62,8 @@ class Frame:
         self.attack4 = MakeButton(self.mainGame, callback=lambda: print(self.battle, 'attack-4'), width=250, height=100,
                                   desired_x=600, desired_y=525, standard_img=None, hover_img=None)
         self.postBattleDeath = MakeButton(self.mainGame, callback="oop", width=250, height=200,
-                                          desired_x=275, desired_y=350, standard_img=None, hover_img=None)
+                                          desired_x=400, desired_y=450, standard_img=None, hover_img=None,
+                                          text=self.battle.buttonfont.render('You Died', True, GameBase.red))
         self.showMain()
 
     def showMain(self):
@@ -101,8 +102,6 @@ class Frame:
         self.attack4.hide()
         self.makeRect(self.color, self.width, self.depth)
         self.doPlayerDialog()
-        if self.battle.thePlayer.playerCurrentHealth <= 0:
-            self.postBattleDeath.show()
 
 
     def setPlayerDialog(self, text):
@@ -131,17 +130,19 @@ class Frame:
             self.textWriter = None
             self.playerDialogText = None
             self.enemyDialogText = None
-            self.showMain()
+            if self.battle.thePlayer.playerCurrentHealth <= 0 or self.battle.theEnemy.getHp() <= 0:
+                self.postBattleDeath.show()
+            else: self.showMain()
 
     def doPlayerDialog(self):
         firstAttack = self.battle.thePlayer.getPlayerName() + " has dealt " + \
                       str(self.battle.thePlayer.getPlayerDamage()) + " to " + self.battle.theEnemy.getName()
-        self.textWriter = TextWriter(self.mainGame, 15, firstAttack, self.setPlayerDialog)
+        self.textWriter = TextWriter(self.mainGame, 30, firstAttack, self.setPlayerDialog)
         self.textWriter.start()
 
     def doEnemyDialog(self):
         secondAttack = self.battle.theEnemy.getName() + " has dealt " + \
                       str(self.battle.theEnemy.getDamage()) + " to " + self.battle.thePlayer.getPlayerName()
-        self.textWriter = TextWriter(self.mainGame, 15, secondAttack, self.setEnemyDialog)
+        self.textWriter = TextWriter(self.mainGame, 30, secondAttack, self.setEnemyDialog)
         self.textWriter.start()
 
