@@ -5,6 +5,7 @@ from game.battle.Frame import Frame
 from game.base.PlayerBase import PlayerBase
 from game.enemy.EnemyList import EnemyList
 from game.base import Animation
+from game.locations import Location
 
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 600
@@ -24,7 +25,6 @@ familyguy = pygame.image.load('familyguypeter.jpg')
 The_Player = None
 enemies = None
 The_Enemy = None
-
 battle_frame = None
 
 def brokenBeter(display, x,y):
@@ -32,16 +32,20 @@ def brokenBeter(display, x,y):
 
 class GameBase:
     CLICK_STATE = False
-
+    mapLocation = None
     The_Player = PlayerBase("Jairo")
     enemies = EnemyList(The_Player.getPlayerLevel())
-    The_Enemy = enemies.ListofEnemies[0]
+    The_Enemy = enemies.ListofEnemies[3]
 
     def __init__(self):
         self.display = None
         self.clock = pygame.time.Clock()
         self.startButton = MakeButton.MakeButton(self, 300, 100, 400, 400, True, 'sansrick.jpg', 'hovergriff.jpg',
                                                  callback=self.peterTime)
+
+    def testMap(self):
+        self.mapLocation = Location.Location(self.The_Player, self, 'StartingTown.png')
+        self.startButton.hide()
 
     def exception(self):
         brokenBeter(self.display, 0, 0)
