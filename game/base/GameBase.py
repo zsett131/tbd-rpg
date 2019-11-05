@@ -41,7 +41,7 @@ class GameBase:
         self.display = None
         self.clock = pygame.time.Clock()
         self.startButton = MakeButton.MakeButton(self, 300, 100, 400, 400, True, 'sansrick.jpg', 'hovergriff.jpg',
-                                                 callback=self.peterTime)
+                                                 callback=self.testMap)
 
     def testMap(self):
         self.mapLocation = starting_town(self.The_Player, self, 'StartingTown.png')
