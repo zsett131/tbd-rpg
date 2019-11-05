@@ -8,13 +8,14 @@ class MakeButton:
     y_position = 0
     img_width = 0
     img_height = 0
+    visible = None
     standard_img = ''
     hover_img = ''
     clicked_img = ''
     resolution_width = 800
     resolution_height = 600
 
-    def __init__(self, base, width, height, desired_x, desired_y, standard_img, hover_img, press_img=None, text=None, callback=None):
+    def __init__(self, base, width, height, desired_x, desired_y, visibility, standard_img, hover_img, press_img=None, text=None, callback=None):
         self.base = base
         self.img_width = width
         self.img_height = height
@@ -24,9 +25,11 @@ class MakeButton:
         self.hover_img = pygame.image.load(hover_img) if hover_img else None
         self.press_img = pygame.image.load(press_img) if press_img else None
         self.callback = callback
+        self.visible = visibility
         self.pressed = False
         self.rect = None
         self.text = text
+
 
     def getXPosition(self):
         return self.x_position
@@ -46,6 +49,8 @@ class MakeButton:
     def show(self):
         if not self.imgStandard():
             self.rect = pygame.Rect(self.x_position, self.y_position, self.img_width, self.img_height)
+            if not self.visible:
+                self.rect.set_alpha(0)
         BUTTONS.append(self)
         self.process()
 
