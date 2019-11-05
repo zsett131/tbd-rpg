@@ -5,7 +5,7 @@ from game.battle.Frame import Frame
 from game.base.PlayerBase import PlayerBase
 from game.enemy.EnemyList import EnemyList
 from game.base import Animation
-from game.locations import Location
+from game.locations.starting_town import starting_town
 
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 600
@@ -44,7 +44,9 @@ class GameBase:
                                                  callback=self.peterTime)
 
     def testMap(self):
-        self.mapLocation = Location.Location(self.The_Player, self, 'StartingTown.png')
+        self.mapLocation = starting_town(self.The_Player, self, 'StartingTown.png')
+        self.mapLocation.addButtons()
+        self.mapLocation.showMainButtons()
         self.startButton.hide()
 
     def exception(self):

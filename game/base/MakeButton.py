@@ -49,8 +49,6 @@ class MakeButton:
     def show(self):
         if not self.imgStandard():
             self.rect = pygame.Rect(self.x_position, self.y_position, self.img_width, self.img_height)
-            if not self.visible:
-                self.rect.set_alpha(0)
         BUTTONS.append(self)
         self.process()
 
@@ -66,18 +64,20 @@ class MakeButton:
         rect.x, rect.y = self.getXY()
         if rect.collidepoint(pygame.mouse.get_pos()):
             if not self.base.CLICK_STATE or self.pressed:
-                if self.imgHover():
+                if self.imgHover() and self.visible:
                     self.base.display.blit(self.imgHover(), self.getXY())
                 else:
-                    self.rectVis = pygame.draw.rect(self.base.display, GameBase.green, self.rect)
+                    if self.visible:
+                        self.rectVis = pygame.draw.rect(self.base.display, GameBase.green, self.rect)
                 hovered = True
         else:
-            if self.imgStandard():
+            if self.imgStandard() and self.visible:
                 self.base.display.blit(self.imgStandard(), self.getXY())
             else:
-                self.rectVis = pygame.draw.rect(self.base.display, GameBase.white, self.rect)
+                if self.visible:
+                    self.rectVis = pygame.draw.rect(self.base.display, GameBase.white, self.rect)
 
-        if self.text:
+        if self.text and self.visible:
             textRect = self.text.get_rect()
             textWidth = textRect.width
             textHeight = textRect.height
