@@ -4,10 +4,16 @@ from game.inventory import ConsumableItemsList
 class EnemyList():
 
     ListofEnemies = []
+    returnList = []
     player_level = None
 
     def __init__(self, level):
         self.player_level = level
+
+    def getList(self, *args):
+        for arg in args:
+            self.returnList.append(self.ListofEnemies[arg])
+        return self.returnList
     # -----------------------------------------Chad enemy loot table and enemy is created. Enemy 0.
     # Enemy Class template (Name, Description, level, playerlevel, hp, exp, damage, lootTables, icon).
 

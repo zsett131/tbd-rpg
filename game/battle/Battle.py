@@ -13,6 +13,7 @@ class Battle:
     isEnemyDead = False
     bottomFrame = None
     topFrame = None
+    location = None
     myfont = pygame.font.SysFont('comicsansms', 16)
     buttonfont = pygame.font.SysFont('comicsansms', 25)
     enemy_health_bar_length = 150

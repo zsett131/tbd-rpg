@@ -63,6 +63,9 @@ class GameBase:
         battle_frame = Battle(self.The_Player, self.The_Enemy, self)
         self.The_Player = battle_frame.battleComplete()
 
+    def battleTime(self, enemy):
+        battle_frame = Battle(self.The_Player, enemy, self)
+
     def construct(self):
         self.display = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 
