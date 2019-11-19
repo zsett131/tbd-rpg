@@ -47,8 +47,12 @@ class Battle:
         # Creates the Font and renders them.
         text = self.myfont.render(self.theEnemy.getName(), True, GameBase.black)
         self.topFrame.display.blit(text, (54, 35))
+        text = self.myfont.render("Level: " + str(self.theEnemy.getLevel()), True, GameBase.black)
+        self.topFrame.display.blit(text, (220, 35))
         text = self.myfont.render(self.thePlayer.getPlayerName(), True, GameBase.black)
-        self.topFrame.display.blit(text, (530, 215))
+        self.topFrame.display.blit(text, (530, 210))
+        text = self.myfont.render("Level: " + str(self.thePlayer.getPlayerLevel()), True, GameBase.black)
+        self.topFrame.display.blit(text, (696, 210))
 
 
         # Draws the Player and Enemy Health Bars
