@@ -5,6 +5,7 @@ from game.battle.Frame import Frame
 from game.base.PlayerBase import PlayerBase
 from game.enemy.EnemyList import EnemyList
 from game.base import Animation
+from game.base import InputField
 from game.locations.starting_town import starting_town
 
 DISPLAY_WIDTH = 800
@@ -41,7 +42,36 @@ class GameBase:
         self.display = None
         self.clock = pygame.time.Clock()
         self.startButton = MakeButton.MakeButton(self, 300, 100, 400, 400, True, 'sansrick.jpg', 'hovergriff.jpg',
-                                                 callback=self.testMap)
+                                                 callback=self.initialGame)
+        self.warned = False
+        self.nameInput = None
+
+    def initialGame(self):
+        print(pygame.font.get_fonts())
+        self.startButton.hide()
+        self.nameInput = InputField.InputField(self, 400, 300, 425, 50, 45, maxLength=15, space=False, callback=self.enterGame)
+        self.nameInput.show()
+        self.drawInstruction()
+        buttonText = pygame.font.SysFont('cambriacambriamath', 60).render('Enter⏎', True, black)
+        self.nameInputButton = MakeButton.MakeButton(self, 200, 75, 400, 400, True, standard_img=None, hover_img=None,
+                                                     text=buttonText, callback=self.enterGame)
+        self.nameInputButton.show()
+        InputField.SELECTED = self.nameInput
+
+    def enterGame(self):
+        self.The_Player.setPlayerName(self.nameInput.textInput.get_text())
+        self.nameInput.hide()
+        self.nameInputButton.hide()
+        InputField.SELECTED = None
+        self.nameInput = None
+        self.nameInputButton = None
+        self.testMap()
+
+    def drawInstruction(self):
+        self.display.fill(black)
+        instructFont = pygame.font.SysFont('comicsansms', 30)
+        instructText = instructFont.render("Please enter a name for your character.", True, white)
+        self.display.blit(instructText, (400 - instructText.get_width() / 2, 200))
 
     def testMap(self):
         self.mapLocation = starting_town(self.The_Player, self, 'StartingTown.png')
@@ -78,7 +108,16 @@ class GameBase:
         quit = False
         self.startButton.show()
         while not quit:
-            for event in pygame.event.get():
+            events = pygame.event.get()
+            for event in events:
+                if event.type == pygame.KEYDOWN:
+                    if InputField.SELECTED and InputField.SELECTED == self.nameInput:
+                        if event.key == pygame.K_BACKSPACE:
+                            self.drawInstruction()
+                        elif len(self.nameInput.textInput.get_text()) >= self.nameInput.textInput.max_string_length:
+                            warnFont = pygame.font.Font(None, 30)
+                            warnText = warnFont.render('You have reached the maximum name length.', True, red)
+                            self.display.blit(warnText, (400 - warnText.get_width() / 2, 245))
                 if event.type == pygame.QUIT:
                     quit = True
 
@@ -87,6 +126,9 @@ class GameBase:
 
             for process in Animation.PROCESSING:
                 process.process()
+
+            for field in InputField.FIELDS:
+                field.process(events)
 
             if pygame.mouse.get_pressed()[0]:
                 self.CLICK_STATE = True

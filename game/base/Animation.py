@@ -24,7 +24,6 @@ class TextWriter(Animation):
         divIncrement = self.seconds / self.base.clock.get_fps()
         if not self.rate:
             divIncrement = len(self.text) / max(1, (self.seconds * self.base.clock.get_fps()))
-        print(divIncrement)
         self.currentIndex += divIncrement
         text = self.text[len(self.finalText):int(self.currentIndex)]
         self.finalText += text

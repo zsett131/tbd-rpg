@@ -4,37 +4,32 @@ from game.inventory import Item
 
 
 class PlayerBase:
-    # All the player variables are kept within this area.
-    # Exp, health, weapons, damage, and stats will all be here.
-
-    playerName = ""
-    playerAlive = True
-    playerIcon = pygame.image.load('Jotaro.jpg')
-    playerLevel = 1
-    playerExp = 0
-    playerExpCap = 100
-    playerHealthPercentage = 0.0
-    expLogistic = 0
-    playerCurrentHealth = 20
-    playerMaxHealth = 20
-    playerWeapon = Item
-    playerDamage = 2
-    playerInventory = []
-
-    # The stats, Strength, Wisdom, and Agility.
-
-    Strength = 0
-    Wisdom = 0
-    Agility = 0
-    SkillPoints = 0
-
-    # The constructor (place holder for now)
     def __init__(self, name):
-        self.setPlayerName(name)
+        # Player stats and attributes
+        self.playerName = name
+        self.playerAlive = True
+        self.playerIcon = pygame.image.load('Jotaro.jpg')
+        self.playerLevel = 1
+        self.playerExp = 0
+        self.playerExpCap = 100
+        self.playerHealthPercentage = 0.0
+        self.expLogistic = 0
+        self.playerCurrentHealth = 20
+        self.playerMaxHealth = 20
+        self.playerWeapon = Item
+        self.playerDamage = 2
+        self.playerInventory = []
+
+        # The stats, strength, wisdom, and agility.
+
+        self.strength = 0
+        self.wisdom = 0
+        self.agility = 0
+        self.skillPoints = 0
 
     def expAlgorithm(self):
         expLogistic = 1/(3+math.exp(-(3/4)*(self.playerLevel/16)-4))
-        print (expLogistic)
+        print(expLogistic)
 
     # Player name Setter & Getter
 
@@ -78,9 +73,9 @@ class PlayerBase:
         return self.playerExpCap
 
     def expAlgorithm(self):
-        self.ExpLogistic = 1+(1 / (3 + math.exp(-(3 / 4) * (self.playerLevel / 16) - 4)))
-        Multiplier = 1 + self.ExpLogistic
-        return self.ExpLogistic
+        self.expLogistic = 1+(1 / (3 + math.exp(-(3 / 4) * (self.playerLevel / 16) - 4)))
+        multiplier = 1 + self.expLogistic
+        return self.expLogistic
 
     # Player health Setter, Getter, and Health calculation.
 
@@ -149,27 +144,27 @@ class PlayerBase:
     def playerAttack(self):
         return self.getPlayerDamage()
 
-    # Attributes: Strength, Wisdom, Agility
+    # Attributes: strength, wisdom, agility
 
     # Skill point Stuff.
     def incrementSkillPoints(self):
-        self.SkillPoints += 1
+        self.skillPoints += 1
         print("You have accrued one more skill point.")
 
     def setSkillPoints(self, allocation):
-        self.SkillPoints += allocation
+        self.skillPoints += allocation
 
     def allocateSkillPoints(self, allocation):
-        self.SkillPoints -= allocation
+        self.skillPoints -= allocation
 
     def getSkillPoints(self):
-        return self.SkillPoints
+        return self.skillPoints
 
-    # Player Strength Setter and Getter.
+    # Player strength Setter and Getter.
 
     def setPlayerStrength(self, allocation):
-        if self.SkillPoints >= allocation:
-            self.Strength += allocation
+        if self.skillPoints >= allocation:
+            self.strength += allocation
             self.allocateSkillPoints(allocation)
             playerStrength = self.getPlayerStrength()
             print("Your strength is now {}".format(playerStrength))
@@ -177,13 +172,13 @@ class PlayerBase:
             print("You only have {} to allocate, not {}.".format(self.Skillpoints, allocation))
 
     def getPlayerStrength(self):
-        return self.Strength
+        return self.strength
 
-    # Player Wisdom Setter and Getter
+    # Player wisdom Setter and Getter
 
     def setPlayerWisdom(self, allocation):
-        if self.SkillPoints >= allocation:
-            self.Wisdom += allocation
+        if self.skillPoints >= allocation:
+            self.wisdom += allocation
             self.allocateSkillPoints(allocation)
             playerwisdom = self.getPlayerWisdom()
             print("Your wisdom is now {}".format(playerwisdom))
@@ -191,13 +186,13 @@ class PlayerBase:
             print("You only have {} to allocate, not {}.".format(self.Skillpoints, allocation))
 
     def getPlayerWisdom(self):
-        return self.Wisdom
+        return self.wisdom
 
-    # Player Agility Setter and Getter
+    # Player agility Setter and Getter
 
     def setPlayerAgility(self, allocation):
-        if self.SkillPoints >= allocation:
-            self.Agility += allocation
+        if self.skillPoints >= allocation:
+            self.agility += allocation
             self.allocateSkillPoints(allocation)
             playeragility = self.getPlayerAgility()
             print("Your agility is now {}".format(playeragility))
@@ -205,16 +200,16 @@ class PlayerBase:
             print("You only have {} to allocate, not {}.".format(self.Skillpoints, allocation))
 
     def getPlayerAgility(self):
-        return self.Agility
+        return self.agility
 
     # The mythical land of player inventory. Appends to list and also removes based on function.
-    def addtoPlayerInventory(self, item):
+    def addToPlayerInventory(self, item):
         self.playerInventory.append(item)
 
-    def getfromPlayerInventory(self, position):
-        return self.playerInventory(position)
+    def getFromPlayerInventory(self, position):
+        return self.playerInventory[position]
 
-    def removefromPlayerInventory(self, removalpoint):
+    def removeFromPlayerInventory(self, removalpoint):
         self.playerInventory.remove(removalpoint)
 
     def getPlayerInventory(self):
@@ -224,7 +219,7 @@ class PlayerBase:
     def getBattleDrops(self, drops):
         self.addPlayerExp(drops[0])
         for x in drops[1:]:
-            self.addtoPlayerInventory(x)
+            self.addToPlayerInventory(x)
 
     # Item affects and what to do with them
     def itemAffects(self, item):
