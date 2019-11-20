@@ -4,14 +4,8 @@ from game.base.Animation import TextWriter
 import time
 import pygame
 
+
 class Frame:
-
-    pygame.init()
-    down = 0
-    right = 0
-    mainGame = 0
-    myfont = pygame.font.SysFont('Comic Sans TM', 25)
-
     def __init__(self, down, right, gamebase, battle):
         self.down = down
         self.right = right
@@ -29,6 +23,7 @@ class Frame:
         self.textWriter = None
         self.playerDialogText = ''
         self.enemyDialogText = ''
+        self.myFont = pygame.font.SysFont('Comic Sans TM', 25)
 
     def efill(self, color):
         self.display.fill(color)
@@ -107,7 +102,7 @@ class Frame:
     def setPlayerDialog(self, text):
         self.playerDialogText = text
         self.makeRect(self.color, self.width, self.depth)
-        text = self.myfont.render(self.playerDialogText, True, GameBase.white)
+        text = self.myFont.render(self.playerDialogText, True, GameBase.white)
         self.display.blit(text, (20, 310))
         if self.playerDialogText == self.textWriter.text:
             self.battle.theEnemy.enemyTakeDamage(self.battle.thePlayer.getPlayerDamage())
@@ -118,8 +113,8 @@ class Frame:
     def setEnemyDialog(self, text):
         self.enemyDialogText = text
         self.makeRect(self.color, self.width, self.depth)
-        text1 = self.myfont.render(self.playerDialogText, True, GameBase.white)
-        text2 = self.myfont.render(self.enemyDialogText, True, GameBase.white)
+        text1 = self.myFont.render(self.playerDialogText, True, GameBase.white)
+        text2 = self.myFont.render(self.enemyDialogText, True, GameBase.white)
         self.display.blit(text1, (20, 310))
         self.display.blit(text2, (20, 340))
         if self.enemyDialogText == self.textWriter.text:
@@ -132,7 +127,8 @@ class Frame:
             self.enemyDialogText = None
             if self.battle.thePlayer.playerCurrentHealth <= 0 or self.battle.theEnemy.getHp() <= 0:
                 self.postBattleDeath.show()
-            else: self.showMain()
+            else:
+                self.showMain()
 
     def doPlayerDialog(self):
         firstAttack = self.battle.thePlayer.getPlayerName() + " has dealt " + \
