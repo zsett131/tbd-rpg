@@ -1,21 +1,29 @@
 from game.base import GameBase
 from game.battle import Battle
-from game.enemy import EnemyList
 from game.base.MakeButton import MakeButton
 from game.locations.Location import Location
+import random
+
 
 class starting_town(Location):
 
  ##    def __init__(self, player, base):
- ##        location(player, base)
+ ##        location(player, base
 
     def addButtons(self):
-        self.battleButton = MakeButton(self.screen, callback=lambda: print(self.battle, 'Button Pressed'), width=250, height=100,
-                                       desired_x=600, desired_y=525, visibility=False, standard_img=None, hover_img=None)
+        self.battleButton = MakeButton(self.screen, callback=self.enterBattle, width=250, height=100,
+                                       desired_x=100, desired_y=450, visibility=False, standard_img=None, hover_img=None)
+        self.enemies = self.screen.enemies.getList(0, 2, 5)
 
 
     def showMainButtons(self):
         self.battleButton.show()
 
     def hideMainButtons(self):
-        None
+        self.battleButton.hide()
+
+    def enterBattle(self):
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        specific_enemy = self.enemies[random.randint(0,2)]
+        self.hideMainButtons()
+        self.screen.battleTime(specific_enemy)

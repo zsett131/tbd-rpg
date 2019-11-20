@@ -40,7 +40,7 @@ class Frame:
     def addButtons(self):
         self.attackButton = MakeButton(self.mainGame, callback=self.enterAttack, width=250, height=100, desired_x=200,
                                        desired_y=375, visibility=True, standard_img=None, hover_img=None, text=self.battle.buttonfont.render('Attack', True, GameBase.black))
-        self.runButton = MakeButton(self.mainGame, callback=lambda: print(self.battle, '2'), width=250, height=100,
+        self.runButton = MakeButton(self.mainGame, callback=self.returnToLocation, width=250, height=100,
                                     desired_x=600, desired_y=375, visibility=True, standard_img=None, hover_img=None, text=self.battle.buttonfont.render('Run', True, GameBase.black))
         self.itemButton = MakeButton(self.mainGame, callback=lambda: print(self.battle, '3'), width=250, height=100,
                                      desired_x=200, desired_y=525, visibility=True, standard_img=None, hover_img=None, text=self.battle.buttonfont.render('Item', True, GameBase.black))
@@ -67,6 +67,16 @@ class Frame:
         self.runButton.show()
         self.itemButton.show()
         self.cringeButton.show()
+
+
+    def returnToLocation(self):
+        self.attackButton.hide()
+        self.runButton.hide()
+        self.itemButton.hide()
+        self.cringeButton.hide()
+        self.display.blit(self.mainGame.mapLocation.locationMap, (0, 0))
+        self.mainGame.mapLocation.showMainButtons()
+
 
     def enterAttack(self):
         self.attackButton.hide()
