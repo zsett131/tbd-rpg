@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="01417f84-2d47-4203-8ad1-f33d06630c54" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/base/GameBase.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/base/GameBase.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game/base/PlayerBase.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/base/PlayerBase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/battle/Battle.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/battle/Battle.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/battle/Frame.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/battle/Frame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/enemy/EnemyList.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/enemy/EnemyList.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/locations/Location.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/locations/Location.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game/locations/starting_town.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/locations/starting_town.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,7 +50,8 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

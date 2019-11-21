@@ -1,6 +1,11 @@
 from game.enemy.EnemyBasic import EnemyBasic
 from game.inventory import ConsumableItemsList
 
+"""
+This class creates a list of every enemy within the game based on the 
+players level.
+__author__ = Jairo Garciga
+"""
 class EnemyList():
 
     ListofEnemies = []

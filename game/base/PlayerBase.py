@@ -2,9 +2,18 @@ import pygame
 import math
 from game.inventory import Item
 
+"""
+This is the object for the player and stores hp, exp, items, and stats.
+__author__: Jairo Garciga and Zachary Setterquist
+"""
+
 
 class PlayerBase:
     def __init__(self, name):
+        """
+        :param name: place holder for the name
+        All the other variables are being called for initialization.
+        """
         # Player stats and attributes
         self.playerName = name
         self.playerAlive = True
@@ -27,212 +36,229 @@ class PlayerBase:
         self.agility = 0
         self.skillPoints = 0
 
-    def expAlgorithm(self):
-        expLogistic = 1/(3+math.exp(-(3/4)*(self.playerLevel/16)-4))
-        print(expLogistic)
+    def exp_algorithm(self):
+        """
+        Creates the logistical function for percent increase in exp.
+        :return: percentage increase for the exp cap.
+        """
+        expLogistic = 1 / (
+                3 + math.exp(-(3 / 4) * (self.playerLevel / 16) - 4))
+        return expLogistic
 
-    # Player name Setter & Getter
+    def set_player_name(self, input_name):
+        """
+        Sets the player's name to the input
+        :param input_name: Takes input for the name
+        """
+        self.playerName = input_name
 
-    def setPlayerName(self, inputName):
-        self.playerName = inputName
-
-    def getPlayerName(self):
+    def get_player_name(self):
+        """
+        Outputs player's name
+        :return: the player's name
+        """
         return self.playerName
 
-    # Player Level getter.
-
-    def getPlayerLevel(self):
+    def get_player_level(self):
+        """
+        Gets player's level
+        :return: player level
+        """
         return self.playerLevel
 
-    def playerLevelUp(self):
-        while self.getPlayerExp() >= self.getPlayerExpCap():
+    def player_level_up(self):
+        """
+        Levels up the player WIP
+        """
+        while self.get_player_exp() >= self.get_player_exp_cap():
             self.playerLevel += 1
-            self.incrementSkillPoints()
-            self.setPlayerExp(self.getplayerExp()-self.getplayerExpCap())
-            self.setPlayerExpCap()
+            self.increment_skill_points()
+            self.set_player_exp(
+                self.get_player_exp() - self.get_player_exp_cap())
+            self.set_player_exp_cap()
 
     # Player Exp Setter and Getter.
 
-    def addPlayerExp(self, expGained):
-        self.playerExp += expGained
-        self.playerLevelUp()
+    def add_player_exp(self, exp_gained):
+        """
+        Adds exp to the player's exp and levels up if necessary
+        :param exp_gained: exp increase amount
+        """
+        self.playerExp += exp_gained
+        self.player_level_up()
 
-    def setPlayerExp(self, amount):
+    def set_player_exp(self, amount):
         self.playerExp = amount
 
-    def getPlayerExp(self):
+    def get_player_exp(self):
         return self.playerExp
 
-    # Player ExpCap Setter, Getter, & Algorithm.
+    def set_player_exp_cap(self):
+        self.playerExpCap = int(self.playerExpCap * self.exp_algorithm())
 
-    # Multiplies the current exp cap by the multiplier from the exp algorithm to produce the new exp cap.
-    def setPlayerExpCap(self):
-        self.playerExpCap = int(self.playerExpCap*self.expAlgorithm())
-
-    def getPlayerExpCap(self):
+    def get_player_exp_cap(self):
         return self.playerExpCap
 
-    def expAlgorithm(self):
-        self.expLogistic = 1+(1 / (3 + math.exp(-(3 / 4) * (self.playerLevel / 16) - 4)))
-        multiplier = 1 + self.expLogistic
-        return self.expLogistic
-
-    # Player health Setter, Getter, and Health calculation.
-
-    def setPlayerCurrentHealth(self, incoming):
+    def set_player_current_health(self, incoming):
         self.playerCurrentHealth = incoming
 
-    def checkPlayerCurrentHealth(self):
+    def check_player_current_health(self):
         return self.playerCurrentHealth
 
-    def getPlayerCurrentHealth(self):
-        if self.checkPlayerCurrentHealth() <= 0:
+    def get_player_current_health(self):
+        if self.check_player_current_health() <= 0:
             self.playerAlive = False
         return self.playerCurrentHealth
 
-    def playerHeal(self, amount):
-        if amount+self.getPlayerCurrentHealth() <= self.getPlayerMaxHealth():
-            self.setPlayerCurrenthealth(self.getPlayerCurrentHealth()+amount)
+    def player_heal(self, amount):
+        if amount + self.get_player_current_health() <= \
+                self.get_player_max_health():
+            self.set_player_current_health(self.get_player_current_health() +
+                                           amount)
         else:
-            self.setPlayerCurrentHealth(self.getPlayerMaxHealth())
+            self.set_player_current_health(self.get_player_max_health())
 
-    def playerHospitalHeal(self):
-        self.setPlayerCurrentHealth(self.getPlayerMaxHealth())
+    def player_hospital_heal(self):
+        self.set_player_current_health(self.get_player_max_health())
 
-    def playerTakeDamage(self, damage):
+    def player_take_damage(self, damage):
         if self.playerCurrentHealth - damage > 0:
-            self.playerCurrentHealth = self.getPlayerCurrentHealth() - damage
+            self.playerCurrentHealth = self.get_player_current_health() - \
+                                        damage
         elif self.playerCurrentHealth - damage <= 0:
             self.playerCurrentHealth = 0
 
-
-    def isPlayerAlive(self):
-        if self.getPlayerCurrentHealth() == 0:
+    def is_player_alive(self):
+        if self.get_player_current_health() == 0:
             return False
         else:
             return True
 
-    def setPlayerMaxHealth(self):
-        self.playerMaxHealth = (self.getPlayerMaxHealth() + self.getPlayerStrength())
+    def set_player_max_health(self):
+        self.playerMaxHealth = (
+                self.get_player_max_health() + self.get_player_strength())
 
-    def getPlayerMaxHealth(self):
+    def get_player_max_health(self):
         return self.playerMaxHealth
 
-    def setPlayerHealthPercentage(self):
-        self.playerHealthPercentage = self.getPlayerCurrentHealth()/self.getPlayerMaxHealth()
+    def set_player_health_percentage(self):
+        self.playerHealthPercentage = self.get_player_current_health() / \
+                                      self.get_player_max_health()
 
-    def getPlayerHealthPercentage(self):
-        self.setPlayerHealthPercentage()
+    def get_player_health_percentage(self):
+        self.set_player_health_percentage()
         return self.playerHealthPercentage
 
     # Sets and Gets the players equipped item
-    def setPlayerEquiped(self, weapon):
-        if self.getPlayerEquiped():
-            self.setPlayerDamage(weapon.getDamage()*(1+(self.getPlayerStrength()//10)))
+    def set_player_equipped(self, weapon):
+        if self.get_player_equipped():
+            self.set_player_damage(
+                weapon.getDamage() * (1 + (self.get_player_strength() // 10)))
         else:
-            self.setPlayerDamage(1+(self.getPlayerStrength()//10))
+            self.set_player_damage(1 + (self.get_player_strength() // 10))
 
-    def getPlayerEquiped(self):
+    def get_player_equipped(self):
         return self.playerWeapon
 
     # Player damage Setter and Getter.
 
-    def setPlayerDamage(self, damage):
+    def set_player_damage(self, damage):
         self.playerDamage = damage
 
-    def getPlayerDamage(self):
-        self.getPlayerEquiped()
+    def get_player_damage(self):
+        self.get_player_equipped()
         return self.playerDamage
 
-    def playerAttack(self):
-        return self.getPlayerDamage()
+    def player_attack(self):
+        return self.get_player_damage()
 
-    # Attributes: strength, wisdom, agility
-
-    # Skill point Stuff.
-    def incrementSkillPoints(self):
+    def increment_skill_points(self):
         self.skillPoints += 1
         print("You have accrued one more skill point.")
 
-    def setSkillPoints(self, allocation):
+    def set_skill_points(self, allocation):
         self.skillPoints += allocation
 
-    def allocateSkillPoints(self, allocation):
+    def allocate_skill_points(self, allocation):
         self.skillPoints -= allocation
 
-    def getSkillPoints(self):
+    def get_skill_points(self):
         return self.skillPoints
 
     # Player strength Setter and Getter.
 
-    def setPlayerStrength(self, allocation):
+    def set_player_strength(self, allocation):
         if self.skillPoints >= allocation:
             self.strength += allocation
-            self.allocateSkillPoints(allocation)
-            playerStrength = self.getPlayerStrength()
+            self.allocate_skill_points(allocation)
+            playerStrength = self.get_player_strength()
             print("Your strength is now {}".format(playerStrength))
         else:
-            print("You only have {} to allocate, not {}.".format(self.Skillpoints, allocation))
+            print("You only have {} to allocate, not {}.".format(
+                self.skillPoints, allocation))
 
-    def getPlayerStrength(self):
+    def get_player_strength(self):
         return self.strength
 
     # Player wisdom Setter and Getter
 
-    def setPlayerWisdom(self, allocation):
+    def set_player_wisdom(self, allocation):
         if self.skillPoints >= allocation:
             self.wisdom += allocation
-            self.allocateSkillPoints(allocation)
-            playerwisdom = self.getPlayerWisdom()
-            print("Your wisdom is now {}".format(playerwisdom))
+            self.allocate_skill_points(allocation)
+            player_wisdom = self.get_player_wisdom()
+            print("Your wisdom is now {}".format(player_wisdom))
         else:
-            print("You only have {} to allocate, not {}.".format(self.Skillpoints, allocation))
+            print("You only have {} to allocate, not {}.".format(
+                self.skillPoints, allocation))
 
-    def getPlayerWisdom(self):
+    def get_player_wisdom(self):
         return self.wisdom
 
     # Player agility Setter and Getter
 
-    def setPlayerAgility(self, allocation):
+    def set_player_agility(self, allocation):
         if self.skillPoints >= allocation:
             self.agility += allocation
-            self.allocateSkillPoints(allocation)
-            playeragility = self.getPlayerAgility()
-            print("Your agility is now {}".format(playeragility))
+            self.allocate_skill_points(allocation)
+            player_agility = self.get_player_agility()
+            print("Your agility is now {}".format(player_agility))
         else:
-            print("You only have {} to allocate, not {}.".format(self.Skillpoints, allocation))
+            print("You only have {} to allocate, not {}.".format(
+                self.skillPoints, allocation))
 
-    def getPlayerAgility(self):
+    def get_player_agility(self):
         return self.agility
 
-    # The mythical land of player inventory. Appends to list and also removes based on function.
-    def addToPlayerInventory(self, item):
+    # The mythical land of player inventory. Appends to list and also
+    # removes based on function.
+
+    def add_to_player_inventory(self, item):
         self.playerInventory.append(item)
 
-    def getFromPlayerInventory(self, position):
+    def get_from_player_inventory(self, position):
         return self.playerInventory[position]
 
-    def removeFromPlayerInventory(self, removalpoint):
-        self.playerInventory.remove(removalpoint)
+    def remove_from_player_inventory(self, removal_point):
+        self.playerInventory.remove(removal_point)
 
-    def getPlayerInventory(self):
+    def get_player_inventory(self):
         return self.playerInventory
 
     # Get battle drops
-    def getBattleDrops(self, drops):
-        self.addPlayerExp(drops[0])
+    def get_battle_drops(self, drops):
+        self.add_player_exp(drops[0])
         for x in drops[1:]:
-            self.addToPlayerInventory(x)
+            self.add_to_player_inventory(x)
 
     # Item affects and what to do with them
-    def itemAffects(self, item):
+    def item_affects(self, item):
         if item.getAffect() == 1:
-            self.setPlayerCurrentHealth(item.gethealAmount())
+            self.set_player_current_health(item.gethealAmount())
 
     # Item getters
-    def getItem(self, position):
-        if self.getPlayerInventory():
+    def get_item(self, position):
+        if self.get_player_inventory():
             return self.playerInventory[position].getItemName()
         else:
             print("Bruh the inventory is empty.")
-

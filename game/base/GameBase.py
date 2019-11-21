@@ -35,7 +35,7 @@ class GameBase:
     CLICK_STATE = False
     mapLocation = None
     The_Player = PlayerBase("Jairo")
-    enemies = EnemyList(The_Player.getPlayerLevel())
+    enemies = EnemyList(The_Player.get_player_level())
     The_Enemy = enemies.ListofEnemies[3]
 
     def __init__(self):
@@ -59,7 +59,7 @@ class GameBase:
         InputField.SELECTED = self.nameInput
 
     def enterGame(self):
-        self.The_Player.setPlayerName(self.nameInput.textInput.get_text())
+        self.The_Player.set_player_name(self.nameInput.textInput.get_text())
         self.nameInput.hide()
         self.nameInputButton.hide()
         InputField.SELECTED = None

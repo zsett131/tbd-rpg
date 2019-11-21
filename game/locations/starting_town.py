@@ -5,6 +5,10 @@ from game.locations.Location import Location
 import pygame
 import random
 
+"""
+First location that the player starts in, with the weakest enemies.
+__author__ = Jairo Garciga
+"""
 
 class starting_town(Location):
 
@@ -25,10 +29,10 @@ class starting_town(Location):
                                     desired_x=500, desired_y=200, visibility=True, standard_img=None, hover_img=None,
                                     text=self.myfont.render("Hospital UWU", True, GameBase.black))
         self.hospitalHealButton = MakeButton(self.screen,
-                                    callback=self.the_Player.playerHospitalHeal,
-                                    width=250, height=100,
-                                    desired_x=500, desired_y=250, visibility=True, standard_img=None, hover_img=None,
-                                    text=self.myfont.render("Heal Time!", True, GameBase.black))
+                                             callback=self.the_Player.player_hospital_heal,
+                                             width=250, height=100,
+                                             desired_x=500, desired_y=250, visibility=True, standard_img=None, hover_img=None,
+                                             text=self.myfont.render("Heal Time!", True, GameBase.black))
         self.leaveHospitalButton = MakeButton(self.screen, callback=self.leaveHospital, width=250, height=100,
                                     desired_x=100, desired_y=450, visibility=True, standard_img=None, hover_img=None,
                                     text=self.myfont.render(" Exit", True, GameBase.black))
