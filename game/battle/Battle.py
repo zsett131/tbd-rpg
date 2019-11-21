@@ -95,10 +95,8 @@ class Battle:
         # Draws both the enemy and player hp arb
         if self.player_health_bar_length != 0:
             pygame.draw.rect(self.topFrame.display, self.player_health_bar_color, self.playerHealthBar)
-            self.battleComplete()
         if self.enemy_health_bar_length != 0:
             pygame.draw.rect(self.topFrame.display, self.enemy_health_bar_color, self.enemyHealthBar)
-            self.battleComplete()
 
         text = self.myfont.render(str(self.theEnemy.getHp()) + "/" + str(self.theEnemy.getMaxHp()), True,
                                   GameBase.black)
@@ -119,12 +117,3 @@ class Battle:
         if self.theEnemy.getHp() <= 0:
             self.isEnemyDead = True
         return self.theEnemy.enemyTakeDamage(self.thePlayer.playerAttack())
-
-
-    def battleComplete(self):
-        if self.thePlayer.isPlayerAlive() and not self.theEnemy.isAlive():
-            self.thePlayer.getBattleDrops(self.theEnemy.died())
-            return self.thePlayer
-        else:
-            return self.thePlayer
-

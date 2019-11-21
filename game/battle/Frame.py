@@ -24,6 +24,8 @@ class Frame:
         self.playerDialogText = ''
         self.enemyDialogText = ''
         self.myFont = pygame.font.SysFont('Comic Sans TM', 25)
+        self.deathMessage = "You died :("
+        self.victoryMessage = "You Won!"
 
     def efill(self, color):
         self.display.fill(color)
@@ -56,9 +58,9 @@ class Frame:
                                   desired_x=200, desired_y=525, visibility=True, standard_img=None, hover_img=None)
         self.attack4 = MakeButton(self.mainGame, callback=lambda: print(self.battle, 'attack-4'), width=250, height=100,
                                   desired_x=600, desired_y=525, visibility=True, standard_img=None, hover_img=None)
-        self.postBattleDeath = MakeButton(self.mainGame, callback="oop", width=250, height=200,
+        self.postBattleDeath = MakeButton(self.mainGame, callback=self.returnToLocation, width=250, height=200,
                                           desired_x=400, desired_y=450,  visibility=True, standard_img=None, hover_img=None,
-                                          text=self.battle.buttonfont.render('You Died', True, GameBase.red))
+                                          text=self.battle.buttonfont.render(self.victoryMessage, True, GameBase.red))
         self.showMain()
 
     def showMain(self):
@@ -74,6 +76,7 @@ class Frame:
         self.runButton.hide()
         self.itemButton.hide()
         self.cringeButton.hide()
+        self.postBattleDeath.hide()
         self.display.blit(self.mainGame.mapLocation.locationMap, (0, 0))
         self.mainGame.mapLocation.showMainButtons()
 
@@ -118,7 +121,13 @@ class Frame:
             self.battle.theEnemy.enemyTakeDamage(self.battle.thePlayer.getPlayerDamage())
             self.battle.drawHealthBars()
             self.mainGame.updateDisplay()
-            self.doEnemyDialog()
+            if self.battle.theEnemy.getHp() <= 0:
+                self.postBattleDeath.text = self.battle.buttonfont.render(self.victoryMessage, True, GameBase.red)
+                self.postBattleDeath.show()
+            else:
+                self.doEnemyDialog()
+
+
 
     def setEnemyDialog(self, text):
         self.enemyDialogText = text
@@ -131,14 +140,16 @@ class Frame:
             self.battle.thePlayer.playerTakeDamage(self.battle.theEnemy.getDamage())
             self.battle.drawHealthBars()
             self.mainGame.updateDisplay()
-            time.sleep(1)
-            self.textWriter = None
-            self.playerDialogText = None
-            self.enemyDialogText = None
-            if self.battle.thePlayer.playerCurrentHealth <= 0 or self.battle.theEnemy.getHp() <= 0:
+            if self.battle.thePlayer.getPlayerCurrentHealth() <= 0:
+                self.battle.thePlayer.setPlayerCurrentHealth((self.battle.thePlayer.getPlayerMaxHealth() // 3)+1)
+                self.postBattleDeath.text = self.battle.buttonfont.render(self.deathMessage, True, GameBase.red)
                 self.postBattleDeath.show()
             else:
+                self.textWriter = None
+                self.playerDialogText = None
+                self.enemyDialogText = None
                 self.showMain()
+
 
     def doPlayerDialog(self):
         firstAttack = self.battle.thePlayer.getPlayerName() + " has dealt " + \
@@ -146,9 +157,10 @@ class Frame:
         self.textWriter = TextWriter(self.mainGame, 30, firstAttack, self.setPlayerDialog)
         self.textWriter.start()
 
+
     def doEnemyDialog(self):
         secondAttack = self.battle.theEnemy.getName() + " has dealt " + \
-                      str(self.battle.theEnemy.getDamage()) + " to " + self.battle.thePlayer.getPlayerName()
+                       str(self.battle.theEnemy.getDamage()) + " to " + self.battle.thePlayer.getPlayerName()
         self.textWriter = TextWriter(self.mainGame, 30, secondAttack, self.setEnemyDialog)
         self.textWriter.start()
 
