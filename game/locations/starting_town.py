@@ -24,7 +24,9 @@ class starting_town(Location):
         self.hospitalButton = MakeButton(self.screen, callback=self.goHospital, width=250, height=100,
                                     desired_x=500, desired_y=200, visibility=True, standard_img=None, hover_img=None,
                                     text=self.myfont.render("Hospital UWU", True, GameBase.black))
-        self.hospitalHealButton = MakeButton(self.screen, callback=None, width=250, height=100,
+        self.hospitalHealButton = MakeButton(self.screen,
+                                    callback=self.the_Player.playerHospitalHeal,
+                                    width=250, height=100,
                                     desired_x=500, desired_y=250, visibility=True, standard_img=None, hover_img=None,
                                     text=self.myfont.render("Heal Time!", True, GameBase.black))
         self.leaveHospitalButton = MakeButton(self.screen, callback=self.leaveHospital, width=250, height=100,
