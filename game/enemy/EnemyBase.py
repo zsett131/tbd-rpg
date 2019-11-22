@@ -2,80 +2,83 @@ import pygame
 
 class EnemyBase:
 
-    name = ""
-    desc = ""
-    icon = None
-    hp = 0
-    maxhp = 0
+    enemy_name = ""
+    enemy_description = ""
+    enemy_icon = None
+    enemy_health = 0
+    enemy_max_health = 0
     healthpercentage = 0.0
-    exp = 0
-    damage = 0
-    level = 0
+    enemy_exp = 0
+    enemy_damage = 0
+    enemy_level = 0
 
     def __init__(self, name, desc, level, hp, exp, damage, icon):
-        self.name = name
-        self.desc = desc
-        self.icon = pygame.image.load(icon)
-        self.hp = hp
-        self.maxhp = hp
-        self.exp = exp
-        self.damage = damage
-        self.level = level
+        self.enemy_name = name
+        self.enemy_description = desc
+        self.enemy_icon = pygame.image.load(icon)
+        self.enemy_health = hp
+        self.enemy_max_health = hp
+        self.enemy_exp = exp
+        self.enemy_damage = damage
+        self.enemy_level = level
 
     # Name getter and setters
     def setName(self, name):
-        self.name = name
+        self.enemy_name = name
 
     def getName(self):
-        return self.name
+        return self.enemy_name
 
     # Sets and Gets enemy description
     def setDesc(self, desc):
-        self.desc = desc
+        self.enemy_description = desc
 
     def getDesc(self):
-        return self.desc
+        return self.enemy_description
 
     # Enemy exp getter and setter
     def setExp(self, exp):
-        self.exp = exp
+        self.enemy_exp = exp
 
     def getExp(self):
-        return self.exp
+        return self.enemy_exp
 
     # Hp getter and setters
     def setHp(self, hp):
-        self.hp = hp
+        self.enemy_health = hp
 
     def getHp(self):
-        return self.hp
+        return self.enemy_health
 
     def getMaxHp(self):
-        return self.maxhp
+        return self.enemy_max_health
+
+    def set_enemy_health_max(self):
+        self.enemy_health = self.getMaxHp()
 
     def getEnemyHealthPercentage(self):
-        self.healthpercentage = self.hp/self.getMaxHp()
+        self.healthpercentage = self.enemy_health / self.getMaxHp()
         return self.healthpercentage
 
     def enemyTakeDamage(self, taken):
-        self.hp = self.getHp() - taken
+        self.enemy_health = self.getHp() - taken
         if self.getHp() < 0:
             self.setHp(0)
             self.isAlive()
 
     # Enemy damage getter and setter
     def setDamage(self, damage):
-        self.damage = damage
+        self.enemy_damage = damage
 
     def getDamage(self):
-        return self.damage
+        return self.enemy_damage
 
     # Enemy level getter and setter
     def setLevel(self, level):
-        self.level = level
+        self.enemy_level = level
 
     def getLevel(self):
-        return self.level
+        return self.enemy_level
 
     # Lever generator based on monster level and player level
     def levelGenerator(self, level, playerlevel):

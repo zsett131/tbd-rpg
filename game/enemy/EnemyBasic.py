@@ -14,8 +14,8 @@ class EnemyBasic(EnemyBase):
 
     def setPlayerLevel(self, level):
         self.playerlevel = level
-        self.levelGenerator(self.level, self.playerlevel)
-        self.statsGenerator(self.exp, self.hp, self.damage, level, self.level)
+        self.levelGenerator(self.enemy_level, self.playerlevel)
+        self.statsGenerator(self.enemy_exp, self.enemy_health, self.enemy_damage, level, self.enemy_level)
 
     # Level generator based on monster level and player level
     def levelGenerator(self, level, playerlevel):
@@ -40,7 +40,7 @@ class EnemyBasic(EnemyBase):
         self.setExp(int(originalExp * percentMultiplier))
         self.setHp(int(originalHp * percentMultiplier))
         self.setDamage(int(originalDamage * percentMultiplier))
-        self.maxhp = self.hp
+        self.maxhp = self.enemy_health
 
     # First a list called drops is created. Next, the exp amount of the enemy is put in followed by each item that is successfully dropped from the enemy.
 

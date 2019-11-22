@@ -1,14 +1,18 @@
-import pygame
-import math
-from game.inventory import Item
-
 """
 This is the object for the player and stores hp, exp, items, and stats.
 __author__: Jairo Garciga and Zachary Setterquist
 """
 
+import pygame
+import math
+from game.inventory import Item
+
 
 class PlayerBase:
+    """
+    This class sets up the player object which is used throughout the program.
+    """
+
     def __init__(self, name):
         """
         :param name: place holder for the name
@@ -88,29 +92,54 @@ class PlayerBase:
         self.player_level_up()
 
     def set_player_exp(self, amount):
+        """
+        Sets the Player's exp
+        :param amount: the amount of exp
+        """
         self.playerExp = amount
 
     def get_player_exp(self):
+        """
+        Returns the Player's exp
+        :return: player exp
+        """
         return self.playerExp
 
     def set_player_exp_cap(self):
+        """
+        Sets the exp cap each time in relation to player level
+        """
         self.playerExpCap = int(self.playerExpCap * self.exp_algorithm())
 
     def get_player_exp_cap(self):
+        """
+        Returns player exp cap
+        :return: the player exp cap
+        """
         return self.playerExpCap
 
     def set_player_current_health(self, incoming):
+        """
+        Sets the current health of the player to the incoming number,
+        either adding or subtracting
+        :param incoming: number health changing by
+        """
         self.playerCurrentHealth = incoming
 
-    def check_player_current_health(self):
-        return self.playerCurrentHealth
-
     def get_player_current_health(self):
-        if self.check_player_current_health() <= 0:
-            self.playerAlive = False
+        """
+        Outputs player's current health and checks if player is alive
+        :return: player's current health
+        """
         return self.playerCurrentHealth
 
     def player_heal(self, amount):
+        """
+        Heals the player's health by adding the current health and the
+        health amount together.
+        At most it can be the max health.
+        :param amount: Amount of health the player is healed
+        """
         if amount + self.get_player_current_health() <= \
                 self.get_player_max_health():
             self.set_player_current_health(self.get_player_current_health() +
@@ -118,147 +147,156 @@ class PlayerBase:
         else:
             self.set_player_current_health(self.get_player_max_health())
 
-    def player_hospital_heal(self):
+    def set_player_health_max(self):
+        """
+        Automatically sets the player's current health to max.
+        """
         self.set_player_current_health(self.get_player_max_health())
 
     def player_take_damage(self, damage):
+        """
+        Reduces the health of the player based on incoming damage.
+        :param damage: The amount of damage the player is taking
+        """
         if self.playerCurrentHealth - damage > 0:
             self.playerCurrentHealth = self.get_player_current_health() - \
-                                        damage
+                                       damage
         elif self.playerCurrentHealth - damage <= 0:
             self.playerCurrentHealth = 0
 
     def is_player_alive(self):
+        """
+        Determines if the player is alive
+        :return: Boolean depending on player hp being 0 or not
+        """
         if self.get_player_current_health() == 0:
+            self.playerAlive = False
             return False
         else:
             return True
 
     def set_player_max_health(self):
+        """
+        Sets the maximum health of the player
+        """
         self.playerMaxHealth = (
-                self.get_player_max_health() + self.get_player_strength())
+            self.get_player_max_health())
 
     def get_player_max_health(self):
+        """
+        Returns the player's maximum health
+        :return: The player's maximum health value
+        """
         return self.playerMaxHealth
 
     def set_player_health_percentage(self):
-        self.playerHealthPercentage = self.get_player_current_health() / \
-                                      self.get_player_max_health()
+        """
+        Creates a percentage of the current player health divided by the
+        maximum player health.
+        """
+        self.playerHealthPercentage = (self.get_player_current_health()
+                                       / self.get_player_max_health())
 
     def get_player_health_percentage(self):
+        """
+        Returns the health percentage
+        :return: percentage of health the player has
+        """
         self.set_player_health_percentage()
         return self.playerHealthPercentage
 
     # Sets and Gets the players equipped item
     def set_player_equipped(self, weapon):
+        """
+        Sets the item that the player has equipped
+        :param weapon: The item
+        """
         if self.get_player_equipped():
             self.set_player_damage(
-                weapon.getDamage() * (1 + (self.get_player_strength() // 10)))
+                weapon.getDamage())  # * (1 + (self.get_player_strength() //
+            # 10)))
         else:
-            self.set_player_damage(1 + (self.get_player_strength() // 10))
+            self.set_player_damage(1)  # + (self.get_player_strength() // 10))
 
     def get_player_equipped(self):
+        """
+        Returns the item the player has equipped
+        :return: player weapon
+        """
         return self.playerWeapon
 
     # Player damage Setter and Getter.
 
     def set_player_damage(self, damage):
+        """
+        Assigns the player's damage to the parameter damage
+        :param damage: the amount of damage
+        """
         self.playerDamage = damage
 
     def get_player_damage(self):
-        self.get_player_equipped()
+        """
+        Returns the player's damage
+        :return: player's damage
+        """
         return self.playerDamage
 
-    def player_attack(self):
-        return self.get_player_damage()
-
     def increment_skill_points(self):
+        """
+        Increases the player's skill points by one
+        """
         self.skillPoints += 1
         print("You have accrued one more skill point.")
 
     def set_skill_points(self, allocation):
+        """
+        Sets the player's skill points to the parameter allocation
+        :param allocation: The amount of skill points
+        """
         self.skillPoints += allocation
 
     def allocate_skill_points(self, allocation):
+        """
+        Subtracts skill points from the total skill points to "allocate"
+        :param allocation: Skill points being allocated
+        """
         self.skillPoints -= allocation
 
     def get_skill_points(self):
+        """
+        Returns the amount of skill points
+        :return: the player's skill points
+        """
         return self.skillPoints
-
-    # Player strength Setter and Getter.
-
-    def set_player_strength(self, allocation):
-        if self.skillPoints >= allocation:
-            self.strength += allocation
-            self.allocate_skill_points(allocation)
-            playerStrength = self.get_player_strength()
-            print("Your strength is now {}".format(playerStrength))
-        else:
-            print("You only have {} to allocate, not {}.".format(
-                self.skillPoints, allocation))
-
-    def get_player_strength(self):
-        return self.strength
-
-    # Player wisdom Setter and Getter
-
-    def set_player_wisdom(self, allocation):
-        if self.skillPoints >= allocation:
-            self.wisdom += allocation
-            self.allocate_skill_points(allocation)
-            player_wisdom = self.get_player_wisdom()
-            print("Your wisdom is now {}".format(player_wisdom))
-        else:
-            print("You only have {} to allocate, not {}.".format(
-                self.skillPoints, allocation))
-
-    def get_player_wisdom(self):
-        return self.wisdom
-
-    # Player agility Setter and Getter
-
-    def set_player_agility(self, allocation):
-        if self.skillPoints >= allocation:
-            self.agility += allocation
-            self.allocate_skill_points(allocation)
-            player_agility = self.get_player_agility()
-            print("Your agility is now {}".format(player_agility))
-        else:
-            print("You only have {} to allocate, not {}.".format(
-                self.skillPoints, allocation))
-
-    def get_player_agility(self):
-        return self.agility
 
     # The mythical land of player inventory. Appends to list and also
     # removes based on function.
 
     def add_to_player_inventory(self, item):
+        """
+
+        :param item:
+        """
         self.playerInventory.append(item)
 
     def get_from_player_inventory(self, position):
+        """
+
+        :param position:
+        :return:
+        """
         return self.playerInventory[position]
 
     def remove_from_player_inventory(self, removal_point):
+        """
+
+        :param removal_point:
+        """
         self.playerInventory.remove(removal_point)
 
     def get_player_inventory(self):
+        """
+
+        :return:
+        """
         return self.playerInventory
-
-    # Get battle drops
-    def get_battle_drops(self, drops):
-        self.add_player_exp(drops[0])
-        for x in drops[1:]:
-            self.add_to_player_inventory(x)
-
-    # Item affects and what to do with them
-    def item_affects(self, item):
-        if item.getAffect() == 1:
-            self.set_player_current_health(item.gethealAmount())
-
-    # Item getters
-    def get_item(self, position):
-        if self.get_player_inventory():
-            return self.playerInventory[position].getItemName()
-        else:
-            print("Bruh the inventory is empty.")

@@ -6,7 +6,7 @@ from game.base.PlayerBase import PlayerBase
 from game.enemy.EnemyList import EnemyList
 from game.base import Animation
 from game.base import InputField
-from game.locations.starting_town import starting_town
+from game.locations.StartingTown import StartingTown
 
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 600
@@ -28,8 +28,10 @@ enemies = None
 The_Enemy = None
 battle_frame = None
 
-def brokenBeter(display, x,y):
-    display.blit(familyguy, (x,y))
+
+def brokenBeter(display, x, y):
+    display.blit(familyguy, (x, y))
+
 
 class GameBase:
     CLICK_STATE = False
@@ -41,7 +43,9 @@ class GameBase:
     def __init__(self):
         self.display = None
         self.clock = pygame.time.Clock()
-        self.startButton = MakeButton.MakeButton(self, 300, 100, 400, 400, True, 'sansrick.jpg', 'hovergriff.jpg',
+        self.startButton = MakeButton.MakeButton(self, 300, 100, 400, 400,
+                                                 True, 'sansrick.jpg',
+                                                 'hovergriff.jpg',
                                                  callback=self.initialGame)
         self.warned = False
         self.nameInput = None
@@ -49,12 +53,18 @@ class GameBase:
     def initialGame(self):
         print(pygame.font.get_fonts())
         self.startButton.hide()
-        self.nameInput = InputField.InputField(self, 400, 300, 425, 50, 45, maxLength=15, space=False, callback=self.enterGame)
+        self.nameInput = InputField.InputField(self, 400, 300, 425, 50, 45,
+                                               maxLength=15, space=False,
+                                               callback=self.enterGame)
         self.nameInput.show()
         self.drawInstruction()
-        buttonText = pygame.font.SysFont('cambriacambriamath', 60).render('Enter⏎', True, black)
-        self.nameInputButton = MakeButton.MakeButton(self, 200, 75, 400, 400, True, standard_img=None, hover_img=None,
-                                                     text=buttonText, callback=self.enterGame)
+        buttonText = pygame.font.SysFont('cambriacambriamath', 60).render(
+            'Enter⏎', True, black)
+        self.nameInputButton = MakeButton.MakeButton(self, 200, 75, 400, 400,
+                                                     True, standard_img=None,
+                                                     hover_img=None,
+                                                     text=buttonText,
+                                                     callback=self.enterGame)
         self.nameInputButton.show()
         InputField.SELECTED = self.nameInput
 
@@ -70,13 +80,15 @@ class GameBase:
     def drawInstruction(self):
         self.display.fill(black)
         instructFont = pygame.font.SysFont('comicsansms', 30)
-        instructText = instructFont.render("Please enter a name for your character.", True, white)
-        self.display.blit(instructText, (400 - instructText.get_width() / 2, 200))
+        instructText = instructFont.render(
+            "Please enter a name for your character.", True, white)
+        self.display.blit(instructText,
+                          (400 - instructText.get_width() / 2, 200))
 
     def testMap(self):
-        self.mapLocation = starting_town(self.The_Player, self, 'StartingTown.png')
-        self.mapLocation.addButtons()
-        self.mapLocation.showMainButtons()
+        self.mapLocation = StartingTown(self.The_Player, self,
+                                        'StartingTown.png')
+        self.mapLocation.show_main_buttons()
         self.startButton.hide()
 
     def exception(self):
@@ -88,12 +100,13 @@ class GameBase:
         brokenBeter(self.display, 0, 0)
         self.startButton.hide()
 
-        # --------------------------------------Initiates the battle phase, will be placed into another class later.
+        # Initiates the battle phase, will be placed into another class later.
         Frame.efill(self, black)
         battle_frame = Battle(self.The_Player, self.The_Enemy, self)
         self.The_Player = battle_frame.battleComplete()
 
-    def battleTime(self, enemy):
+    def battle_time(self, enemy):
+        enemy.set_enemy_health_max()
         battle_frame = Battle(self.The_Player, enemy, self)
 
     def construct(self):
@@ -114,10 +127,14 @@ class GameBase:
                     if InputField.SELECTED and InputField.SELECTED == self.nameInput:
                         if event.key == pygame.K_BACKSPACE:
                             self.drawInstruction()
-                        elif len(self.nameInput.textInput.get_text()) >= self.nameInput.textInput.max_string_length:
+                        elif len(
+                                self.nameInput.textInput.get_text()) >= self.nameInput.textInput.max_string_length:
                             warnFont = pygame.font.Font(None, 30)
-                            warnText = warnFont.render('You have reached the maximum name length.', True, red)
-                            self.display.blit(warnText, (400 - warnText.get_width() / 2, 245))
+                            warnText = warnFont.render(
+                                'You have reached the maximum name length.',
+                                True, red)
+                            self.display.blit(warnText, (
+                            400 - warnText.get_width() / 2, 245))
                 if event.type == pygame.QUIT:
                     quit = True
 
@@ -137,7 +154,5 @@ class GameBase:
 
             self.clock.tick(30)
 
-
-            # ---------------------------------While statement dies when X button pressed
+            # While statement dies when X button pressed
             pygame.display.update()
-
