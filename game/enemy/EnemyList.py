@@ -20,7 +20,7 @@ class EnemyList():
             self.returnList.append(self.ListofEnemies[arg])
         return self.returnList
     # -----------------------------------------Chad enemy loot table and enemy is created. Enemy 0.
-    # Enemy Class template (Name, Description, level, playerlevel, hp, exp, damage, lootTables, icon).
+    # Enemy Class template (Name, Description, level, player_level, hp, exp, damage, lootTables, icon).
 
     # Chad Family: 0-1
     ChadsLoot = [ConsumableItemsList.consumables[0], ConsumableItemsList.consumables[0], ConsumableItemsList.consumables[0], ConsumableItemsList.consumables[0], ConsumableItemsList.consumables[0], ConsumableItemsList.consumables[0], ConsumableItemsList.consumables[0], ConsumableItemsList.consumables[0], ConsumableItemsList.consumables[0], ConsumableItemsList.consumables[0]]

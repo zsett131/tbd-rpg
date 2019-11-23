@@ -213,7 +213,7 @@ class PlayerBase:
         """
         if self.get_player_equipped():
             self.set_player_damage(
-                weapon.getDamage())  # * (1 + (self.get_player_strength() //
+                weapon.get_damage())  # * (1 + (self.get_player_strength() //
             # 10)))
         else:
             self.set_player_damage(1)  # + (self.get_player_strength() // 10))

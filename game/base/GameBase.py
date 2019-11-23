@@ -106,7 +106,7 @@ class GameBase:
         self.The_Player = battle_frame.battleComplete()
 
     def battle_time(self, enemy):
-        enemy.set_enemy_health_max()
+        enemy.set_enemy_health_to_max()
         battle_frame = Battle(self.The_Player, enemy, self)
 
     def construct(self):

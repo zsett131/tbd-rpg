@@ -166,11 +166,11 @@ class Frame:
         text = self.myFont.render(self.playerDialogText, True, GameBase.white)
         self.display.blit(text, (20, 310))
         if self.playerDialogText == self.textWriter.text:
-            self.battle.theEnemy.enemyTakeDamage(
+            self.battle.theEnemy.enemy_take_damage(
                 self.battle.thePlayer.get_player_damage())
             self.battle.draw_health_bars()
             self.mainGame.updateDisplay()
-            if self.battle.theEnemy.getHp() <= 0:
+            if self.battle.theEnemy.get_hp() <= 0:
                 self.postBattleDeath.text = self.battle.button_font.render(
                     self.victoryMessage, True, GameBase.red)
                 self.postBattleDeath.show()
@@ -186,7 +186,7 @@ class Frame:
         self.display.blit(text2, (20, 340))
         if self.enemyDialogText == self.textWriter.text:
             self.battle.thePlayer.player_take_damage(
-                self.battle.theEnemy.getDamage())
+                self.battle.theEnemy.get_damage())
             self.battle.draw_health_bars()
             self.mainGame.updateDisplay()
             if self.battle.thePlayer.get_player_current_health() <= 0:
@@ -204,15 +204,15 @@ class Frame:
     def doPlayerDialog(self):
         firstAttack = self.battle.thePlayer.get_player_name() + " has dealt " + \
                       str(
-                          self.battle.thePlayer.get_player_damage()) + " to " + self.battle.theEnemy.getName()
+                          self.battle.thePlayer.get_player_damage()) + " to " + self.battle.theEnemy.get_name()
         self.textWriter = TextWriter(self.mainGame, 30, firstAttack,
                                      self.setPlayerDialog)
         self.textWriter.start()
 
     def doEnemyDialog(self):
-        secondAttack = self.battle.theEnemy.getName() + " has dealt " + \
+        secondAttack = self.battle.theEnemy.get_name() + " has dealt " + \
                        str(
-                           self.battle.theEnemy.getDamage()) + " to " + self.battle.thePlayer.get_player_name()
+                           self.battle.theEnemy.get_damage()) + " to " + self.battle.thePlayer.get_player_name()
         self.textWriter = TextWriter(self.mainGame, 30, secondAttack,
                                      self.setEnemyDialog)
         self.textWriter.start()

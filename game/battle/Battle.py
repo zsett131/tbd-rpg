@@ -71,10 +71,10 @@ class Battle:
         self.topFrame.display.blit(self.thePlayer.playerIcon, (25, 140))
 
         # Creates the Font and renders them.
-        text = self.my_font.render(self.theEnemy.getName(), True,
+        text = self.my_font.render(self.theEnemy.get_name(), True,
                                    GameBase.black)
         self.topFrame.display.blit(text, (54, 35))
-        text = self.my_font.render("Level: " + str(self.theEnemy.getLevel()),
+        text = self.my_font.render("Level: " + str(self.theEnemy.get_level()),
                                    True, GameBase.black)
         self.topFrame.display.blit(text, (220, 35))
         text = self.my_font.render(self.thePlayer.get_player_name(), True,
@@ -100,7 +100,7 @@ class Battle:
         self.player_health_bar_length = int(
             150 * self.thePlayer.get_player_health_percentage())
         self.enemy_health_bar_length = int(
-            150 * self.theEnemy.getEnemyHealthPercentage())
+            150 * self.theEnemy.get_enemy_health_percentage())
 
         # Draws a white rectangle over the hp, allowing for a green
         # rectangle to be put on top
@@ -119,11 +119,11 @@ class Battle:
         else:
             self.player_health_bar_color = GameBase.green
 
-        if self.theEnemy.getHp() <= 0.0:
+        if self.theEnemy.get_hp() <= 0.0:
             self.enemy_health_bar_color = GameBase.white
-        elif self.theEnemy.getEnemyHealthPercentage() <= 1 / 3:
+        elif self.theEnemy.get_enemy_health_percentage() <= 1 / 3:
             self.enemy_health_bar_color = GameBase.red
-        elif self.theEnemy.getEnemyHealthPercentage() <= 2 / 3:
+        elif self.theEnemy.get_enemy_health_percentage() <= 2 / 3:
             self.enemy_health_bar_color = GameBase.orange
         else:
             self.enemy_health_bar_color = GameBase.green
@@ -134,7 +134,7 @@ class Battle:
         self.enemyHealthBar = pygame.Rect(125, 60,
                                           self.enemy_health_bar_length, 25)
         print("Player hp: ", self.thePlayer.get_player_current_health())
-        print("Enemy hp: ", self.theEnemy.getHp())
+        print("Enemy hp: ", self.theEnemy.get_hp())
 
         # Draws both the enemy and player hp arb
         if self.player_health_bar_length != 0:
@@ -146,7 +146,7 @@ class Battle:
                              self.enemy_health_bar_color, self.enemyHealthBar)
 
         text = self.my_font.render(
-            str(self.theEnemy.getHp()) + "/" + str(self.theEnemy.getMaxHp()),
+            str(self.theEnemy.get_hp()) + "/" + str(self.theEnemy.get_max_hp()),
             True,
             GameBase.black)
         textRect = text.get_rect()
@@ -169,13 +169,13 @@ class Battle:
         """
         if self.thePlayer.get_player_current_health() <= 0:
             self.isPlayerDead = True
-        self.thePlayer.player_take_damage(self.theEnemy.getDamage())
+        self.thePlayer.player_take_damage(self.theEnemy.get_damage())
 
     def damage_enemy(self):
         """
         Deals damage to the player
         """
-        if self.theEnemy.getHp() <= 0:
+        if self.theEnemy.get_hp() <= 0:
             self.isEnemyDead = True
-        self.theEnemy.enemyTakeDamage(
+        self.theEnemy.enemy_take_damage(
             self.thePlayer.get_player_damage())

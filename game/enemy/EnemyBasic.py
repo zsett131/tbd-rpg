@@ -14,16 +14,16 @@ class EnemyBasic(EnemyBase):
 
     def setPlayerLevel(self, level):
         self.playerlevel = level
-        self.levelGenerator(self.enemy_level, self.playerlevel)
+        self.level_generator(self.enemy_level, self.playerlevel)
         self.statsGenerator(self.enemy_exp, self.enemy_health, self.enemy_damage, level, self.enemy_level)
 
     # Level generator based on monster level and player level
-    def levelGenerator(self, level, playerlevel):
-        if playerlevel < level:
-            self.setLevel(self.getLevel()-(level - playerlevel)//4)
+    def level_generator(self, level, player_level):
+        if player_level < level:
+            self.set_level(self.get_level() - (level - player_level) // 4)
 
-        if playerlevel > level:
-            self.setLevel(self.getLevel()+(playerlevel - level)//3)
+        if player_level > level:
+            self.set_level(self.get_level() + (player_level - level) // 3)
 
     # Exp, hp, and damage generator based on monster's level in comparison to input level.
     def statsGenerator(self, originalExp, originalHp, originalDamage, originalLevel, currentLevel):
@@ -37,15 +37,15 @@ class EnemyBasic(EnemyBase):
         else:
             percentMultiplier = 1
 
-        self.setExp(int(originalExp * percentMultiplier))
-        self.setHp(int(originalHp * percentMultiplier))
-        self.setDamage(int(originalDamage * percentMultiplier))
+        self.set_exp(int(originalExp * percentMultiplier))
+        self.set_hp(int(originalHp * percentMultiplier))
+        self.set_damage(int(originalDamage * percentMultiplier))
         self.maxhp = self.enemy_health
 
     # First a list called drops is created. Next, the exp amount of the enemy is put in followed by each item that is successfully dropped from the enemy.
 
     def died(self): # TODO: xp calculation, loot generation, etc.
-        drops = [self.getExp()]
+        drops = [self.get_exp()]
         for x in self.lootDrop:
             if x.getItemDropRate() >= random():
                 drops.append(x)
