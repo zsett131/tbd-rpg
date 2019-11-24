@@ -68,7 +68,8 @@ class EnemyBase:
 
     def get_exp(self):
         """
-        Returns the amount of exp, this is useful for giving the player the exp.
+        Returns the amount of exp,
+        this is useful for giving the player the exp.
         :return: enemy's exp
         """
         return self.enemy_exp
@@ -83,7 +84,8 @@ class EnemyBase:
 
     def get_hp(self):
         """
-        Returns the health of the enemy, this helps in reassigning the enemies health when it takes damage.
+        Returns the health of the enemy, this helps in reassigning
+        the enemies health when it takes damage.
         :return: enemy's health
         """
         return self.enemy_health
@@ -97,8 +99,10 @@ class EnemyBase:
 
     def get_max_hp(self):
         """
-        Sets the maximum hp of the enemy. This function helps draw the health bars
-        of the enemy as the bar length depends on the percentage of the current hp to maximum hp.
+        Sets the maximum hp of the enemy.
+        This function helps draw the health bars
+        of the enemy as the bar length depends
+        on the percentage of the current hp to maximum hp.
         :return: max enemy health
         """
         return self.enemy_max_health
@@ -112,7 +116,8 @@ class EnemyBase:
 
     def get_enemy_health_percentage(self):
         """
-        Calculates the enemies health percentage by dividing health by the maximum hp, then returns it.
+        Calculates the enemies health percentage by dividing
+        health by the maximum hp, then returns it.
         :return: health percentage
         """
         self.health_percentage = self.enemy_health / self.get_max_hp()
@@ -146,27 +151,32 @@ class EnemyBase:
     # Enemy level getter and setter
     def set_level(self, level):
         """
-        Sets the level of the enemy. Helps in reducing or increasing enemy's level for normal enemies.
+        Sets the level of the enemy. Helps in reducing
+        or increasing enemy's level for normal enemies.
         :param level: The level
         """
         self.enemy_level = level
 
     def get_level(self):
         """
-        Gets the enemies level for number crunching and also visual output in the battle screen.
+        Gets the enemies level for number crunching and
+        also visual output in the battle screen.
         :return: enemy's level
         """
         return self.enemy_level
 
-    # Level generator based on monster level and player level
-    def level_generator(self, level, player_level):
-        if player_level < level:
-            self.set_level(level + (level % player_level) // 3)
-        if player_level > level:
-            self.set_level(level - (player_level % level) // 3)
-
-    # Exp, hp, and damage generator based on monster's level in comparison to input level.
-    def exp_generator(self, original_exp, original_hp, original_damage, original_level, current_level):
+    def exp_generator(self, original_exp, original_hp, original_damage,
+                      original_level, current_level):
+        """
+        This generates the exp of the enemy based on the level differences
+        between the player and the enemy.
+        Basically updates the level, exp, and health.
+        :param original_exp: the enemy's original exp
+        :param original_hp:  the enemy's original hp
+        :param original_damage: the enemy's original damage
+        :param original_level:  the enemy's original level
+        :param current_level: the enemy's current level
+        """
 
         level_difference = original_level % current_level
 
@@ -182,11 +192,19 @@ class EnemyBase:
         self.set_hp(int(original_hp * percent_multiplier))
         self.set_damage(int(original_damage * percent_multiplier))
 
-    def died(self, *args):  # TODO: xp calculation, loot generation, etc.
+    def died(self):  # TODO: xp calculation, loot generation, etc.
+        """
+        Will return the exp, and items of the enemy to the player.
+        :return: The exp, then then the items of the enemy
+        """
         pass
 
     # Function to determine if the enemy is dead or not
     def is_alive(self):
+        """
+        Checks to see if the enemy is alive
+        :return: Boolean value based on live or not
+        """
         if self.get_hp() == 0:
             return False
         else:

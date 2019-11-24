@@ -53,8 +53,8 @@ class Battle:
         :param main_game: The GameBase object
         """
         self.bottomFrame = Frame(300, 0, main_game, self)
-        self.bottomFrame.makeRect(GameBase.blue, 800, 300)
-        self.bottomFrame.addButtons()
+        self.bottomFrame.make_rect(GameBase.blue, 800, 300)
+        self.bottomFrame.add_buttons()
 
     def top_battle_frame(self, main_game):
         """
@@ -64,7 +64,7 @@ class Battle:
         :param main_game: GameBase object
         """
         self.topFrame = Frame(0, 0, main_game, self)
-        self.topFrame.makeRect(GameBase.lightblue, 800, 300)
+        self.topFrame.make_rect(GameBase.light_blue, 800, 300)
         self.topFrame.display.blit(self.character_bar, (25, 25))
         self.topFrame.display.blit(self.character_bar, (500, 200))
         self.topFrame.display.blit(self.theEnemy.enemy_icon, (550, 20))
@@ -146,7 +146,8 @@ class Battle:
                              self.enemy_health_bar_color, self.enemyHealthBar)
 
         text = self.my_font.render(
-            str(self.theEnemy.get_hp()) + "/" + str(self.theEnemy.get_max_hp()),
+            str(self.theEnemy.get_hp()) + "/" + str(
+                self.theEnemy.get_max_hp()),
             True,
             GameBase.black)
         textRect = text.get_rect()

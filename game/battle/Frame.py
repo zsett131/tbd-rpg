@@ -1,7 +1,11 @@
+"""
+The class that creates the major frames for the battles.
+Both the top and bottom halves and their subsequent buttons.
+__author__: Jairo Garciga and Zachary Setterquist
+"""
 from game.base.MakeButton import MakeButton
 from game.base import GameBase
 from game.base.Animation import TextWriter
-import time
 import pygame
 
 
@@ -17,6 +21,12 @@ class Frame:
         self.runButton = None
         self.itemButton = None
         self.cringeButton = None
+        self.backButton = None
+        self.attack1 = None
+        self.attack2 = None
+        self.attack3 = None
+        self.attack4 = None
+        self.postBattleDeath = None
         self.color = None
         self.width = None
         self.depth = None
@@ -30,33 +40,34 @@ class Frame:
     def efill(self, color):
         self.display.fill(color)
 
-    def makeRect(self, color, width, depth):
+    def make_rect(self, color, width, depth):
         self.color = color
         self.width = width
         self.depth = depth
         pygame.draw.rect(self.display, color,
                          (self.right, self.down, width, depth))
 
-    def uniqueRect(self, color, right, down, width, depth):
+    def unique_rect(self, color, right, down, width, depth):
         pygame.draw.rect(self.display, color, (right, down, width, depth))
 
-    def addButtons(self):
+    def add_buttons(self):
         self.attackButton = MakeButton(self.mainGame,
-                                       callback=self.enterAttack, width=250,
+                                       callback=self.enter_attack, width=250,
                                        height=100, desired_x=200,
                                        desired_y=375, visibility=True,
                                        standard_img=None, hover_img=None,
                                        text=self.battle.button_font.render(
                                            'Attack', True, GameBase.black))
-        self.runButton = MakeButton(self.mainGame,
-                                    callback=self.returnToLocation, width=250,
-                                    height=100,
-                                    desired_x=600, desired_y=375,
-                                    visibility=True, standard_img=None,
-                                    hover_img=None,
-                                    text=self.battle.button_font.render('Run',
-                                                                        True,
-                                                                        GameBase.black))
+        self.runButton = \
+            MakeButton(self.mainGame,
+                       callback=self.return_to_location, width=250,
+                       height=100,
+                       desired_x=600, desired_y=375,
+                       visibility=True, standard_img=None,
+                       hover_img=None,
+                       text=self.battle.button_font.render('Run',
+                                                           True,
+                                                           GameBase.black))
         self.itemButton = MakeButton(self.mainGame,
                                      callback=lambda: print(self.battle, '3'),
                                      width=250, height=100,
@@ -72,12 +83,12 @@ class Frame:
                                        desired_x=600, desired_y=525,
                                        visibility=True, standard_img=None,
                                        hover_img=None)
-        self.backButton = MakeButton(self.mainGame, callback=self.exitAttack,
+        self.backButton = MakeButton(self.mainGame, callback=self.exit_attack,
                                      width=25, height=25, desired_x=25,
                                      desired_y=325, visibility=True,
                                      standard_img='exit_normal.png',
                                      hover_img='exit_hover.png')
-        self.attack1 = MakeButton(self.mainGame, callback=self.doAttack,
+        self.attack1 = MakeButton(self.mainGame, callback=self.do_attack,
                                   width=250, height=100,
                                   desired_x=200, desired_y=375,
                                   visibility=True, standard_img=None,
@@ -104,7 +115,7 @@ class Frame:
                                   visibility=True, standard_img=None,
                                   hover_img=None)
         self.postBattleDeath = MakeButton(self.mainGame,
-                                          callback=self.returnToLocation,
+                                          callback=self.return_to_location,
                                           width=250, height=200,
                                           desired_x=400, desired_y=450,
                                           visibility=True, standard_img=None,
@@ -112,16 +123,16 @@ class Frame:
                                           text=self.battle.button_font.render(
                                               self.victoryMessage, True,
                                               GameBase.red))
-        self.showMain()
+        self.show_main()
 
-    def showMain(self):
-        self.makeRect(self.color, self.width, self.depth)
+    def show_main(self):
+        self.make_rect(self.color, self.width, self.depth)
         self.attackButton.show()
         self.runButton.show()
         self.itemButton.show()
         self.cringeButton.show()
 
-    def returnToLocation(self):
+    def return_to_location(self):
         self.attackButton.hide()
         self.runButton.hide()
         self.itemButton.hide()
@@ -130,56 +141,56 @@ class Frame:
         self.display.blit(self.mainGame.mapLocation.locationMap, (0, 0))
         self.mainGame.mapLocation.show_main_buttons()
 
-    def enterAttack(self):
+    def enter_attack(self):
         self.attackButton.hide()
         self.runButton.hide()
         self.itemButton.hide()
         self.cringeButton.hide()
-        self.makeRect(self.color, self.width, self.depth)
+        self.make_rect(self.color, self.width, self.depth)
         self.backButton.show()
         self.attack1.show()
         self.attack2.show()
         self.attack3.show()
         self.attack4.show()
 
-    def exitAttack(self):
+    def exit_attack(self):
         self.backButton.hide()
         self.attack1.hide()
         self.attack2.hide()
         self.attack3.hide()
         self.attack4.hide()
-        self.makeRect(self.color, self.width, self.depth)
-        self.showMain()
+        self.make_rect(self.color, self.width, self.depth)
+        self.show_main()
 
-    def doAttack(self):
+    def do_attack(self):
         self.backButton.hide()
         self.attack1.hide()
         self.attack2.hide()
         self.attack3.hide()
         self.attack4.hide()
-        self.makeRect(self.color, self.width, self.depth)
-        self.doPlayerDialog()
+        self.make_rect(self.color, self.width, self.depth)
+        self.do_player_dialog()
 
-    def setPlayerDialog(self, text):
+    def set_player_dialog(self, text):
         self.playerDialogText = text
-        self.makeRect(self.color, self.width, self.depth)
+        self.make_rect(self.color, self.width, self.depth)
         text = self.myFont.render(self.playerDialogText, True, GameBase.white)
         self.display.blit(text, (20, 310))
         if self.playerDialogText == self.textWriter.text:
             self.battle.theEnemy.enemy_take_damage(
                 self.battle.thePlayer.get_player_damage())
             self.battle.draw_health_bars()
-            self.mainGame.updateDisplay()
+            self.mainGame.update_display()
             if self.battle.theEnemy.get_hp() <= 0:
                 self.postBattleDeath.text = self.battle.button_font.render(
                     self.victoryMessage, True, GameBase.red)
                 self.postBattleDeath.show()
             else:
-                self.doEnemyDialog()
+                self.do_enemy_dialog()
 
-    def setEnemyDialog(self, text):
+    def set_enemy_dialog(self, text):
         self.enemyDialogText = text
-        self.makeRect(self.color, self.width, self.depth)
+        self.make_rect(self.color, self.width, self.depth)
         text1 = self.myFont.render(self.playerDialogText, True, GameBase.white)
         text2 = self.myFont.render(self.enemyDialogText, True, GameBase.white)
         self.display.blit(text1, (20, 310))
@@ -188,7 +199,7 @@ class Frame:
             self.battle.thePlayer.player_take_damage(
                 self.battle.theEnemy.get_damage())
             self.battle.draw_health_bars()
-            self.mainGame.updateDisplay()
+            self.mainGame.update_display()
             if self.battle.thePlayer.get_player_current_health() <= 0:
                 self.battle.thePlayer.set_player_current_health(
                     (self.battle.thePlayer.get_player_max_health() // 3) + 1)
@@ -199,20 +210,22 @@ class Frame:
                 self.textWriter = None
                 self.playerDialogText = None
                 self.enemyDialogText = None
-                self.showMain()
+                self.show_main()
 
-    def doPlayerDialog(self):
-        firstAttack = self.battle.thePlayer.get_player_name() + " has dealt " + \
-                      str(
-                          self.battle.thePlayer.get_player_damage()) + " to " + self.battle.theEnemy.get_name()
+    def do_player_dialog(self):
+        firstAttack = self.battle.thePlayer.get_player_name() \
+                      + " has dealt " + str(
+            self.battle.thePlayer.get_player_damage()) + \
+                      " to " + self.battle.theEnemy.get_name()
         self.textWriter = TextWriter(self.mainGame, 30, firstAttack,
-                                     self.setPlayerDialog)
+                                     self.set_player_dialog)
         self.textWriter.start()
 
-    def doEnemyDialog(self):
+    def do_enemy_dialog(self):
         secondAttack = self.battle.theEnemy.get_name() + " has dealt " + \
                        str(
-                           self.battle.theEnemy.get_damage()) + " to " + self.battle.thePlayer.get_player_name()
+                           self.battle.theEnemy.get_damage()) + " to " + \
+                       self.battle.thePlayer.get_player_name()
         self.textWriter = TextWriter(self.mainGame, 30, secondAttack,
-                                     self.setEnemyDialog)
+                                     self.set_enemy_dialog)
         self.textWriter.start()

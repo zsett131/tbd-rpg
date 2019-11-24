@@ -114,7 +114,7 @@ class StartingTown(Location):
         Send the random enemy that is picked to the function battle_time
         which starts the battle and generates an enemy
         """
-        self.enemies = self.screen.enemies.getList(0, 2, 5)
+        self.enemies = self.screen.enemies.get_list(0, 2, 5)
         specific_enemy = self.enemies[random.randint(0, 2)]
         self.hide_main_buttons()
         self.screen.battle_time(specific_enemy)
