@@ -72,7 +72,7 @@ class GameBase:
         print(pygame.font.get_fonts())
         self.startButton.hide()
         self.nameInput = InputField.InputField(self, 400, 300, 425, 50, 45,
-                                               maxLength=15, space=False,
+                                               max_length=15, space=False,
                                                callback=self.enter_game)
         self.nameInput.show()
         self.draw_instruction()
@@ -102,11 +102,11 @@ class GameBase:
         Draws the name input screen and text.
         """
         self.display.fill(black)
-        instructFont = pygame.font.SysFont('comicsansms', 30)
-        instructText = instructFont.render(
+        instruct_font = pygame.font.SysFont('comicsansms', 30)
+        instruct_text = instruct_font.render(
             "Please enter a name for your character.", True, white)
-        self.display.blit(instructText,
-                          (400 - instructText.get_width() / 2, 200))
+        self.display.blit(instruct_text,
+                          (400 - instruct_text.get_width() / 2, 200))
 
     def test_map(self):
         """
@@ -173,12 +173,12 @@ class GameBase:
                         elif len(
                                 self.nameInput.textInput.get_text()) >= \
                                 self.nameInput.textInput.max_string_length:
-                            warnFont = pygame.font.Font(None, 30)
-                            warnText = warnFont.render(
+                            warn_font = pygame.font.Font(None, 30)
+                            warn_text = warn_font.render(
                                 'You have reached the maximum name length.',
                                 True, red)
-                            self.display.blit(warnText, (
-                                400 - warnText.get_width() / 2, 245))
+                            self.display.blit(warn_text, (
+                                400 - warn_text.get_width() / 2, 245))
                 if event.type == pygame.QUIT:
                     quit_event = True
 

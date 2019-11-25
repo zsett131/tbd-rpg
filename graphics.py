@@ -1,9 +1,13 @@
+"""
+Main module for starting the game.
+__authors__: Jairo Garciga and Zachary Setterquist
+"""
+from game.base import GameBase
 import pygame
 from game.base.PlayerBase import PlayerBase
 import traceback
 
 Player = PlayerBase("Jairo")
-from game.base import GameBase
 
 clock = pygame.time.Clock()
 red = (255, 0, 0)
@@ -35,13 +39,13 @@ except Exception as e:
     base.exception()
     traceback.print_exc()
     pygame.display.update()
-    quit = False
-    while not quit:
+    QUIT = False
+    while not QUIT:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                quit = True
+                QUIT = True
 
         if pygame.mouse.get_pressed()[0]:
-            quit = True
+            QUIT = True
 
 pygame.quit()

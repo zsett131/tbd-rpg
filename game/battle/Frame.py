@@ -10,6 +10,10 @@ import pygame
 
 
 class Frame:
+    """
+    This is a class for drawing battle frames.
+    """
+
     def __init__(self, down, right, gamebase, battle):
         self.down = down
         self.right = right
@@ -38,9 +42,19 @@ class Frame:
         self.victoryMessage = "You Won!"
 
     def efill(self, color):
+        """
+        Fills the display with a specified color.
+        :param color: RGB color to fill display with
+        """
         self.display.fill(color)
 
     def make_rect(self, color, width, depth):
+        """
+        Draws rectangle for the frame.
+        :param color: RGB color to fill rectangle with.
+        :param width: Width of rectangle.
+        :param depth: Height of rectangle.
+        """
         self.color = color
         self.width = width
         self.depth = depth
@@ -48,9 +62,20 @@ class Frame:
                          (self.right, self.down, width, depth))
 
     def unique_rect(self, color, right, down, width, depth):
+        """
+        The same as make_rect, but does not change Frame attributes.
+        :param color: RGB color to fill rectangle with.
+        :param right: X position.
+        :param down: Y position.
+        :param width: Width of rectangle.
+        :param depth: Depth of rectangle.
+        """
         pygame.draw.rect(self.display, color, (right, down, width, depth))
 
     def add_buttons(self):
+        """
+        Creates all of the buttons for the battle frame.
+        """
         self.attackButton = MakeButton(self.mainGame,
                                        callback=self.enter_attack, width=250,
                                        height=100, desired_x=200,
@@ -126,6 +151,9 @@ class Frame:
         self.show_main()
 
     def show_main(self):
+        """
+        Makes the first battle frame visible.
+        """
         self.make_rect(self.color, self.width, self.depth)
         self.attackButton.show()
         self.runButton.show()
@@ -133,6 +161,9 @@ class Frame:
         self.cringeButton.show()
 
     def return_to_location(self):
+        """
+        Exits the battle frame and returns to the location the player was at.
+        """
         self.attackButton.hide()
         self.runButton.hide()
         self.itemButton.hide()
@@ -142,6 +173,9 @@ class Frame:
         self.mainGame.mapLocation.show_main_buttons()
 
     def enter_attack(self):
+        """
+        Makes the attack screen visible on the battle frame.
+        """
         self.attackButton.hide()
         self.runButton.hide()
         self.itemButton.hide()
@@ -154,6 +188,9 @@ class Frame:
         self.attack4.show()
 
     def exit_attack(self):
+        """
+        Exits the attack screen back to the main battle screen.
+        """
         self.backButton.hide()
         self.attack1.hide()
         self.attack2.hide()
@@ -163,6 +200,9 @@ class Frame:
         self.show_main()
 
     def do_attack(self):
+        """
+        Performs the attack.
+        """
         self.backButton.hide()
         self.attack1.hide()
         self.attack2.hide()
@@ -172,6 +212,10 @@ class Frame:
         self.do_player_dialog()
 
     def set_player_dialog(self, text):
+        """
+        Sets the current player damage text shown on the attack text draw page.
+        :param text: text to draw
+        """
         self.playerDialogText = text
         self.make_rect(self.color, self.width, self.depth)
         text = self.myFont.render(self.playerDialogText, True, GameBase.white)
@@ -189,6 +233,10 @@ class Frame:
                 self.do_enemy_dialog()
 
     def set_enemy_dialog(self, text):
+        """
+        Sets the current enemy damage text shown on the attack text draw page.
+        :param text: text to draw
+        """
         self.enemyDialogText = text
         self.make_rect(self.color, self.width, self.depth)
         text1 = self.myFont.render(self.playerDialogText, True, GameBase.white)
@@ -213,19 +261,23 @@ class Frame:
                 self.show_main()
 
     def do_player_dialog(self):
-        firstAttack = self.battle.thePlayer.get_player_name() \
-                      + " has dealt " + str(
-            self.battle.thePlayer.get_player_damage()) + \
-                      " to " + self.battle.theEnemy.get_name()
-        self.textWriter = TextWriter(self.mainGame, 30, firstAttack,
+        """
+        Begins the process of drawing out the player damage dialog text.
+        """
+        first_attack = self.battle.thePlayer.get_player_name() + " has dealt " \
+                       + str(self.battle.thePlayer.get_player_damage()) + \
+                       " to " + self.battle.theEnemy.get_name()
+        self.textWriter = TextWriter(self.mainGame, 30, first_attack,
                                      self.set_player_dialog)
         self.textWriter.start()
 
     def do_enemy_dialog(self):
-        secondAttack = self.battle.theEnemy.get_name() + " has dealt " + \
-                       str(
-                           self.battle.theEnemy.get_damage()) + " to " + \
-                       self.battle.thePlayer.get_player_name()
-        self.textWriter = TextWriter(self.mainGame, 30, secondAttack,
+        """
+        Begins the process of drawing out the enemy damage dialog text.
+        """
+        second_attack = self.battle.theEnemy.get_name() + " has dealt " + \
+                        str(self.battle.theEnemy.get_damage()) + " to " + \
+                        self.battle.thePlayer.get_player_name()
+        self.textWriter = TextWriter(self.mainGame, 30, second_attack,
                                      self.set_enemy_dialog)
         self.textWriter.start()

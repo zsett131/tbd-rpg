@@ -150,18 +150,18 @@ class Battle:
                 self.theEnemy.get_max_hp()),
             True,
             GameBase.black)
-        textRect = text.get_rect()
+        text_rect = text.get_rect()
         self.topFrame.display.blit(text, (130,
                                           self.enemyHealthBar.y -
-                                          textRect.height / 2 +
+                                          text_rect.height / 2 +
                                           self.enemyHealthBar.height / 2))
         text = self.my_font.render(
             str(self.thePlayer.get_player_current_health()) + "/" +
             str(self.thePlayer.get_player_max_health()), True, GameBase.black)
-        textRect = text.get_rect()
+        text_rect = text.get_rect()
         self.topFrame.display.blit(text, (605,
                                           self.playerHealthBar.y -
-                                          textRect.height / 2 +
+                                          text_rect.height / 2 +
                                           self.playerHealthBar.height / 2))
 
     def damage_player(self):

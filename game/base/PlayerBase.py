@@ -45,9 +45,9 @@ class PlayerBase:
         Creates the logistical function for percent increase in exp.
         :return: percentage increase for the exp cap.
         """
-        expLogistic = 1 / (
+        exp_logistic = 1 / (
                 3 + math.exp(-(3 / 4) * (self.playerLevel / 16) - 4))
-        return expLogistic
+        return exp_logistic
 
     def set_player_name(self, input_name):
         """

@@ -56,18 +56,18 @@ class EnemyBasic(EnemyBase):
         :return:
         """
 
-        levelDifference = abs(original_level - current_level)
+        level_difference = abs(original_level - current_level)
 
         if original_level > current_level:
-            percentMultiplier = 1 - (levelDifference * 5) / 100
+            percent_multiplier = 1 - (level_difference * 5) / 100
         elif current_level > original_level:
-            percentMultiplier = 1 + (levelDifference * 5) / 100
+            percent_multiplier = 1 + (level_difference * 5) / 100
         else:
-            percentMultiplier = 1
+            percent_multiplier = 1
 
-        self.set_exp(int(original_exp * percentMultiplier))
-        self.set_hp(int(original_hp * percentMultiplier))
-        self.set_damage(int(original_damage * percentMultiplier))
+        self.set_exp(int(original_exp * percent_multiplier))
+        self.set_hp(int(original_hp * percent_multiplier))
+        self.set_damage(int(original_damage * percent_multiplier))
         self.enemy_max_health = self.enemy_health
 
     # First a list called drops is created.
