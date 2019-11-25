@@ -117,7 +117,10 @@ class Frame:
                                   width=250, height=100,
                                   desired_x=200, desired_y=375,
                                   visibility=True, standard_img=None,
-                                  hover_img=None)
+                                  hover_img=None,
+                                  text=self.battle.button_font.render(
+                                      "Attack 1", True,
+                                      GameBase.blue))
         self.attack2 = MakeButton(self.mainGame,
                                   callback=lambda: print(self.battle,
                                                          'attack-2'),
@@ -213,7 +216,8 @@ class Frame:
 
     def set_player_dialog(self, text):
         """
-        Sets the current player damage text shown on the attack text draw page.
+        Sets the current player damage text shown on the attack text draw
+        page.
         :param text: text to draw
         """
         self.playerDialogText = text
@@ -252,7 +256,7 @@ class Frame:
             if self.battle.thePlayer.get_player_current_health() <= 0:
                 self.battle.thePlayer.set_player_current_health(
                     (self.battle.thePlayer.get_player_max_health() // 3) + 1)
-                self.postBattleDeath.text = self.battle.buttonfont.render(
+                self.postBattleDeath.text = self.battle.battle_font.render(
                     self.deathMessage, True, GameBase.red)
                 self.postBattleDeath.show()
             else:
