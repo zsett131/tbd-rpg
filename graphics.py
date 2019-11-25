@@ -19,9 +19,9 @@ black = (0, 0, 0)
 display_height = 600
 display_width = 800
 
-sansRick = pygame.image.load('sansrick.jpg')
-hoverGriff = pygame.image.load('hovergriff.jpg')
-familyguy = pygame.image.load('familyguypeter.jpg')
+sansRick = pygame.image.load('Images/sansrick.jpg')
+hoverGriff = pygame.image.load('Images/hovergriff.jpg')
+familyguy = pygame.image.load('Images/familyguypeter.jpg')
 # The picture that is printed when the game crashes
 Peter = False
 

@@ -7,6 +7,7 @@ __author__: Jairo Garciga
 from game.base.PlayerBase import PlayerBase
 from game.battle.Frame import Frame
 from game.base import GameBase
+import Images
 import pygame
 
 
@@ -32,7 +33,7 @@ class Battle:
     enemyHealthBar = pygame.Rect(125, 60, enemy_health_bar_length, 25)
     playerHealthBar = pygame.Rect(600, 235, player_health_bar_length, 25)
 
-    character_bar = pygame.image.load('Character_Bar.png')
+    character_bar = pygame.image.load("Images/Character_Bar.png")
 
     def __init__(self, player, enemy, main_game):
         """

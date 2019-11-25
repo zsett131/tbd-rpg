@@ -22,7 +22,7 @@ class EnemyBase:
     def __init__(self, name, desc, level, hp, exp, damage, icon):
         self.enemy_name = name
         self.enemy_description = desc
-        self.enemy_icon = pygame.image.load(icon)
+        self.enemy_icon = pygame.image.load("Images/" + icon)
         self.enemy_health = hp
         self.enemy_max_health = hp
         self.enemy_exp = exp

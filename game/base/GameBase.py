@@ -21,9 +21,9 @@ white = (255, 255, 255)
 black = (0, 0, 0)
 sansrick_display_x = 250
 sansrick_display_y = 300
-sansRick = pygame.image.load('sansrick.jpg')
-hoverGriff = pygame.image.load('hovergriff.jpg')
-familyguy = pygame.image.load('familyguypeter.jpg')
+sansRick = pygame.image.load('Images/sansrick.jpg')
+hoverGriff = pygame.image.load('Images/hovergriff.jpg')
+familyguy = pygame.image.load('Images/familyguypeter.jpg')
 
 The_Player = None
 enemies = None
@@ -55,8 +55,8 @@ class GameBase:
         self.display = None
         self.clock = pygame.time.Clock()
         self.startButton = MakeButton.MakeButton(self, 300, 100, 400, 400,
-                                                 True, 'sansrick.jpg',
-                                                 'hovergriff.jpg',
+                                                 True, 'Images/sansrick.jpg',
+                                                 'Images/hovergriff.jpg',
                                                  callback=self.initial_game)
         self.buttonText = pygame.font.SysFont('cambriacambriamath', 60).render(
             'Enter⏎', True, black)

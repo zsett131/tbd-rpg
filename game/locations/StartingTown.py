@@ -20,14 +20,18 @@ class StartingTown(Location):
     def __init__(self, player, base, mapp):
         Location.__init__(self, player, base, mapp)
         pygame.init()
-        self.hospitalImg = pygame.image.load('hospital.png')
+        self.hospitalImg = pygame.image.load('Images/hospital.png')
         self.myfont = pygame.font.SysFont('comicsansms', 26)
 
-        self.battleButton = MakeButton(self.screen, callback=self.enter_battle,
+        self.battleButton = MakeButton(self.screen,
+                                       callback=self.enter_battle,
                                        width=250, height=100,
-                                       desired_x=100, desired_y=450,
-                                       visibility=False, standard_img=None,
-                                       hover_img=None)
+                                       desired_x=200, desired_y=350,
+                                       visibility=True, standard_img=None,
+                                       hover_img=None,
+                                       text=self.myfont.render(
+                                           "To Battle!", True,
+                                           GameBase.black))
 
         self.hospitalButton = MakeButton(self.screen,
                                          callback=self.go_hospital,

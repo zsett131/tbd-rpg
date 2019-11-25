@@ -111,8 +111,8 @@ class Frame:
         self.backButton = MakeButton(self.mainGame, callback=self.exit_attack,
                                      width=25, height=25, desired_x=25,
                                      desired_y=325, visibility=True,
-                                     standard_img='exit_normal.png',
-                                     hover_img='exit_hover.png')
+                                     standard_img='Images/exit_normal.png',
+                                     hover_img='Images/exit_hover.png')
         self.attack1 = MakeButton(self.mainGame, callback=self.do_attack,
                                   width=250, height=100,
                                   desired_x=200, desired_y=375,

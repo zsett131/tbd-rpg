@@ -21,7 +21,7 @@ class PlayerBase:
         # Player stats and attributes
         self.playerName = name
         self.playerAlive = True
-        self.playerIcon = pygame.image.load('Jotaro.jpg')
+        self.playerIcon = pygame.image.load('Images/Jotaro.jpg')
         self.playerLevel = 1
         self.playerExp = 0
         self.playerExpCap = 100
