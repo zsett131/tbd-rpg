@@ -1,5 +1,5 @@
 # Tbd-Rpg
-## Most of the Images were not created by us but taken off the internet.
+# Most of the Images were not created by us. We do not claim authorship of the images.
 Integration Project
 
 In order to launch the game it is important to first have pygame installed using pip.
