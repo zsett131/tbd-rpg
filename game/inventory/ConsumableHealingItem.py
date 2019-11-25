@@ -14,6 +14,7 @@ class ConsumableHealingItem(Item):
 
     def __init__(self, name, desc, stack_cap, stack, heal, drop_rate):
         Item.__init__(self, name, desc, stack_cap, stack, drop_rate)
+        self.heal = heal
 
     # Getter and setter for the amount healed
     def set_heal_amount(self, heal):

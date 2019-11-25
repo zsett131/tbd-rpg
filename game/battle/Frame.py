@@ -239,7 +239,8 @@ class Frame:
         """
         self.enemyDialogText = text
         self.make_rect(self.color, self.width, self.depth)
-        text1 = self.myFont.render(self.playerDialogText, True, GameBase.white)
+        text1 = self.myFont.render(self.playerDialogText, True,
+                                   GameBase.white)
         text2 = self.myFont.render(self.enemyDialogText, True, GameBase.white)
         self.display.blit(text1, (20, 310))
         self.display.blit(text2, (20, 340))
@@ -264,9 +265,11 @@ class Frame:
         """
         Begins the process of drawing out the player damage dialog text.
         """
-        first_attack = self.battle.thePlayer.get_player_name() + " has dealt " \
+        first_attack = self.battle.thePlayer.get_player_name() + " has " \
+                                                                 "dealt " \
                        + str(self.battle.thePlayer.get_player_damage()) + \
                        " to " + self.battle.theEnemy.get_name()
+
         self.textWriter = TextWriter(self.mainGame, 30, first_attack,
                                      self.set_player_dialog)
         self.textWriter.start()
