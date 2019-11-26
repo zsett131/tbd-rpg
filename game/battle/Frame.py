@@ -15,6 +15,7 @@ class Frame:
     """
 
     def __init__(self, down, right, gamebase, battle):
+        self.player_prev_level = battle.thePlayer.get_player_level()
         self.down = down
         self.right = right
         self.mainGame = gamebase
@@ -167,13 +168,20 @@ class Frame:
         """
         Exits the battle frame and returns to the location the player was at.
         """
+        self.player_prev_level = self.battle.thePlayer.get_player_level()
+        if self.battle.thePlayer.get_player_current_health() > 0:
+            self.battle.thePlayer.add_player_exp(
+                self.battle.theEnemy.get_exp())
         self.attackButton.hide()
         self.runButton.hide()
         self.itemButton.hide()
         self.cringeButton.hide()
         self.postBattleDeath.hide()
-        self.display.blit(self.mainGame.mapLocation.locationMap, (0, 0))
-        self.mainGame.mapLocation.show_main_buttons()
+        if self.player_prev_level < self.battle.thePlayer.get_player_level():
+            self.battle.thePlayer.player_level_up_screen(self.mainGame)
+        else:
+            self.display.blit(self.mainGame.mapLocation.locationMap, (0, 0))
+            self.mainGame.mapLocation.show_main_buttons()
 
     def enter_attack(self):
         """
@@ -256,7 +264,7 @@ class Frame:
             if self.battle.thePlayer.get_player_current_health() <= 0:
                 self.battle.thePlayer.set_player_current_health(
                     (self.battle.thePlayer.get_player_max_health() // 3) + 1)
-                self.postBattleDeath.text = self.battle.battle_font.render(
+                self.postBattleDeath.text = self.battle.my_font.render(
                     self.deathMessage, True, GameBase.red)
                 self.postBattleDeath.show()
             else:

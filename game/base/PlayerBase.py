@@ -5,7 +5,13 @@ __author__: Jairo Garciga and Zachary Setterquist
 
 import pygame
 import math
+from game.base.MakeButton import MakeButton
 from game.inventory import Item
+
+pygame.init()
+my_font = pygame.font.SysFont('comicsansms', 16)
+white = (255, 255, 255)
+black = (0, 0, 0)
 
 
 class PlayerBase:
@@ -30,8 +36,14 @@ class PlayerBase:
         self.playerCurrentHealth = 20
         self.playerMaxHealth = 20
         self.playerWeapon = Item
-        self.playerDamage = 2
+        self.playerDamage = 10
         self.playerInventory = []
+        self.display = None
+        self.base = None
+        self.level_up_button_Strength = None
+        self.level_up_button_Agility = None
+        self.level_up_button_Wisdom = None
+        self.exit_level_up = None
 
         # The stats, strength, wisdom, and agility.
 
@@ -46,7 +58,7 @@ class PlayerBase:
         :return: percentage increase for the exp cap.
         """
         exp_logistic = 1 / (
-                3 + math.exp(-(3 / 4) * (self.playerLevel / 16) - 4))
+                3 + math.exp(-(3 / 4) * (self.playerLevel / 16) - 4)) + 1
         return exp_logistic
 
     def set_player_name(self, input_name):
@@ -80,6 +92,100 @@ class PlayerBase:
             self.set_player_exp(
                 self.get_player_exp() - self.get_player_exp_cap())
             self.set_player_exp_cap()
+
+    def player_level_up_screen(self, base):
+        """
+        This function calls a new display that allows for the player to
+        decide where to add skill points in.
+        :param base: The GameBase object
+        """
+
+        self.base = base
+
+        self.level_up_button_Strength = \
+            MakeButton(base, callback=self.increase_player_strength,
+                       width=200, height=100,
+                       desired_x=500, desired_y=200,
+                       hover_img=None, standard_img=None,
+                       visibility=True,
+                       text=my_font.render(
+                           'Strength', True, black))
+
+        self.level_up_button_Agility = \
+            MakeButton(base, callback=self.increase_player_agility,
+                       width=200, height=100,
+                       desired_x=500, desired_y=325,
+                       hover_img=None, standard_img=None,
+                       visibility=True,
+                       text=my_font.render(
+                           'Agility', True, black))
+
+        self.level_up_button_Wisdom = \
+            MakeButton(base, callback=self.increase_player_wisdom,
+                       width=200, height=100,
+                       desired_x=500, desired_y=450,
+                       hover_img=None, standard_img=None,
+                       visibility=True,
+                       text=my_font.render(
+                           'Wisdom', True, black))
+
+        self.exit_level_up = \
+            MakeButton(base, callback=self.player_exit_level_up_screen,
+                       width=150, height=50,
+                       desired_x=700, desired_y=50,
+                       hover_img=None, standard_img=None,
+                       visibility=True,
+                       text=my_font.render(
+                           'Return to location', True, black))
+
+        self.display = base.display
+        self.level_up_button_Strength.show()
+        self.level_up_button_Agility.show()
+        self.level_up_button_Wisdom.show()
+        self.exit_level_up.show()
+        self.display.fill(black)
+        pygame.draw.rect(self.display, white, (100, 150, 200, 350))
+        bruh = my_font.render(self.get_player_name() + "'s Stats", True, black)
+        strength = my_font.render(("Strength:" + str(self.strength)),
+                                  True, black)
+        agility = my_font.render(("Agility:" + str(self.agility)),
+                                 True, black)
+        wisdom = my_font.render(("Wisdom:" + str(self.wisdom)),
+                                True, black)
+
+        self.display.blit(bruh, (200 - bruh.get_rect().width / 2, 175))
+        self.display.blit(strength, (200 - bruh.get_rect().width / 2, 250))
+        self.display.blit(agility, (200 - bruh.get_rect().width / 2, 325))
+        self.display.blit(wisdom, (200 - bruh.get_rect().width / 2, 400))
+
+    def update_player_level_up_screen(self):
+        """
+        Quickly updates the stats side of the level up screen
+        """
+        pygame.draw.rect(self.display, white, (100, 150, 200, 350))
+        bruh = my_font.render(self.get_player_name() + "'s Stats", True, black)
+        strength = my_font.render(("Strength:" + str(self.strength)),
+                                  True, black)
+        agility = my_font.render(("Agility:" + str(self.agility)),
+                                 True, black)
+        wisdom = my_font.render(("Wisdom:" + str(self.wisdom)),
+                                True, black)
+        self.display.blit(bruh, (200 - bruh.get_rect().width / 2, 175))
+        self.display.blit(strength, (200 - bruh.get_rect().width / 2, 250))
+        self.display.blit(agility, (200 - bruh.get_rect().width / 2, 325))
+        self.display.blit(wisdom, (200 - bruh.get_rect().width / 2, 400))
+        pygame.display.update()
+
+    def player_exit_level_up_screen(self):
+        """
+        This is a function that exits the level up screen.
+        """
+        self.level_up_button_Strength.hide()
+        self.level_up_button_Agility.hide()
+        self.level_up_button_Wisdom.hide()
+        self.exit_level_up.hide()
+        self.display.blit(self.base.mapLocation.locationMap, (0, 0))
+        self.base.mapLocation.show_main_buttons()
 
     # Player Exp Setter and Getter.
 
@@ -255,12 +361,12 @@ class PlayerBase:
         """
         self.skillPoints += allocation
 
-    def allocate_skill_points(self, allocation):
+    def allocate_skill_points(self):
         """
         Subtracts skill points from the total skill points to "allocate"
-        :param allocation: Skill points being allocated
+        :param: Skill points being allocated
         """
-        self.skillPoints -= allocation
+        self.skillPoints -= 1
 
     def get_skill_points(self):
         """
@@ -268,6 +374,33 @@ class PlayerBase:
         :return: the player's skill points
         """
         return self.skillPoints
+
+    def increase_player_strength(self):
+        """
+        Increases the player's strength by one.
+        """
+        if self.get_skill_points() > 0:
+            self.allocate_skill_points()
+            self.strength += 1
+            self.update_player_level_up_screen()
+
+    def increase_player_agility(self):
+        """
+        Increases the player's agilit by one.
+        """
+        if self.get_skill_points() > 0:
+            self.allocate_skill_points()
+            self.agility += 1
+            self.update_player_level_up_screen()
+
+    def increase_player_wisdom(self):
+        """
+        Increases the player's wisdom by one.
+        """
+        if self.get_skill_points() > 0:
+            self.allocate_skill_points()
+            self.wisdom += 1
+            self.update_player_level_up_screen()
 
     # The mythical land of player inventory. Appends to list and also
     # removes based on function.

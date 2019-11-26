@@ -7,7 +7,6 @@ __author__: Jairo Garciga
 from game.base.PlayerBase import PlayerBase
 from game.battle.Frame import Frame
 from game.base import GameBase
-import Images
 import pygame
 
 
