@@ -14,7 +14,6 @@ class Location:
     pygame.init()
     screen = None
     the_Player = None
-    enemies = None
     battle = None
     locationMap = None
 
@@ -30,7 +29,7 @@ class Location:
         """
         self.the_Player = player
         self.screen = base
-        self.enemies = EnemyList(self.the_Player.get_player_level())
+        self.enemy_list = EnemyList()
         self.locationMap = pygame.image.load("Images/"+mapp)
         self.display = self.screen.display
         self.display.blit(self.locationMap, (0, 0))

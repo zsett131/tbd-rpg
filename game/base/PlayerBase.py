@@ -33,10 +33,10 @@ class PlayerBase:
         self.playerExpCap = 100
         self.playerHealthPercentage = 0.0
         self.expLogistic = 0
-        self.playerCurrentHealth = 20
-        self.playerMaxHealth = 20
+        self.playerCurrentHealth = 200
+        self.playerMaxHealth = 200
         self.playerWeapon = Item
-        self.playerDamage = 10
+        self.playerDamage = 100
         self.playerInventory = []
         self.display = None
         self.base = None

@@ -26,7 +26,6 @@ hoverGriff = pygame.image.load('Images/hovergriff.jpg')
 familyguy = pygame.image.load('Images/familyguypeter.jpg')
 
 The_Player = None
-enemies = None
 The_Enemy = None
 battle_frame = None
 
@@ -48,8 +47,7 @@ class GameBase:
     CLICK_STATE = False
     mapLocation = None
     The_Player = PlayerBase("Jairo")
-    enemies = EnemyList(The_Player.get_player_level())
-    The_Enemy = enemies.list_of_enemies[3]
+    enemies = EnemyList()
 
     def __init__(self):
         self.display = None

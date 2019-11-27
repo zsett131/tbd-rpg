@@ -3,9 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="01417f84-2d47-4203-8ad1-f33d06630c54" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/base/GameBase.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/base/GameBase.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game/base/PlayerBase.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/base/PlayerBase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/battle/Battle.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/battle/Battle.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/battle/Frame.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/battle/Frame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/enemy/EnemyBase.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/enemy/EnemyBase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/enemy/EnemyBasic.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/enemy/EnemyBasic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/enemy/EnemyList.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/enemy/EnemyList.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/locations/Location.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/locations/Location.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/locations/StartingTown.py" beforeDir="false" afterPath="$PROJECT_DIR$/game/locations/StartingTown.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

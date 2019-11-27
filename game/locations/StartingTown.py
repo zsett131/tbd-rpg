@@ -6,6 +6,7 @@ __author__ = Jairo Garciga
 from game.base import GameBase
 from game.base.MakeButton import MakeButton
 from game.locations.Location import Location
+from game.enemy.EnemyList import EnemyList
 import pygame
 import random
 
@@ -118,7 +119,8 @@ class StartingTown(Location):
         Send the random enemy that is picked to the function battle_time
         which starts the battle and generates an enemy
         """
-        self.enemies = self.screen.enemies.get_list(0, 2, 5)
+        self.enemy_list = EnemyList()
+        self.enemies = self.enemy_list.get_list(0, 2, 5)
         specific_enemy = self.enemies[random.randint(0, 2)]
         self.hide_main_buttons()
         self.screen.battle_time(specific_enemy)

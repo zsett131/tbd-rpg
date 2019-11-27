@@ -4,6 +4,7 @@ __author__: Jairo Garciga
 """
 from game.enemy.EnemyBase import EnemyBase
 from random import random
+import math
 
 
 class EnemyBasic(EnemyBase):
@@ -13,62 +14,50 @@ class EnemyBasic(EnemyBase):
     lootDrop = []
     player_level = None
 
-    def __init__(self, name, desc, level, player_level, hp, exp, damage,
-                 loot_table, icon):
-        EnemyBase.__init__(self, name, desc, level, hp, exp, damage, icon)
-        self.player_level = player_level
+    def __init__(self, name, desc, stats, loot_table, icon):
+        EnemyBase.__init__(self, name, desc, icon, stats)
+        self.rand_level_amount = int((random() * 4) - 2)
+        self.enemy_level = abs(self.enemy_level + self.rand_level_amount)
+        if self.enemy_level < 1:
+            self.enemy_level = 1
         self.lootDrop = loot_table
+        self.rand_level_modifier()
 
-    def set_player_level(self, level):
-        """
-        Receives the player's level and sets it for the object.
-        :param level: The player's level
-        """
-        self.player_level = level
-        self.level_generator(self.enemy_level, self.player_level)
-        self.stats_generator(self.enemy_exp, self.enemy_health,
-                             self.enemy_damage, level, self.enemy_level)
-
-    # Level generator based on monster level and player level
-    def level_generator(self, level, player_level):
-        """
-        Establishes the level for the enemy based on the player's level
-        :param level: The enemy's level
-        :param player_level: The player's level
-        """
-        if player_level < level:
-            self.set_level(self.get_level() - (level - player_level) // 4)
-
-        if player_level > level:
-            self.set_level(self.get_level() + (player_level - level) // 3)
-
-    # Exp, hp, and damage generator based
-    # on monster's level in comparison to input level.
-    def stats_generator(self, original_exp, original_hp, original_damage,
-                        original_level, current_level):
-        """
-        Generates the stats(exp and health) based on level
-        :param original_exp: The enemy's original exp
-        :param original_hp: The enemy's health
-        :param original_damage: The enemy's original damage
-        :param original_level: The enemy's original level
-        :param current_level: The enemy's new level
-        :return:
-        """
-
-        level_difference = abs(original_level - current_level)
-
-        if original_level > current_level:
-            percent_multiplier = 1 - (level_difference * 5) / 100
-        elif current_level > original_level:
-            percent_multiplier = 1 + (level_difference * 5) / 100
+    def rand_level_modifier(self):
+        strength_random = random()
+        if strength_random * 100 > 50 and self.rand_level_amount > 0:
+            self.enemy_strength += 1
+        elif strength_random * 100 < 50 and self.rand_level_amount >= 0:
+            self.enemy_strength += 0
         else:
-            percent_multiplier = 1
+            self.enemy_strength -= 1
 
-        self.set_exp(int(original_exp * percent_multiplier))
-        self.set_hp(int(original_hp * percent_multiplier))
-        self.set_damage(int(original_damage * percent_multiplier))
-        self.enemy_max_health = self.enemy_health
+        agility_random = random()
+        if agility_random * 100 > 50 and self.rand_level_amount > 0:
+            self.enemy_agility += 1
+        elif agility_random * 100 < 50 and self.rand_level_amount >= 0:
+            self.enemy_agility += 0
+        else:
+            self.enemy_agility -= 1
+
+        wisdom_random = random()
+        if wisdom_random * 100 > 50 and self.rand_level_amount > 0:
+            self.enemy_wisdom += 1
+        elif wisdom_random * 100 < 50 and self.rand_level_amount >= 0:
+            self.enemy_wisdom += 0
+        else:
+            self.enemy_wisdom -= 1
+        randomized_health_modifier = 1 + ((random() / 10) - .10)
+        self.enemy_max_health = int(
+            (self.enemy_max_health + self.enemy_strength*2) *
+            (1 + self.rand_level_amount / 20))
+        self.enemy_max_health *= randomized_health_modifier
+        self.enemy_max_health = math.ceil(self.enemy_max_health)
+
+        self.enemy_health = self.enemy_max_health
+
+        self.enemy_exp *= 1 + self.rand_level_amount / 20
+        print(self.enemy_exp)
 
     # First a list called drops is created.
     # Next, the exp amount of the enemy is put in followed

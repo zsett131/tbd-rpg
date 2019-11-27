@@ -3,6 +3,7 @@ This class is the parent classes for all the enemies
 __author__: Jairo Garciga
 """
 import pygame
+import random
 
 
 class EnemyBase:
@@ -19,15 +20,26 @@ class EnemyBase:
     enemy_damage = 0
     enemy_level = 0
 
-    def __init__(self, name, desc, level, hp, exp, damage, icon):
+    def __init__(self, name, desc, icon, stats):
         self.enemy_name = name
         self.enemy_description = desc
         self.enemy_icon = pygame.image.load("Images/" + icon)
-        self.enemy_health = hp
-        self.enemy_max_health = hp
-        self.enemy_exp = exp
-        self.enemy_damage = damage
-        self.enemy_level = level
+
+        # For Clarification on what stats is.
+        # Stats is all the stats of the specific enemy
+        # Order: Level, exp,
+        # strength, agility, wisdom, defense,
+        # damage, health
+
+        self.enemy_level = stats[0]
+        self.enemy_exp = stats[1]
+        self.enemy_strength = stats[2]
+        self.enemy_agility = stats[3]
+        self.enemy_wisdom = stats[4]
+        self.enemy_defense = stats[5]
+        self.enemy_damage = stats[6]
+        self.enemy_max_health = stats[7]
+        self.enemy_health = self.enemy_max_health
 
     # Name getter and setters
     def set_name(self, name):
