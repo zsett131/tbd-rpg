@@ -4,7 +4,7 @@ __author__ = Jairo Garciga
 """
 
 import pygame
-from game.enemy.EnemyList import EnemyList
+from game.characters.enemy.EnemyList import EnemyList
 
 
 class Location:

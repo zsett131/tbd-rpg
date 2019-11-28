@@ -2,7 +2,7 @@
 This is the non-boss enemies. They are more generic and not event specific.
 __author__: Jairo Garciga
 """
-from game.enemy.EnemyBase import EnemyBase
+from game.characters.enemy.EnemyBase import EnemyBase
 from random import random
 import math
 

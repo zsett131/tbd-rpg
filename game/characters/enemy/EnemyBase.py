@@ -2,11 +2,11 @@
 This class is the parent classes for all the enemies
 __author__: Jairo Garciga
 """
+from game.characters.CharacterBase import CharacterBase
 import pygame
-import random
 
 
-class EnemyBase:
+class EnemyBase(CharacterBase):
     """
     The base template for enemies
     """
@@ -21,6 +21,7 @@ class EnemyBase:
     enemy_level = 0
 
     def __init__(self, name, desc, icon, stats):
+        CharacterBase.__init__(self)
         self.enemy_name = name
         self.enemy_description = desc
         self.enemy_icon = pygame.image.load("Images/" + icon)
@@ -102,7 +103,7 @@ class EnemyBase:
         """
         return self.enemy_health
 
-    def set_max_hp(self, max_hp):
+    def set_max_health(self, max_hp):
         """
         Sets the maximum hp for the enemy
         :param max_hp: the max hp

@@ -6,7 +6,7 @@ __author__ = Jairo Garciga
 from game.base import GameBase
 from game.base.MakeButton import MakeButton
 from game.locations.Location import Location
-from game.enemy.EnemyList import EnemyList
+from game.characters.enemy.EnemyList import EnemyList
 import pygame
 import random
 
@@ -46,7 +46,7 @@ class StartingTown(Location):
 
         self.hospitalHealButton = \
             MakeButton(self.screen,
-                       callback=self.the_Player.set_player_health_max,
+                       callback=self.the_Player.set_health_max,
                        width=250, height=100,
                        desired_x=500, desired_y=250,
                        visibility=True,

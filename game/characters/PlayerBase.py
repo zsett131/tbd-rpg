@@ -6,6 +6,7 @@ __author__: Jairo Garciga and Zachary Setterquist
 import pygame
 import math
 from game.base.MakeButton import MakeButton
+from game.characters.CharacterBase import CharacterBase
 from game.inventory import Item
 
 pygame.init()
@@ -14,7 +15,7 @@ white = (255, 255, 255)
 black = (0, 0, 0)
 
 
-class PlayerBase:
+class PlayerBase(CharacterBase):
     """
     This class sets up the player object which is used throughout the program.
     """
@@ -25,6 +26,7 @@ class PlayerBase:
         All the other variables are being called for initialization.
         """
         # Player stats and attributes
+        CharacterBase.__init__(self)
         self.playerName = name
         self.playerAlive = True
         self.playerIcon = pygame.image.load('Images/Jotaro.jpg')
@@ -61,23 +63,23 @@ class PlayerBase:
                 3 + math.exp(-(3 / 4) * (self.playerLevel / 16) - 4)) + 1
         return exp_logistic
 
-    def set_player_name(self, input_name):
+    def set_name(self, input_name):
         """
         Sets the player's name to the input
         :param input_name: Takes input for the name
         """
         self.playerName = input_name
 
-    def get_player_name(self):
+    def get_name(self):
         """
-        Outputs player's name
-        :return: the player's name
+        Gets the name of the player
+        :return: player name
         """
         return self.playerName
 
-    def get_player_level(self):
+    def get_level(self):
         """
-        Gets player's level
+        Gets the level of the player
         :return: player level
         """
         return self.playerLevel
@@ -86,12 +88,12 @@ class PlayerBase:
         """
         Levels up the player WIP
         """
-        while self.get_player_exp() >= self.get_player_exp_cap():
+        while self.get_exp() >= self.get_exp_cap():
             self.playerLevel += 1
             self.increment_skill_points()
-            self.set_player_exp(
-                self.get_player_exp() - self.get_player_exp_cap())
-            self.set_player_exp_cap()
+            self.set_exp(
+                self.get_exp() - self.get_exp_cap())
+            self.set_exp_cap()
 
     def player_level_up_screen(self, base):
         """
@@ -145,7 +147,7 @@ class PlayerBase:
         self.exit_level_up.show()
         self.display.fill(black)
         pygame.draw.rect(self.display, white, (100, 150, 200, 350))
-        bruh = my_font.render(self.get_player_name() + "'s Stats", True, black)
+        bruh = my_font.render(self.get_name() + "'s Stats", True, black)
         strength = my_font.render(("Strength:" + str(self.strength)),
                                   True, black)
         agility = my_font.render(("Agility:" + str(self.agility)),
@@ -163,7 +165,7 @@ class PlayerBase:
         Quickly updates the stats side of the level up screen
         """
         pygame.draw.rect(self.display, white, (100, 150, 200, 350))
-        bruh = my_font.render(self.get_player_name() + "'s Stats", True, black)
+        bruh = my_font.render(self.get_name() + "'s Stats", True, black)
         strength = my_font.render(("Strength:" + str(self.strength)),
                                   True, black)
         agility = my_font.render(("Agility:" + str(self.agility)),
@@ -197,34 +199,34 @@ class PlayerBase:
         self.playerExp += exp_gained
         self.player_level_up()
 
-    def set_player_exp(self, amount):
+    def set_exp(self, amount):
         """
         Sets the Player's exp
         :param amount: the amount of exp
         """
         self.playerExp = amount
 
-    def get_player_exp(self):
+    def get_exp(self):
         """
         Returns the Player's exp
         :return: player exp
         """
         return self.playerExp
 
-    def set_player_exp_cap(self):
+    def set_exp_cap(self):
         """
         Sets the exp cap each time in relation to player level
         """
         self.playerExpCap = int(self.playerExpCap * self.exp_algorithm())
 
-    def get_player_exp_cap(self):
+    def get_exp_cap(self):
         """
         Returns player exp cap
         :return: the player exp cap
         """
         return self.playerExpCap
 
-    def set_player_current_health(self, incoming):
+    def set_current_health(self, incoming):
         """
         Sets the current health of the player to the incoming number,
         either adding or subtracting
@@ -232,7 +234,7 @@ class PlayerBase:
         """
         self.playerCurrentHealth = incoming
 
-    def get_player_current_health(self):
+    def get_current_health(self):
         """
         Outputs player's current health and checks if player is alive
         :return: player's current health
@@ -246,18 +248,18 @@ class PlayerBase:
         At most it can be the max health.
         :param amount: Amount of health the player is healed
         """
-        if amount + self.get_player_current_health() <= \
-                self.get_player_max_health():
-            self.set_player_current_health(self.get_player_current_health() +
-                                           amount)
+        if amount + self.get_current_health() <= \
+                self.get_max_health():
+            self.set_current_health(self.get_current_health() +
+                                    amount)
         else:
-            self.set_player_current_health(self.get_player_max_health())
+            self.set_current_health(self.get_max_health())
 
-    def set_player_health_max(self):
+    def set_health_max(self):
         """
         Automatically sets the player's current health to max.
         """
-        self.set_player_current_health(self.get_player_max_health())
+        self.set_current_health(self.get_max_health())
 
     def player_take_damage(self, damage):
         """
@@ -265,7 +267,7 @@ class PlayerBase:
         :param damage: The amount of damage the player is taking
         """
         if self.playerCurrentHealth - damage > 0:
-            self.playerCurrentHealth = self.get_player_current_health() - \
+            self.playerCurrentHealth = self.get_current_health() - \
                                        damage
         elif self.playerCurrentHealth - damage <= 0:
             self.playerCurrentHealth = 0
@@ -275,20 +277,20 @@ class PlayerBase:
         Determines if the player is alive
         :return: Boolean depending on player hp being 0 or not
         """
-        if self.get_player_current_health() == 0:
+        if self.get_current_health() == 0:
             self.playerAlive = False
             return False
         else:
             return True
 
-    def set_player_max_health(self):
+    def set_max_health(self):
         """
         Sets the maximum health of the player
         """
         self.playerMaxHealth = (
-            self.get_player_max_health())
+            self.get_max_health())
 
-    def get_player_max_health(self):
+    def get_max_health(self):
         """
         Returns the player's maximum health
         :return: The player's maximum health value
@@ -300,8 +302,8 @@ class PlayerBase:
         Creates a percentage of the current player health divided by the
         maximum player health.
         """
-        self.playerHealthPercentage = (self.get_player_current_health()
-                                       / self.get_player_max_health())
+        self.playerHealthPercentage = (self.get_current_health()
+                                       / self.get_max_health())
 
     def get_player_health_percentage(self):
         """
@@ -318,11 +320,11 @@ class PlayerBase:
         :param weapon: The item
         """
         if self.get_player_equipped():
-            self.set_player_damage(
+            self.set_damage(
                 weapon.get_damage())  # * (1 + (self.get_player_strength() //
             # 10)))
         else:
-            self.set_player_damage(1)  # + (self.get_player_strength() // 10))
+            self.set_damage(1)  # + (self.get_player_strength() // 10))
 
     def get_player_equipped(self):
         """
@@ -333,14 +335,14 @@ class PlayerBase:
 
     # Player damage Setter and Getter.
 
-    def set_player_damage(self, damage):
+    def set_damage(self, damage):
         """
         Assigns the player's damage to the parameter damage
         :param damage: the amount of damage
         """
         self.playerDamage = damage
 
-    def get_player_damage(self):
+    def get_damage(self):
         """
         Returns the player's damage
         :return: player's damage

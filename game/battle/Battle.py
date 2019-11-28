@@ -4,7 +4,7 @@ to establish all the graphics and numerical aspects
 __author__: Jairo Garciga
 """
 
-from game.base.PlayerBase import PlayerBase
+from game.characters.PlayerBase import PlayerBase
 from game.battle.Frame import Frame
 from game.base import GameBase
 import pygame
@@ -77,11 +77,11 @@ class Battle:
         text = self.my_font.render("Level: " + str(self.theEnemy.get_level()),
                                    True, GameBase.black)
         self.topFrame.display.blit(text, (220, 35))
-        text = self.my_font.render(self.thePlayer.get_player_name(), True,
+        text = self.my_font.render(self.thePlayer.get_name(), True,
                                    GameBase.black)
         self.topFrame.display.blit(text, (530, 210))
         text = self.my_font.render(
-            "Level: " + str(self.thePlayer.get_player_level()), True,
+            "Level: " + str(self.thePlayer.get_level()), True,
             GameBase.black)
         self.topFrame.display.blit(text, (696, 210))
 
@@ -110,7 +110,7 @@ class Battle:
                          (600, 235, 150, 25))
 
         # Sets the color of the Player and Enemies health bar
-        if self.thePlayer.get_player_current_health() <= 0.0:
+        if self.thePlayer.get_current_health() <= 0.0:
             self.player_health_bar_color = GameBase.white
         elif self.thePlayer.get_player_health_percentage() <= 1 / 3:
             self.player_health_bar_color = GameBase.red
@@ -133,7 +133,7 @@ class Battle:
                                            self.player_health_bar_length, 25)
         self.enemyHealthBar = pygame.Rect(125, 60,
                                           self.enemy_health_bar_length, 25)
-        print("Player hp: ", self.thePlayer.get_player_current_health())
+        print("Player hp: ", self.thePlayer.get_current_health())
         print("Enemy hp: ", self.theEnemy.get_hp())
 
         # Draws both the enemy and player hp arb
@@ -156,8 +156,8 @@ class Battle:
                                           text_rect.height / 2 +
                                           self.enemyHealthBar.height / 2))
         text = self.my_font.render(
-            str(self.thePlayer.get_player_current_health()) + "/" +
-            str(self.thePlayer.get_player_max_health()), True, GameBase.black)
+            str(self.thePlayer.get_current_health()) + "/" +
+            str(self.thePlayer.get_max_health()), True, GameBase.black)
         text_rect = text.get_rect()
         self.topFrame.display.blit(text, (605,
                                           self.playerHealthBar.y -
@@ -168,7 +168,7 @@ class Battle:
         """
         Function that is called to deal damage to the player
         """
-        if self.thePlayer.get_player_current_health() <= 0:
+        if self.thePlayer.get_current_health() <= 0:
             self.isPlayerDead = True
         self.thePlayer.player_take_damage(self.theEnemy.get_damage())
 
@@ -179,4 +179,4 @@ class Battle:
         if self.theEnemy.get_hp() <= 0:
             self.isEnemyDead = True
         self.theEnemy.enemy_take_damage(
-            self.thePlayer.get_player_damage())
+            self.thePlayer.get_damage())

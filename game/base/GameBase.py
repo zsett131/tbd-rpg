@@ -4,8 +4,8 @@ The main loop of the game
 import pygame
 from game.base import MakeButton
 from game.battle.Battle import Battle
-from game.base.PlayerBase import PlayerBase
-from game.enemy.EnemyList import EnemyList
+from game.characters.PlayerBase import PlayerBase
+from game.characters.enemy.EnemyList import EnemyList
 from game.base import Animation
 from game.base import InputField
 from game.locations.StartingTown import StartingTown
@@ -87,7 +87,7 @@ class GameBase:
         Enters into the game
         Take the name input
         """
-        self.The_Player.set_player_name(self.nameInput.textInput.get_text())
+        self.The_Player.set_name(self.nameInput.textInput.get_text())
         self.nameInput.hide()
         self.nameInputButton.hide()
         InputField.SELECTED = None

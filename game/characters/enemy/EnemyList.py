@@ -3,7 +3,7 @@ This class creates a list of every enemy within the game based on the
 players level.
 __author__ = Jairo Garciga
 """
-from game.enemy.EnemyBasic import EnemyBasic
+from game.characters.enemy.EnemyBasic import EnemyBasic
 from game.inventory import ConsumableItemsList
 
 

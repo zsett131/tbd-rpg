@@ -15,7 +15,7 @@ class Frame:
     """
 
     def __init__(self, down, right, gamebase, battle):
-        self.player_prev_level = battle.thePlayer.get_player_level()
+        self.player_prev_level = battle.thePlayer.get_level()
         self.down = down
         self.right = right
         self.mainGame = gamebase
@@ -168,8 +168,8 @@ class Frame:
         """
         Exits the battle frame and returns to the location the player was at.
         """
-        self.player_prev_level = self.battle.thePlayer.get_player_level()
-        if self.battle.thePlayer.get_player_current_health() > 0:
+        self.player_prev_level = self.battle.thePlayer.get_level()
+        if self.battle.thePlayer.get_current_health() > 0:
             self.battle.thePlayer.add_player_exp(
                 self.battle.theEnemy.get_exp())
         self.attackButton.hide()
@@ -177,7 +177,7 @@ class Frame:
         self.itemButton.hide()
         self.cringeButton.hide()
         self.postBattleDeath.hide()
-        if self.player_prev_level < self.battle.thePlayer.get_player_level():
+        if self.player_prev_level < self.battle.thePlayer.get_level():
             self.battle.thePlayer.player_level_up_screen(self.mainGame)
         else:
             self.display.blit(self.mainGame.mapLocation.locationMap, (0, 0))
@@ -234,7 +234,7 @@ class Frame:
         self.display.blit(text, (20, 310))
         if self.playerDialogText == self.textWriter.text:
             self.battle.theEnemy.enemy_take_damage(
-                self.battle.thePlayer.get_player_damage())
+                self.battle.thePlayer.get_damage())
             self.battle.draw_health_bars()
             self.mainGame.update_display()
             if self.battle.theEnemy.get_hp() <= 0:
@@ -261,9 +261,9 @@ class Frame:
                 self.battle.theEnemy.get_damage())
             self.battle.draw_health_bars()
             self.mainGame.update_display()
-            if self.battle.thePlayer.get_player_current_health() <= 0:
-                self.battle.thePlayer.set_player_current_health(
-                    (self.battle.thePlayer.get_player_max_health() // 3) + 1)
+            if self.battle.thePlayer.get_current_health() <= 0:
+                self.battle.thePlayer.set_current_health(
+                    (self.battle.thePlayer.get_max_health() // 3) + 1)
                 self.postBattleDeath.text = self.battle.my_font.render(
                     self.deathMessage, True, GameBase.red)
                 self.postBattleDeath.show()
@@ -277,9 +277,9 @@ class Frame:
         """
         Begins the process of drawing out the player damage dialog text.
         """
-        first_attack = self.battle.thePlayer.get_player_name() + " has " \
-                                                                 "dealt " \
-                       + str(self.battle.thePlayer.get_player_damage()) + \
+        first_attack = self.battle.thePlayer.get_name() + " has " \
+                                                          "dealt " \
+                       + str(self.battle.thePlayer.get_damage()) + \
                        " to " + self.battle.theEnemy.get_name()
 
         self.textWriter = TextWriter(self.mainGame, 30, first_attack,

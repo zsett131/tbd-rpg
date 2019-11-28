@@ -4,7 +4,7 @@ __authors__: Jairo Garciga and Zachary Setterquist
 """
 from game.base import GameBase
 import pygame
-from game.base.PlayerBase import PlayerBase
+from game.characters.PlayerBase import PlayerBase
 import traceback
 
 Player = PlayerBase("Jairo")
