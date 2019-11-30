@@ -126,6 +126,7 @@ class BasicAttack(Attacks):
         damage_range = random.random() * (2 * self.variance) - self.variance
         self.get_modifiers()
         damage_to_be_done = self.damage + damage_range
+        print("Damage:", damage_to_be_done)
         return damage_to_be_done
 
     # Format: ([type_one, type_one_percentage, modifier_type])
@@ -133,10 +134,14 @@ class BasicAttack(Attacks):
         """
         Creates the modifiers from the saved modifiers that were set
         """
+        self.damage = self.base_damage
         for argument in self.modifiers:
             if argument[2] == "+":
                 self.damage += math.floor(self.character.get_stat_xyz(
                     argument[0]) * argument[1])
+                print(math.floor(self.character.get_stat_xyz(
+                    argument[0]) * argument[1]))
+                print("New Damage:", self.damage)
             elif argument[2] == "*":
                 self.damage *= math.floor(self.character.get_stat_xyz(
                     argument[0]) * argument[1])
@@ -148,5 +153,6 @@ class BasicAttack(Attacks):
         Sets the modifiers for the attack
         :param args: list of modifiers
         """
+        self.modifiers = []
         for argument in args:
             self.modifiers.append(argument)

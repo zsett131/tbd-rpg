@@ -172,7 +172,8 @@ class Frame:
         Exits the battle frame and returns to the location the player was at.
         """
         self.player_prev_level = self.battle.thePlayer.get_level()
-        if self.battle.thePlayer.get_current_health() > 0:
+        if self.battle.theEnemy.get_current_health() <= 0 and \
+                self.battle.thePlayer.get_current_health() > 0:
             self.battle.thePlayer.add_player_exp(
                 self.battle.theEnemy.get_exp())
         self.attackButton.hide()
@@ -202,6 +203,10 @@ class Frame:
         self.attack4.show()
 
     def do_attack1(self):
+        """
+        Calls the first attack of the Player
+        :return:
+        """
         self.player_attack = 1
         self.do_attack()
 
@@ -244,7 +249,7 @@ class Frame:
                 self.battle.thePlayer.do_attack(self.player_attack))
             self.battle.draw_health_bars()
             self.mainGame.update_display()
-            if self.battle.theEnemy.get_hp() <= 0:
+            if self.battle.theEnemy.get_current_health() <= 0:
                 self.postBattleDeath.text = self.battle.button_font.render(
                     self.victoryMessage, True, GameBase.red)
                 self.postBattleDeath.show()

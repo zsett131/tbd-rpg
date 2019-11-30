@@ -44,7 +44,7 @@ class EnemyList:
                               ConsumableItemsList.consumables[0],
                               ConsumableItemsList.consumables[1],
                               ConsumableItemsList.consumables[1]]
-        young_sheldon_stats = [2, 25, 1, 2, 2, 0, 1, 15]
+        young_sheldon_stats = [2, 35, 1, 2, 2, 0, 1, 15]
         young_sheldon = EnemyBasic("Young Sheldon", "Prezinga.",
                                    young_sheldon_stats, young_sheldon_loot,
                                    'baby_sheldon.png')
@@ -80,7 +80,7 @@ class EnemyList:
                                ConsumableItemsList.consumables[0],
                                ConsumableItemsList.consumables[1],
                                ConsumableItemsList.consumables[1]]
-        regular_shaggy_stats = [1, 20, 2, 2, 1, 1, 1, 20]
+        regular_shaggy_stats = [1, 25, 2, 2, 1, 1, 1, 20]
         regular_shaggy = EnemyBasic("Shaggy", "Zoinks", regular_shaggy_stats,
                                     regular_shaggy_loot, 'regular_shaggy.png')
         self.list_of_enemies.append(regular_shaggy)

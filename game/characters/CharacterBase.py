@@ -39,9 +39,9 @@ class CharacterBase:
         :param stat_type: the stat type
         :return: the stat amount
         """
-        if stat_type == "strength":
+        if stat_type == "Strength":
             return self.get_strength()
-        elif stat_type == "agility":
+        elif stat_type == "Agility":
             return self.get_agility()
         else:
             return self.get_wisdom()

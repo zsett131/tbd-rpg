@@ -36,8 +36,8 @@ class PlayerBase(CharacterBase):
         self.playerExpCap = 100
         self.playerHealthPercentage = 0.0
         self.expLogistic = 0
-        self.playerCurrentHealth = 200
-        self.playerMaxHealth = 200
+        self.playerCurrentHealth = 20
+        self.playerMaxHealth = 20
         self.playerWeapon = Item
         self.playerDamage = 1
         self.playerInventory = []
@@ -70,7 +70,6 @@ class PlayerBase(CharacterBase):
             self.attack_one.set_modifiers(["Strength", 1, "+"])
             self.playerDamage = \
                 math.ceil(self.attack_one.calculate_damage())
-            print(self.attack_one.calculate_damage())
             return self.playerDamage
 
     def exp_algorithm(self):

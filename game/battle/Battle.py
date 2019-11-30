@@ -119,7 +119,7 @@ class Battle:
         else:
             self.player_health_bar_color = GameBase.green
 
-        if self.theEnemy.get_hp() <= 0.0:
+        if self.theEnemy.get_current_health() <= 0.0:
             self.enemy_health_bar_color = GameBase.white
         elif self.theEnemy.get_enemy_health_percentage() <= 1 / 3:
             self.enemy_health_bar_color = GameBase.red
@@ -133,8 +133,9 @@ class Battle:
                                            self.player_health_bar_length, 25)
         self.enemyHealthBar = pygame.Rect(125, 60,
                                           self.enemy_health_bar_length, 25)
-        print("Player hp: ", self.thePlayer.get_current_health())
-        print("Enemy hp: ", self.theEnemy.get_hp())
+
+        # print("Player hp: ", self.thePlayer.get_current_health())
+        # print("Enemy hp: ", self.theEnemy.get_current_health())
 
         # Draws both the enemy and player hp arb
         if self.player_health_bar_length != 0:
@@ -146,7 +147,7 @@ class Battle:
                              self.enemy_health_bar_color, self.enemyHealthBar)
 
         text = self.my_font.render(
-            str(self.theEnemy.get_hp()) + "/" + str(
+            str(self.theEnemy.get_current_health()) + "/" + str(
                 self.theEnemy.get_max_hp()),
             True,
             GameBase.black)
@@ -176,7 +177,7 @@ class Battle:
         """
         Deals damage to the player
         """
-        if self.theEnemy.get_hp() <= 0:
+        if self.theEnemy.get_current_health() <= 0:
             self.isEnemyDead = True
         self.theEnemy.enemy_take_damage(
             self.thePlayer.get_damage())

@@ -88,14 +88,14 @@ class EnemyBase(CharacterBase):
         return self.enemy_exp
 
     # Hp getter and setters
-    def set_hp(self, hp):
+    def set_current_health(self, hp):
         """
         Sets the health of the enemy
         :param hp: enemy health
         """
         self.enemy_health = hp
 
-    def get_hp(self):
+    def get_current_health(self):
         """
         Returns the health of the enemy, this helps in reassigning
         the enemies health when it takes damage.
@@ -141,9 +141,9 @@ class EnemyBase(CharacterBase):
         Damages the enemy by reducing the enemy's hp by the parameter taken
         :param taken: the amount of hp taken from the enemy
         """
-        self.enemy_health = self.get_hp() - taken
-        if self.get_hp() < 0:
-            self.set_hp(0)
+        self.enemy_health = self.get_current_health() - taken
+        if self.get_current_health() < 0:
+            self.set_current_health(0)
             self.is_alive()
 
     # Enemy damage getter and setter
@@ -202,7 +202,7 @@ class EnemyBase(CharacterBase):
         else:
             percent_multiplier = 1
         self.set_exp(int(original_exp * percent_multiplier))
-        self.set_hp(int(original_hp * percent_multiplier))
+        self.set_current_health(int(original_hp * percent_multiplier))
         self.set_damage(int(original_damage * percent_multiplier))
 
     def died(self):  # TODO: xp calculation, loot generation, etc.
@@ -218,7 +218,7 @@ class EnemyBase(CharacterBase):
         Checks to see if the enemy is alive
         :return: Boolean value based on live or not
         """
-        if self.get_hp() == 0:
+        if self.get_current_health() == 0:
             return False
         else:
             return True
