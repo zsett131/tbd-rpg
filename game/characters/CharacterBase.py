@@ -33,6 +33,19 @@ class CharacterBase:
         """
         return self.level
 
+    def get_stat_xyz(self, stat_type):
+        """
+        Uses the parameter string to decide which stat to call.
+        :param stat_type: the stat type
+        :return: the stat amount
+        """
+        if stat_type == "strength":
+            return self.get_strength()
+        elif stat_type == "agility":
+            return self.get_agility()
+        else:
+            return self.get_wisdom()
+
     def get_strength(self):
         """
         Gets the strength of the character.

@@ -24,6 +24,9 @@ class EnemyBasic(EnemyBase):
         self.rand_level_modifier()
 
     def rand_level_modifier(self):
+        """
+        Randomizes the stats based on the level difference
+        """
         strength_random = random()
         if strength_random * 100 > 50 and self.rand_level_amount > 0:
             self.enemy_strength += 1
@@ -57,7 +60,6 @@ class EnemyBasic(EnemyBase):
         self.enemy_health = self.enemy_max_health
 
         self.enemy_exp *= 1 + self.rand_level_amount / 20
-        print(self.enemy_exp)
 
     # First a list called drops is created.
     # Next, the exp amount of the enemy is put in followed

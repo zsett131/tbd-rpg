@@ -21,6 +21,7 @@ class Frame:
         self.mainGame = gamebase
         self.battle = battle
         self.display = self.mainGame.display
+        self.player_attack = None
         self.buttons = []
         self.attackButton = None
         self.runButton = None
@@ -114,14 +115,16 @@ class Frame:
                                      desired_y=325, visibility=True,
                                      standard_img='Images/exit_normal.png',
                                      hover_img='Images/exit_hover.png')
-        self.attack1 = MakeButton(self.mainGame, callback=self.do_attack,
-                                  width=250, height=100,
-                                  desired_x=200, desired_y=375,
-                                  visibility=True, standard_img=None,
-                                  hover_img=None,
-                                  text=self.battle.button_font.render(
-                                      "Attack 1", True,
-                                      GameBase.blue))
+        self.attack1 = \
+            MakeButton(self.mainGame, callback=self.do_attack1,
+                       width=250, height=100,
+                       desired_x=200, desired_y=375,
+                       visibility=True, standard_img=None,
+                       hover_img=None,
+                       text=self.battle.button_font.render(
+                           self.battle.thePlayer.attack_one.get_attack_name(),
+                           True,
+                           GameBase.blue))
         self.attack2 = MakeButton(self.mainGame,
                                   callback=lambda: print(self.battle,
                                                          'attack-2'),
@@ -198,6 +201,10 @@ class Frame:
         self.attack3.show()
         self.attack4.show()
 
+    def do_attack1(self):
+        self.player_attack = 1
+        self.do_attack()
+
     def exit_attack(self):
         """
         Exits the attack screen back to the main battle screen.
@@ -234,7 +241,7 @@ class Frame:
         self.display.blit(text, (20, 310))
         if self.playerDialogText == self.textWriter.text:
             self.battle.theEnemy.enemy_take_damage(
-                self.battle.thePlayer.get_damage())
+                self.battle.thePlayer.do_attack(self.player_attack))
             self.battle.draw_health_bars()
             self.mainGame.update_display()
             if self.battle.theEnemy.get_hp() <= 0:
@@ -292,7 +299,7 @@ class Frame:
         """
         second_attack = self.battle.theEnemy.get_name() + " has dealt " + \
                         str(self.battle.theEnemy.get_damage()) + " to " + \
-                        self.battle.thePlayer.get_player_name()
+                        self.battle.thePlayer.get_name()
         self.textWriter = TextWriter(self.mainGame, 30, second_attack,
                                      self.set_enemy_dialog)
         self.textWriter.start()

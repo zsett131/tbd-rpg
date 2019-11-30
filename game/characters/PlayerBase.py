@@ -8,6 +8,7 @@ import math
 from game.base.MakeButton import MakeButton
 from game.characters.CharacterBase import CharacterBase
 from game.inventory import Item
+from game.characters.Attacks import BasicAttack
 
 pygame.init()
 my_font = pygame.font.SysFont('comicsansms', 16)
@@ -38,7 +39,7 @@ class PlayerBase(CharacterBase):
         self.playerCurrentHealth = 200
         self.playerMaxHealth = 200
         self.playerWeapon = Item
-        self.playerDamage = 100
+        self.playerDamage = 1
         self.playerInventory = []
         self.display = None
         self.base = None
@@ -53,6 +54,24 @@ class PlayerBase(CharacterBase):
         self.wisdom = 0
         self.agility = 0
         self.skillPoints = 0
+
+        self.testing_attack_punch = BasicAttack("Punch", "A simple punch",
+                                                "Strength", .90, 1, 1)
+        self.testing_attack_punch.set_character(self)
+        self.attack_one = self.testing_attack_punch
+
+    def do_attack(self, attack_number):
+        """
+        Do the attack that is inputted from Frame
+        :param attack_number: The attack
+        :return: The damage of that specific attack
+        """
+        if attack_number == 1:
+            self.attack_one.set_modifiers(["Strength", 1, "+"])
+            self.playerDamage = \
+                math.ceil(self.attack_one.calculate_damage())
+            print(self.attack_one.calculate_damage())
+            return self.playerDamage
 
     def exp_algorithm(self):
         """
