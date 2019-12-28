@@ -18,8 +18,8 @@ class StartingTown(Location):
     for the class
     """
 
-    def __init__(self, player, base, mapp):
-        Location.__init__(self, player, base, mapp)
+    def __init__(self, player, base, mapp, base_level):
+        Location.__init__(self, player, base, mapp, base_level)
         pygame.init()
         self.hospitalImg = pygame.image.load('Images/hospital.png')
         self.myfont = pygame.font.SysFont('comicsansms', 26)
@@ -119,7 +119,7 @@ class StartingTown(Location):
         Send the random enemy that is picked to the function battle_time
         which starts the battle and generates an enemy
         """
-        self.enemy_list = EnemyList()
+        self.enemy_list = EnemyList(self)
         self.enemies = self.enemy_list.get_list(0, 2, 5)
         specific_enemy = self.enemies[random.randint(0, 2)]
         self.hide_main_buttons()

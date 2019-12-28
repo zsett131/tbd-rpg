@@ -3,6 +3,7 @@ This class is the parent classes for all the enemies
 __author__: Jairo Garciga
 """
 from game.characters.CharacterBase import CharacterBase
+import random
 import pygame
 
 
@@ -20,8 +21,16 @@ class EnemyBase(CharacterBase):
     enemy_damage = 0
     enemy_level = 0
 
-    def __init__(self, name, desc, icon, stats):
+    # Wisdom percent can be determined by 100-str_percent-agi_percent
+    # Three types of Defense 1,2,3.
+    # Defense 1 (Low Defense)       ---> 10-30% of strength
+    # Defense 2 (Medium Defense)    ---> 30-55% of strength
+    # Defense 3 (High Defense)      ---> 55-80% of strength
+
+    def __init__(self, name, desc, icon, level, exp, base_health, damage,
+                 str_percent, agi_percent, def_num):
         CharacterBase.__init__(self)
+
         self.enemy_name = name
         self.enemy_description = desc
         self.enemy_icon = pygame.image.load("Images/" + icon)
@@ -32,14 +41,18 @@ class EnemyBase(CharacterBase):
         # strength, agility, wisdom, defense,
         # damage, health
 
-        self.enemy_level = stats[0]
-        self.enemy_exp = stats[1]
-        self.enemy_strength = stats[2]
-        self.enemy_agility = stats[3]
-        self.enemy_wisdom = stats[4]
-        self.enemy_defense = stats[5]
-        self.enemy_damage = stats[6]
-        self.enemy_max_health = stats[7]
+        self.enemy_level = level
+        self.enemy_exp = exp
+        self.enemy_strength_percent = str_percent
+        self.enemy_strength = 0
+        self.enemy_agility_percent = agi_percent
+        self.enemy_agility = 0
+        self.enemy_wisdom_percent = 100-str_percent-agi_percent
+        self.enemy_wisdom = 0
+        self.enemy_def_num = def_num
+        self.enemy_defense = 0
+        self.enemy_damage = damage
+        self.enemy_max_health = base_health
         self.enemy_health = self.enemy_max_health
 
     # Name getter and setters

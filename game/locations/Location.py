@@ -17,7 +17,7 @@ class Location:
     battle = None
     locationMap = None
 
-    def __init__(self, player, base, mapp):
+    def __init__(self, player, base, mapp, base_level):
         """
         The constructor sets up the player object so that the location can
         access certain attributes like health.
@@ -29,7 +29,8 @@ class Location:
         """
         self.the_Player = player
         self.screen = base
-        self.enemy_list = EnemyList()
+        self.base_enemy_level = base_level
+        self.enemy_list = EnemyList(self)
         self.locationMap = pygame.image.load("Images/"+mapp)
         self.display = self.screen.display
         self.display.blit(self.locationMap, (0, 0))

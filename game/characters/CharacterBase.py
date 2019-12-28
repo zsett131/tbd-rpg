@@ -18,6 +18,7 @@ class CharacterBase:
         self.wisdom = None
         self.defense = None
         self.max_health = None
+        self.total_skill_points = None
         self.current_health = self.max_health
 
     def get_name(self):

@@ -47,7 +47,6 @@ class GameBase:
     CLICK_STATE = False
     mapLocation = None
     The_Player = PlayerBase("Jairo")
-    enemies = EnemyList()
 
     def __init__(self):
         self.display = None
@@ -111,7 +110,7 @@ class GameBase:
         Initializes the first map and all of it's buttons
         """
         self.mapLocation = StartingTown(self.The_Player, self,
-                                        'StartingTown.png')
+                                        'StartingTown.png', 3)
         self.mapLocation.show_main_buttons()
         self.startButton.hide()
 

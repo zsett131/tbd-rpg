@@ -14,14 +14,59 @@ class EnemyBasic(EnemyBase):
     lootDrop = []
     player_level = None
 
-    def __init__(self, name, desc, stats, loot_table, icon):
-        EnemyBase.__init__(self, name, desc, icon, stats)
+    def __init__(self, name, desc, loot_table, icon, level, exp,
+                 base_health, damage, str_percent, agi_percent, def_num):
+
+        EnemyBase.__init__(self, name, desc, icon, level, exp, base_health,
+                           damage, str_percent, agi_percent, def_num)
+
         self.rand_level_amount = int((random() * 4) - 2)
         self.enemy_level = abs(self.enemy_level + self.rand_level_amount)
         if self.enemy_level < 1:
             self.enemy_level = 1
         self.lootDrop = loot_table
         self.rand_level_modifier()
+
+        self.total_skill_points = 2 * self.enemy_level
+        self.current_skill_points = self.total_skill_points
+
+        self.randomize_stats()
+
+    def randomize_stats(self):
+        """
+        Randomizes the stats based on the percentages set in the constructor
+        :return:
+        """
+
+        # Takes care of the base stats first
+        while self.current_skill_points > 0:
+            randomized_number = random()
+
+            if 0 <= randomized_number <= self.enemy_strength_percent:
+                self.enemy_strength += 1
+
+            elif self.enemy_strength_percent < randomized_number <= \
+                    (self.enemy_strength_percent +
+                     self.enemy_agility_percent):
+                self.enemy_agility += 1
+
+            else:
+                self.enemy_wisdom += 1
+
+            self.current_skill_points -= 1
+
+        # Takes care of defense now
+        def_random_num = 0
+        if self.enemy_def_num == 1:
+            def_random_num = random() * .2 + .1
+
+        elif self.enemy_def_num == 2:
+            def_random_num = random() * .25 + .3
+
+        else:
+            def_random_num = random() * .25 + .55
+
+        self.enemy_defense = def_random_num * self.enemy_strength
 
     def rand_level_modifier(self):
         """
@@ -50,7 +95,7 @@ class EnemyBasic(EnemyBase):
             self.enemy_wisdom += 0
         else:
             self.enemy_wisdom -= 1
-        randomized_health_modifier = 1 + ((random() / 10) - .10)
+        randomized_health_modifier = 1 + ((random() * .10) - .05)
         self.enemy_max_health = int(
             (self.enemy_max_health + self.enemy_strength*2) *
             (1 + self.rand_level_amount / 20))
